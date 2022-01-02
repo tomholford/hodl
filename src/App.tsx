@@ -1,25 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import './App.scss';
+import { AccountsProvider } from './store/Accounts';
+import { WalletsProvider } from './store/Wallets';
+import Accounts from './views/Accounts/Accounts';
+import { Header } from './views/App/Header';
+import { Home } from './views/Home/Home';
+import Wallets from './views/Wallets/Wallets';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <WalletsProvider>
+      <AccountsProvider>
+        <div className="App">
+          <Router>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/accounts" element={<Accounts />} />
+              <Route path="/wallets" element={<Wallets />} />
+            </Routes>
+          </Router>
+        </div>
+      </AccountsProvider>
+    </WalletsProvider>
   );
 }
 
