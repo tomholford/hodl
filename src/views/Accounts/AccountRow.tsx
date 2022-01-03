@@ -2,7 +2,7 @@ import { BN } from "bn.js";
 import { useCallback, useEffect } from "react";
 import { abbreviatedAddress, balanceWithDecimal } from "../../lib/presenters";
 import { getBalance } from "../../services/Avalanche.service";
-import Account from "../../types/Account.type";
+import { Account } from "../../types/Account.type";
 
 export const AccountRow = ({ account }: { account: Account }) => {
 
@@ -20,11 +20,11 @@ export const AccountRow = ({ account }: { account: Account }) => {
     }
   }, [account]);
 
-  useEffect(() => {
-    if(account.balance) { return };
+  // useEffect(() => {
+  //   if(account.balance) { return };
 
-    fetchBalance();
-  }, [account.balance, fetchBalance]);
+  //   fetchBalance();
+  // }, [account.balance, fetchBalance]);
 
   return (<>
     <div className="account-row">

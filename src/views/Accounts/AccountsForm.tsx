@@ -7,15 +7,16 @@ import { CURRENCIES } from "../../constants";
 import { isValidAddress } from "../../lib/validators";
 
 type FormData = {
+  custodial: boolean;
   address: string;
   currency: Currency;
 };
 
 export default function AccountForm() {
   const { addAccount } = useAccounts();
-  const { register, handleSubmit, setError, reset, formState: { errors } } = useForm<FormData>();
+  const { register, handleSubmit, setError, reset, watch, formState: { errors } } = useForm<FormData>();
   const onSubmit = handleSubmit(data => {
-    if(!isValidAddress(data.address, data.currency)) {
+    if (!isValidAddress(data.address, data.currency)) {
       setError('address', { message: `Invalid ${data.currency} address` })
       return;
     }
@@ -23,16 +24,29 @@ export default function AccountForm() {
     reset();
 
     addAccount({
+      custodial: data.custodial,
       address: data.address,
       currency: data.currency,
       uuid: uuidv4()
     });
   });
 
+  const isCustodial = watch("custodial");
+
   return (
     <form onSubmit={onSubmit}>
-      <label>address</label>
-      <input {...register("address", { required: true })} />
+      <label>custodial</label>
+      <input type="checkbox" {...register("custodial")} />
+      {
+        isCustodial ?
+          (<>
+            <span>custodial</span>
+          </>) : (
+            <>
+              <label>address</label>
+              <input {...register("address", { required: true })} />
+            </>)
+      }
       {
         errors.address && <p>{errors.address.message}</p>
       }
