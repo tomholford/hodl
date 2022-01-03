@@ -4,7 +4,8 @@ import { useAccountsStore } from './useAccountsStore';
 const initialContext = {
   accounts: null,
   addAccount: () => { console.log('add') },
-  setAccounts: () => {}
+  removeAccount: () => {},
+  setAccounts: () => {},
 }
 
 export const AccountsContext = createContext<ReturnType<typeof useAccountsStore>>(initialContext);

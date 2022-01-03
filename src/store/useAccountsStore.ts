@@ -10,6 +10,14 @@ export const useAccountsStore = () => {
     accounts ? setAccounts([...accounts, account]) : setAccounts([account]);
   }
 
+  const removeAccount = (uuid: string) => {
+    if(!accounts) {
+      return;
+    }
+
+    setAccounts([...accounts.filter(a => a.uuid !== uuid)]);
+  }
+
   // Restore from localStorage if available
   useEffect(() => {
     if(localAccounts && localAccounts.length > 0) {
@@ -29,6 +37,7 @@ export const useAccountsStore = () => {
   return {
     accounts,
     addAccount,
-    setAccounts
+    removeAccount,
+    setAccounts,
   };
 }

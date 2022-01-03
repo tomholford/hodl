@@ -7,6 +7,6 @@ export const isValidAddress = (address: string, currency: Currency) => {
       // return isValidAvaxAddress(address);  
       return /^([XPC]|[a-km-zA-HJ-NP-Z1-9]{36,72})-[a-zA-Z]{1,83}1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{38}$/.test(address);
     default:
-      return false
+      return true
   }
 }
