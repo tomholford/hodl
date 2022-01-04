@@ -1,3 +1,5 @@
+// An Account has one more Assets
+
 import BN from "bn.js";
 import { Currency } from "./Currency.type";
 

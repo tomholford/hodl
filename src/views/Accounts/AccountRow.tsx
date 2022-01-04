@@ -6,11 +6,6 @@ import { useAccounts } from "../../store/Accounts";
 import { Account } from "../../types/Account.type";
 
 export const AccountRow = ({ account }: { account: Account }) => {
-
-  useEffect(() => {
-    console.log(account);
-  }, [account]);
-
   const { removeAccount } = useAccounts();
 
   // const fetchBalance = useCallback(async () => {
