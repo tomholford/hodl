@@ -1,9 +1,10 @@
-import { useMemo } from "react";
-import { useParams } from "react-router-dom"
+import { useEffect, useMemo } from "react";
+import { useNavigate, useParams } from "react-router-dom"
 import { useAssets } from "../../store/Assets";
 import AssetsForm from "./AssetsForm";
 
 export const AssetsEdit = () => {
+  const navigate = useNavigate();
   const { assets } = useAssets();
   const { uuid } = useParams<{uuid: string}>();
   const editingAsset = useMemo(() => {
@@ -12,10 +13,14 @@ export const AssetsEdit = () => {
     return assets.find(a => a.uuid === uuid);
   }, [assets, uuid]);
 
-  // TODO: ensure asset, otherwise redirect to /new
+  useEffect(() => {
+    if(!editingAsset) {
+      navigate('/assets');
+    }
+  }, [editingAsset, navigate]);
 
   return (<>
-    <h1>Assets Edit</h1>
+    <h1>Edit an Asset</h1>
     <AssetsForm asset={editingAsset} />
   </>)
 }

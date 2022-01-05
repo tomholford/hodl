@@ -5,6 +5,7 @@ import {
   Routes,
 } from "react-router-dom";
 import './App.scss';
+import { QueryProvider } from './queries/QueryProvider';
 import { AccountsProvider } from './store/Accounts';
 import { AssetsProvider } from './store/Assets';
 import { WalletsProvider } from './store/Wallets';
@@ -16,23 +17,25 @@ import Wallets from './views/Wallets/Wallets';
 
 function App() {
   return (
-    <WalletsProvider>
-      <AccountsProvider>
-        <AssetsProvider>
-          <div className="App">
-            <Router>
-              <Header />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/assets/*" element={<Assets />} />
-                <Route path="/accounts/*" element={<Accounts />} />
-                <Route path="/wallets" element={<Wallets />} />
-              </Routes>
-            </Router>
-          </div>
-        </AssetsProvider>
-      </AccountsProvider>
-    </WalletsProvider>
+    <QueryProvider>
+      <WalletsProvider>
+        <AccountsProvider>
+          <AssetsProvider>
+            <div className="App">
+              <Router>
+                <Header />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/assets/*" element={<Assets />} />
+                  <Route path="/accounts/*" element={<Accounts />} />
+                  <Route path="/wallets" element={<Wallets />} />
+                </Routes>
+              </Router>
+            </div>
+          </AssetsProvider>
+        </AccountsProvider>
+      </WalletsProvider>
+    </QueryProvider>
   );
 }
 

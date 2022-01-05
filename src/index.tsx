@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 ReactDOM.render(
   <React.StrictMode>

@@ -15,9 +15,12 @@
     "bitcoinjs-lib": "^6.0.1",
     "bn.js": "^5.2.0",
     "coingecko-api-v3": "^0.0.13",
+    "core-js-pure": "^3.20.2",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.22.5",
+    "react-query": "^3.34.7",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "sass": "^1.45.2",
@@ -51,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.178",
     "@types/uuid": "^8.3.3"
   }
 }

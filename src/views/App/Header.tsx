@@ -5,8 +5,8 @@ export const Header = () => {
     <>
       <div className="header-links">
         <Link to="/">Home</Link>
-        <Link to="wallets">Wallets</Link>
-        <Link to="accounts">Accounts</Link>
+        {/* <Link to="wallets">Wallets</Link>
+        <Link to="accounts">Accounts</Link> */}
         <Link to="assets">Assets</Link>
       </div>
     </>

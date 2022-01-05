@@ -30,10 +30,15 @@ export const useAssetsStore = () => {
     setAssets([...assets.map(a => a.uuid === uuid ? updatedAsset : a)]);
   }
 
+  const _ensureBalance = (asset: Asset): Asset => {
+    asset.balance = Number(asset.balance);
+    return asset;
+  }
+
   // Restore from localStorage if available
   useEffect(() => {
     if(localAssets && localAssets.length > 0) {
-      setAssets(localAssets);
+      setAssets(localAssets.map(_ensureBalance));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

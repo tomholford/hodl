@@ -2,7 +2,7 @@ import AssetsForm from "./AssetsForm"
 
 export const AssetsNew = () => {
   return (<>
-    <h1>Assets New</h1>
+    <h1>Add an Asset</h1>
     <AssetsForm />
   </>)
 }
