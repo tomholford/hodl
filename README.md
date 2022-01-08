@@ -24,3 +24,20 @@ An Account has one or more Assets
 
 
 
+## Roadmap
+
+- [ ] UX
+  - [ ] test data mode
+  - [ ] CSV import / export 
+- [ ] Accounts
+  - [ ] 
+- [ ] Asset enhancements
+  - [ ] cost basis
+  - [ ] date acquired
+  - [ ] note
+  - [ ] associate to Account
+  - [ ] import balance from API
+- [ ] Settings
+  - [ ] privacy mode
+  - [ ] toggle vs currency
+- [ ] Visualization
