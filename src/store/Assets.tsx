@@ -3,7 +3,9 @@ import { useAssetsStore } from './useAssetsStore';
 
 const initialContext = {
   assets: null,
-  addAsset: () => { console.log('add') },
+  assetCurrencies: [],
+  groupedAssets: {},
+  addAsset: () => {},
   removeAsset: () => {},
   setAssets: () => {},
   updateAsset: () => {},

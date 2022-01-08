@@ -20,3 +20,8 @@ export const CURRENCIES = {
     id: 'monero',
   },
 }
+
+export const CURRENCY_SYMBOLS = {
+  usd: '$',
+  eur: 'E',
+}

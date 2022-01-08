@@ -1,17 +1,16 @@
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCoinId } from "../../lib/useCurrencyIdea";
 import { useExchangeRate } from "../../lib/useExchangeRate";
 import { useAssets } from "../../store/Assets";
 import { Asset } from "../../types/Asset.type";
+import { Balance } from "../Shared/Balance";
 import './AssetRow.scss';
 
 export const AssetRow = ({ asset }: { asset: Asset }) => {
   const navigate = useNavigate();
   const { removeAsset } = useAssets();
 
-  const coinId = useCoinId(asset.currency);
-  const exchangeRate = useExchangeRate(coinId);
+  const exchangeRate = useExchangeRate(asset.currency);
   const currencyValue = useMemo(() => {
     if(!exchangeRate) { return 0 };
 
@@ -32,7 +31,7 @@ export const AssetRow = ({ asset }: { asset: Asset }) => {
         <div className="asset-balance">
           {asset.balance} {asset.currency}
         </div>
-        <div className="asset-value">$ {currencyValue}</div>
+        <div className="asset-value"><Balance balance={currencyValue} /></div>
         <div className="asset-action">
           <button onClick={handleEditClick}>edit</button>
           <button onClick={handleRemoveClick}>remove</button>

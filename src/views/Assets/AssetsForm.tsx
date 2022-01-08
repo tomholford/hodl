@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import useCoinsList from "../../queries/useCoinsList";
 import { useEffect } from "react";
 
-
 type FormData = {
   type: string;
   currency: Currency;
@@ -42,11 +41,11 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
     navigate('/assets');
   });
 
-  const coinsListQuery = useCoinsList();
+  // const coinsListQuery = useCoinsList();
 
-  useEffect(() => {
-    console.log(coinsListQuery.data);
-  }, [coinsListQuery.data]);
+  // useEffect(() => {
+  //   console.log(coinsListQuery.data);
+  // }, [coinsListQuery.data]);
 
   return (
     <>

@@ -10,6 +10,7 @@ import { AccountsProvider } from './store/Accounts';
 import { AssetsProvider } from './store/Assets';
 import { WalletsProvider } from './store/Wallets';
 import Accounts from './views/Accounts/Accounts';
+import { Footer } from './views/App/Footer';
 import { Header } from './views/App/Header';
 import { Assets } from './views/Assets/Assets';
 import { Home } from './views/Home/Home';
@@ -30,6 +31,7 @@ function App() {
                   <Route path="/accounts/*" element={<Accounts />} />
                   <Route path="/wallets" element={<Wallets />} />
                 </Routes>
+                <Footer />
               </Router>
             </div>
           </AssetsProvider>

@@ -1,27 +1,11 @@
-import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useAssets } from "../../store/Assets";
-import { groupBy } from 'lodash';
 import { AssetSummaryRow } from "./AssetSummaryRow";
 import './AssetsIndex.scss';
+import { AssetTotals } from "./AssetTotals";
 
 export const AssetsIndex = () => {
-  const { assets } = useAssets();
-
-  const groupedAssets = useMemo(() => {
-    if(!assets) { return {} };
-
-    return groupBy(assets, a => a.currency)
-  }, [assets]);
-
-  const assetCurrencies = useMemo(() => {
-    if(!groupedAssets) { return [] };
-
-    const currencies = Object.keys(groupedAssets);
-    currencies.sort();
-
-    return currencies;
-  }, [groupedAssets]);
+  const { groupedAssets, assetCurrencies } = useAssets();
 
   return (<>
     <h1>Assets</h1>
@@ -33,6 +17,7 @@ export const AssetsIndex = () => {
         <div className="asset-summary-row-container">
           { assetCurrencies.map(c => <AssetSummaryRow currency={c} assets={groupedAssets[c]} key={c} />) }
         </div>
+        <AssetTotals />
       </>
       ) :
       (

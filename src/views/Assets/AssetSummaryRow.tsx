@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useCoinId } from "../../lib/useCurrencyIdea";
 import { useExchangeRate } from "../../lib/useExchangeRate";
 import { Asset } from "../../types/Asset.type";
+import { Balance } from "../Shared/Balance";
 import { AssetRow } from "./AssetRow";
 import './AssetSummaryRow.scss';
 
@@ -15,8 +15,7 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
     setShowDetails(state => !state);
   }, []);
 
-  const coinId = useCoinId(currency);
-  const exchangeRate = useExchangeRate(coinId);
+  const exchangeRate = useExchangeRate(currency);
 
   const currencyValue = useMemo(() => {
     if(!exchangeRate) { return 0 };
@@ -30,7 +29,7 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
       <div className="summary-balance">
         {balance} {currency}
       </div>
-      <div className="summary-value">{'$'} {currencyValue}</div>
+      <div className="summary-value"><Balance balance={currencyValue} /></div>
       <div className="summary-count">{count} records</div>
       <div className="summary-action">
         <button onClick={handleShowDetailsClick}>{showDetails ? 'less' : 'more'}</button>

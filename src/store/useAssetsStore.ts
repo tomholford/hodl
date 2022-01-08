@@ -1,10 +1,26 @@
-import { useEffect, useState } from "react";
+import { groupBy } from "lodash";
+import { useEffect, useMemo, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { Asset } from "../types/Asset.type";
 
 export const useAssetsStore = () => {
   const [localAssets, setLocalAssets] = useLocalStorage('hodl:assets', [] as Asset[]);
   const [assets, setAssets] = useState<Asset[] | null>(null);
+
+  const groupedAssets = useMemo(() => {
+    if(!assets) { return {} };
+
+    return groupBy(assets, a => a.currency)
+  }, [assets]);
+
+  const assetCurrencies = useMemo(() => {
+    if(!groupedAssets) { return [] };
+
+    const currencies = Object.keys(groupedAssets);
+    currencies.sort();
+
+    return currencies;
+  }, [groupedAssets]);
 
   const addAsset = (asset: Asset) => {
     assets ? setAssets([...assets, asset]) : setAssets([asset]);
@@ -53,6 +69,8 @@ export const useAssetsStore = () => {
 
   return {
     assets,
+    assetCurrencies,
+    groupedAssets,
     addAsset,
     removeAsset,
     setAssets,

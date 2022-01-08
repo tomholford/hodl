@@ -1,7 +1,9 @@
 import { useMemo } from "react";
 import useSimpleCoinPrice from "../queries/useSimpleCoinPrice";
+import { currencyToCoinId } from "./currencyToCoinId";
 
-export const useExchangeRate = (coinId: string, vsCurrency: string = 'usd') => {
+export const useExchangeRate = (currency: string, vsCurrency: string = 'usd') => {
+  const coinId = currencyToCoinId(currency);
   const simpleCoinPriceQuery = useSimpleCoinPrice(coinId);
 
   const exchangeRate = useMemo(() => {
