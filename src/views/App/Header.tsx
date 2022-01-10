@@ -8,6 +8,7 @@ export const Header = () => {
         {/* <Link to="wallets">Wallets</Link>
         <Link to="accounts">Accounts</Link> */}
         <Link to="assets">Assets</Link>
+        <Link to="settings">Settings</Link>
       </div>
     </>
   )

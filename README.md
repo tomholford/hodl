@@ -30,7 +30,7 @@ An Account has one or more Assets
   - [ ] test data mode
   - [ ] CSV import / export 
 - [ ] Accounts
-  - [ ] 
+  - [ ] import from Wallet
 - [ ] Asset enhancements
   - [ ] cost basis
   - [ ] date acquired
@@ -40,4 +40,5 @@ An Account has one or more Assets
 - [ ] Settings
   - [ ] privacy mode
   - [ ] toggle vs currency
+  - [ ] dark mode
 - [ ] Visualization
