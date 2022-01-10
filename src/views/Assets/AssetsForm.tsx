@@ -6,8 +6,6 @@ import { Currency } from "../../types/Currency.type";
 import { CURRENCIES } from "../../constants";
 import { Asset } from "../../types/Asset.type";
 import { useNavigate } from "react-router-dom";
-import useCoinsList from "../../queries/useCoinsList";
-import { useEffect } from "react";
 
 type FormData = {
   type: string;
@@ -19,7 +17,7 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
   const isEditing = asset !== undefined;
   const navigate = useNavigate()
   const { addAsset, updateAsset } = useAssets();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
+  const { register, handleSubmit, reset } = useForm<FormData>();
   const onSubmit = handleSubmit(data => {
     reset();
 
@@ -40,12 +38,6 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
 
     navigate('/assets');
   });
-
-  // const coinsListQuery = useCoinsList();
-
-  // useEffect(() => {
-  //   console.log(coinsListQuery.data);
-  // }, [coinsListQuery.data]);
 
   return (
     <>

@@ -4,13 +4,12 @@ import { useMemo } from 'react';
 import useSimpleCoinPrices from '../../queries/useSimpleCoinPrices';
 import { currencyToCoinId } from '../../lib/currencyToCoinId';
 import { Balance } from '../Shared/Balance';
+import { useSettings } from '../../store/Settings';
 
 export const AssetTotals = () => {
   const { assetCurrencies, groupedAssets } = useAssets();
-  const priceQueries = useSimpleCoinPrices(assetCurrencies.map(currencyToCoinId));
-
-  // TODO: refactor vs currency, as global setting?
-  const vsCurrency = 'usd';
+  const { vsCurrency } = useSettings();
+  const priceQueries = useSimpleCoinPrices(assetCurrencies.map(currencyToCoinId), vsCurrency);
 
   type PriceMap = Record<string, number>;
   const priceMap: PriceMap | null = useMemo(() => {
@@ -27,8 +26,7 @@ export const AssetTotals = () => {
 
       return memo;
     }, {} as PriceMap);
-  }, [assetCurrencies, priceQueries]);
-
+  }, [assetCurrencies, priceQueries, vsCurrency]);
 
   const totalValue = useMemo(() => {
     if(!(priceMap && assetCurrencies && groupedAssets)) { return 0 };

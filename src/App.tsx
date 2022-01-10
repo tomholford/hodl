@@ -8,36 +8,41 @@ import './App.scss';
 import { QueryProvider } from './queries/QueryProvider';
 import { AccountsProvider } from './store/Accounts';
 import { AssetsProvider } from './store/Assets';
+import { SettingsProvider } from './store/Settings';
 import { WalletsProvider } from './store/Wallets';
 import Accounts from './views/Accounts/Accounts';
 import { Footer } from './views/App/Footer';
 import { Header } from './views/App/Header';
 import { Assets } from './views/Assets/Assets';
 import { Home } from './views/Home/Home';
+import { Settings } from './views/Settings/Settings';
 import Wallets from './views/Wallets/Wallets';
 
 function App() {
   return (
-    <QueryProvider>
-      <WalletsProvider>
-        <AccountsProvider>
-          <AssetsProvider>
-            <div className="App">
+    <SettingsProvider>
+      <QueryProvider>
+        <WalletsProvider>
+          <AccountsProvider>
+            <AssetsProvider>
               <Router>
-                <Header />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/assets/*" element={<Assets />} />
-                  <Route path="/accounts/*" element={<Accounts />} />
-                  <Route path="/wallets" element={<Wallets />} />
-                </Routes>
-                <Footer />
+                <div className="App">
+                  <Header />
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/assets/*" element={<Assets />} />
+                    <Route path="/accounts/*" element={<Accounts />} />
+                    <Route path="/wallets" element={<Wallets />} />
+                    <Route path="/settings" element={<Settings />} />
+                  </Routes>
+                  <Footer />
+                </div>
               </Router>
-            </div>
-          </AssetsProvider>
-        </AccountsProvider>
-      </WalletsProvider>
-    </QueryProvider>
+            </AssetsProvider>
+          </AccountsProvider>
+        </WalletsProvider>
+      </QueryProvider>
+    </SettingsProvider>
   );
 }
 
