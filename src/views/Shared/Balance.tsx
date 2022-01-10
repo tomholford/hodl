@@ -3,10 +3,12 @@ import { CURRENCY_SYMBOLS } from "../../constants";
 import { useSettings } from "../../store/Settings";
 
 export const Balance = ({ balance }: { balance: number }) => {
-  const { vsCurrency } = useSettings();
+  const { isPrivacyMode, vsCurrency } = useSettings();
   const presentedBalance = useMemo(() => {
+    if(isPrivacyMode) { return 'hidden' };
+
     return balance.toFixed(2);
-  }, [balance]);
+  }, [balance, isPrivacyMode]);
 
   const symbol = useMemo(() => {
     if(vsCurrency in CURRENCY_SYMBOLS) {
