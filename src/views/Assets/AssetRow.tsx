@@ -32,6 +32,8 @@ export const AssetRow = ({ asset }: { asset: Asset }) => {
           {asset.balance} {asset.currency}
         </div>
         <div className="asset-value"><Balance balance={currencyValue} /></div>
+        <div className="asset-note">{asset.note}</div>
+        <div className="asset-acquired-date">{asset.acquiredAt}</div>
         <div className="asset-action">
           <button onClick={handleEditClick}>edit</button>
           <button onClick={handleRemoveClick}>remove</button>

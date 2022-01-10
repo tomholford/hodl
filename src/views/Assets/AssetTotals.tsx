@@ -39,10 +39,20 @@ export const AssetTotals = () => {
     }, 0);
   }, [assetCurrencies, groupedAssets, priceMap]);
 
+  const totalAssetCount = useMemo(() => {
+    if(!(groupedAssets && assetCurrencies)) { return 0 };
+
+    return assetCurrencies.reduce((total, c) => {
+      const assets = groupedAssets[c];
+      return assets.length + total;
+    }, 0);  
+  }, [assetCurrencies, groupedAssets])
+
   return (<>
+    <h2>TOTAL</h2>
     <div className="asset-totals">
-      <div className="total-header">TOTAL</div>
       <div className="total-value"><Balance balance={totalValue} /></div>
+      <div className="total-assets">{totalAssetCount} records across {assetCurrencies.length} assets</div>
     </div>
   </>);
 }

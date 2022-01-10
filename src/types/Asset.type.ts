@@ -9,5 +9,7 @@ export interface Asset {
   currency: Currency;
   balance: number;
   uuid: string;
+  note?: string;
+  acquiredAt?: string;
   accountId?: string;
 }

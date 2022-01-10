@@ -39,6 +39,6 @@ An Account has one or more Assets
   - [ ] import balance from API
 - [ ] Settings
   - [ ] privacy mode
-  - [ ] toggle vs currency
+  - [x] toggle vs currency
   - [ ] dark mode
 - [ ] Visualization
