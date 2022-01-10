@@ -24,8 +24,11 @@ export const CURRENCIES = {
 export const DEFAULT_VS_CURRENCY = 'usd';
 
 export const CURRENCY_SYMBOLS = {
-  usd: '$',
-  eur: '€',
-  jpy: '¥',
   btc: '฿',
+  eth: 'Ξ',
+  eur: '€',
+  gbp: '£',
+  jpy: '¥',
+  mxn: '$',
+  usd: '$',
 }

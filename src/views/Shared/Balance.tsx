@@ -9,9 +9,13 @@ export const Balance = ({ balance }: { balance: number }) => {
   }, [balance]);
 
   const symbol = useMemo(() => {
-    return CURRENCY_SYMBOLS[vsCurrency as keyof typeof CURRENCY_SYMBOLS];
+    if(vsCurrency in CURRENCY_SYMBOLS) {
+      return CURRENCY_SYMBOLS[vsCurrency as keyof typeof CURRENCY_SYMBOLS];
+    } else {
+      return vsCurrency.toUpperCase();
+    }
   }, [vsCurrency]);
-  
+
   return (<>
     <span>{symbol} {presentedBalance}</span>
   </>);

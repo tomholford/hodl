@@ -1,6 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { CURRENCY_SYMBOLS } from "../../constants";
 import { useExchangeRate } from "../../lib/useExchangeRate";
+import { useSettings } from "../../store/Settings";
 import { Asset } from "../../types/Asset.type";
 import { Balance } from "../Shared/Balance";
 import { AssetRow } from "./AssetRow";
@@ -16,6 +18,14 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
   }, []);
 
   const exchangeRate = useExchangeRate(currency);
+  const { vsCurrency } = useSettings();
+  const symbol = useMemo(() => {
+    if(vsCurrency in CURRENCY_SYMBOLS) {
+      return CURRENCY_SYMBOLS[vsCurrency as keyof typeof CURRENCY_SYMBOLS];
+    } else {
+      return vsCurrency.toUpperCase();
+    }
+  }, [vsCurrency]);
 
   const currencyValue = useMemo(() => {
     if(!exchangeRate) { return 0 };
@@ -24,7 +34,7 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
   }, [balance, exchangeRate]);
 
   return (<>
-    <h2>{currency} <small>{exchangeRate ? `($ ${exchangeRate})` : 'Loading...'}</small></h2>
+    <h2>{currency} <small>{exchangeRate ? `(${symbol} ${exchangeRate})` : 'Loading...'}</small></h2>
     <div className="asset-summary-row">
       <div className="summary-balance">
         {balance} {currency}

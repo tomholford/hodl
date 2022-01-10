@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { CURRENCY_SYMBOLS } from "../../constants";
+import useSupportedVsCurrencies from "../../queries/useSupportedVsCurrencies";
 import { useSettings } from "../../store/Settings";
 
 type FormData = {
@@ -13,12 +15,23 @@ export default function SettingsForm() {
     setVsCurrency(data.vsCurrency);
   });
 
+  const vsCurrencyQuery = useSupportedVsCurrencies();
+
+  const currencyOptions = useMemo(() => {
+    if(!(vsCurrencyQuery.isSuccess && vsCurrencyQuery.data)) { return Object.keys(CURRENCY_SYMBOLS) };
+
+    const output = vsCurrencyQuery.data;
+    output.sort();
+
+    return output;
+  }, [vsCurrencyQuery.data, vsCurrencyQuery.isSuccess])
+
   return (
     <form onSubmit={onSubmit}>
       <label>vsCurrency</label>
       <select defaultValue={vsCurrency || undefined} {...register("vsCurrency")}>
         {
-          Object.keys(CURRENCY_SYMBOLS).map(c => {
+          currencyOptions.map(c => {
             return (
               <option value={c} key={c}>{c}</option>
             )
