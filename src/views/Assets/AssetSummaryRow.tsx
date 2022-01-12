@@ -27,11 +27,21 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
     }
   }, [vsCurrency]);
 
-  const currencyValue = useMemo(() => {
+  const currentValue = useMemo(() => {
     if(!exchangeRate) { return 0 };
 
     return exchangeRate * balance;
   }, [balance, exchangeRate]);
+
+  const initialValue = useMemo(() => {
+    if(!assets) { return 0 };
+
+    return assets.reduce((memo, a) => memo + Number(a.costBasis) * a.balance, 0)
+  }, [assets]);
+
+  const pnl = useMemo(() => {
+    return currentValue - initialValue;
+  }, [currentValue, initialValue]);
 
   return (<>
     <h2>{currency} <small>{exchangeRate ? `(${symbol} ${exchangeRate})` : 'Loading...'}</small></h2>
@@ -39,7 +49,8 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
       <div className="summary-balance">
         {balance} {currency}
       </div>
-      <div className="summary-value"><Balance balance={currencyValue} /></div>
+      <div className="summary-value"><Balance balance={currentValue} /></div>
+      <div className="summary-pnl"><Balance balance={pnl} /></div>
       <div className="summary-count">{count} records</div>
       <div className="summary-action">
         <button onClick={handleShowDetailsClick}>{showDetails ? 'less' : 'more'}</button>

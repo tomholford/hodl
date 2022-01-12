@@ -14,6 +14,11 @@ export const CURRENCIES = {
     value: 'AVAX',
     id: 'avalanche-2',
   },
+  SOL: {
+    label: 'Solana',
+    value: 'SOL',
+    id: 'solana',
+  },
   XMR: {
     label: 'Monero',
     value: 'XMR',
@@ -34,3 +39,5 @@ export const CURRENCY_SYMBOLS = {
   sats: '₿',
   usd: '$',
 }
+
+export const BITCOIN_ORIGIN_DATE = '09-01-2009';
