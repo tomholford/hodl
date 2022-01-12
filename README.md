@@ -32,13 +32,13 @@ An Account has one or more Assets
 - [ ] Accounts
   - [ ] import from Wallet
 - [ ] Asset enhancements
-  - [ ] cost basis
-  - [ ] date acquired
-  - [ ] note
+  - [x] cost basis
+  - [x] date acquired
+  - [x] note
   - [ ] associate to Account
   - [ ] import balance from API
 - [ ] Settings
-  - [ ] privacy mode
+  - [x] privacy mode
   - [x] toggle vs currency
   - [ ] dark mode
 - [ ] Visualization
