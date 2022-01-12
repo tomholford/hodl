@@ -80,11 +80,13 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
 
   const coinHistoryQuery = useCoinHistory(coinId, queryDate);
   useEffect(() => {
+    if(asset?.costBasis) { return };
+
     if(coinHistoryQuery.isSuccess && coinHistoryQuery.data && coinHistoryQuery.data.market_data?.current_price && ('usd' in coinHistoryQuery.data.market_data.current_price)) {
       const basis = parseFloat(coinHistoryQuery.data.market_data.current_price['usd'].toFixed(2));
       setValue('costBasis', basis)
     }
-  }, [coinHistoryQuery, setValue]);
+  }, [asset?.costBasis, coinHistoryQuery, setValue]);
 
   return (
     <>

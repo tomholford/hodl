@@ -28,7 +28,7 @@ export const AssetTotals = () => {
     }, {} as PriceMap);
   }, [assetCurrencies, priceQueries, vsCurrency]);
 
-  const totalValue = useMemo(() => {
+  const totalCurrentValue = useMemo(() => {
     if(!(priceMap && assetCurrencies && groupedAssets)) { return 0 };
   
     return assetCurrencies.reduce((total, c) => {
@@ -38,6 +38,22 @@ export const AssetTotals = () => {
       return assets.reduce((assetTotal, a) => assetTotal + (a.balance * priceMap[coinId]), total)
     }, 0);
   }, [assetCurrencies, groupedAssets, priceMap]);
+
+  const totalInitialValue = useMemo(() => {
+    if(!(assetCurrencies && groupedAssets)) { return 0 };
+  
+    return assetCurrencies.reduce((total, c) => {
+      const assets = groupedAssets[c];
+
+      return assets.reduce((assetTotal, a) => assetTotal + (a.balance * (a?.costBasis || 1)), total)
+    }, 0);
+  }, [assetCurrencies, groupedAssets]);
+
+  const totalPnl = useMemo(() => {
+    if(!(totalCurrentValue && totalInitialValue)) { return 0 };
+
+    return totalCurrentValue - totalInitialValue;
+  }, [totalCurrentValue, totalInitialValue]);
 
   const totalAssetCount = useMemo(() => {
     if(!(groupedAssets && assetCurrencies)) { return 0 };
@@ -51,7 +67,8 @@ export const AssetTotals = () => {
   return (<>
     <h2>TOTAL</h2>
     <div className="asset-totals">
-      <div className="total-value"><Balance balance={totalValue} /></div>
+      <div className="total-value"><Balance balance={totalCurrentValue} /></div>
+      <div className="total-pnl"><Balance balance={totalPnl} /></div>
       <div className="total-assets">{totalAssetCount} records across {assetCurrencies.length} assets</div>
     </div>
   </>);
