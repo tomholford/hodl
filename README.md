@@ -40,5 +40,6 @@ An Account has one or more Assets
 - [ ] Settings
   - [x] privacy mode
   - [x] toggle vs currency
-  - [ ] dark mode
+  - [x] dark mode
+  - [ ] improved settings management
 - [ ] Visualization

@@ -3,8 +3,10 @@ import { DEFAULT_VS_CURRENCY } from '../constants';
 import { useSettingsStore } from './useSettingsStore';
 
 const initialContext = {
+  isDarkMode: true,
   isPrivacyMode: false,
   setIsPrivacyMode: () => {},
+  toggleDarkMode: () => {},
   vsCurrency: DEFAULT_VS_CURRENCY,
   setVsCurrency: () => {},
 }

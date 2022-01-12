@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -8,7 +9,7 @@ import './App.scss';
 import { QueryProvider } from './queries/QueryProvider';
 import { AccountsProvider } from './store/Accounts';
 import { AssetsProvider } from './store/Assets';
-import { SettingsProvider } from './store/Settings';
+import { SettingsProvider, useSettings } from './store/Settings';
 import { WalletsProvider } from './store/Wallets';
 import Accounts from './views/Accounts/Accounts';
 import { Footer } from './views/App/Footer';
@@ -18,7 +19,16 @@ import { Home } from './views/Home/Home';
 import { Settings } from './views/Settings/Settings';
 import Wallets from './views/Wallets/Wallets';
 
-function App() {
+const DarkModeApp = ({ children }: { children: React.ReactNode }) => {
+  const { isDarkMode } = useSettings();
+  return (<>
+    <div className={classNames('App', { darkMode: isDarkMode })}>
+      {children}
+    </div>
+  </>)
+}
+
+const App = () => {
   return (
     <SettingsProvider>
       <QueryProvider>
@@ -26,8 +36,8 @@ function App() {
           <AccountsProvider>
             <AssetsProvider>
               <Router>
-                <div className="App">
-                  <Header />
+                <DarkModeApp>
+                  .<Header />
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/assets/*" element={<Assets />} />
@@ -36,7 +46,7 @@ function App() {
                     <Route path="/settings" element={<Settings />} />
                   </Routes>
                   <Footer />
-                </div>
+                </DarkModeApp>
               </Router>
             </AssetsProvider>
           </AccountsProvider>

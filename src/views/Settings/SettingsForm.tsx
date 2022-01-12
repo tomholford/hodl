@@ -6,6 +6,7 @@ import { useSettings } from "../../store/Settings";
 
 type FormData = {
   vsCurrency: string;
+  isDarkMode: boolean;
 };
 
 export default function SettingsForm() {
