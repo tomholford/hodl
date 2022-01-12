@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import {
   BrowserRouter as Router,
+  Navigate,
   Route,
   Routes,
 } from "react-router-dom";
@@ -39,11 +40,11 @@ const App = () => {
                 <DarkModeApp>
                   .<Header />
                   <Routes>
-                    <Route path="/" element={<Home />} />
                     <Route path="/assets/*" element={<Assets />} />
-                    <Route path="/accounts/*" element={<Accounts />} />
-                    <Route path="/wallets" element={<Wallets />} />
+                    {/* <Route path="/accounts/*" element={<Accounts />} />
+                    <Route path="/wallets" element={<Wallets />} /> */}
                     <Route path="/settings" element={<Settings />} />
+                    <Route path="*" element={<Navigate to={'/assets'} />} />
                   </Routes>
                   <Footer />
                 </DarkModeApp>
