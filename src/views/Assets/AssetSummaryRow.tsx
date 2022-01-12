@@ -5,6 +5,7 @@ import { useExchangeRate } from "../../lib/useExchangeRate";
 import { useSettings } from "../../store/Settings";
 import { Asset } from "../../types/Asset.type";
 import { Balance } from "../Shared/Balance";
+import { AssetHeaderRow } from "./AssetHeaderRow";
 import { AssetRow } from "./AssetRow";
 import './AssetSummaryRow.scss';
 
@@ -48,9 +49,22 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
     <div className="asset-summary-row">
       <div className="summary-balance">
         {balance} {currency}
+        <div className="summary-label">
+          balance
+        </div>
       </div>
-      <div className="summary-value"><Balance balance={currentValue} /></div>
-      <div className="summary-pnl"><Balance balance={pnl} /></div>
+      <div className="summary-value">
+        <Balance balance={currentValue} />
+        <div className="summary-label">
+          current value
+        </div>
+      </div>
+      <div className="summary-pnl">
+        <Balance balance={pnl} />
+        <div className="summary-label">
+          P / L
+        </div>
+      </div>
       <div className="summary-count">{count} records</div>
       <div className="summary-action">
         <button onClick={handleShowDetailsClick}>{showDetails ? 'less' : 'more'}</button>
@@ -59,14 +73,19 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
     {
       showDetails && (
         <div className="summary-details">
+          <hr/>
           {assets && assets.length > 0 ?
             (
-              assets.map(a => <AssetRow asset={a} key={a.uuid} />)
+              <>
+                <AssetHeaderRow />
+                { assets.map(a => <AssetRow asset={a} key={a.uuid} />) }
+              </>
             ) :
             (
               <p>No assets available, <Link to={'/assets/new'}>add one here</Link></p>
             )
           }
+          <hr/>
         </div>
       )
     }

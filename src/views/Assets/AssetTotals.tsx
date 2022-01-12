@@ -67,8 +67,18 @@ export const AssetTotals = () => {
   return (<>
     <h2>TOTAL</h2>
     <div className="asset-totals">
-      <div className="total-value"><Balance balance={totalCurrentValue} /></div>
-      <div className="total-pnl"><Balance balance={totalPnl} /></div>
+      <div className="total-value">
+        <Balance balance={totalCurrentValue} />
+        <div className="total-label">
+          balance
+        </div>
+      </div>
+      <div className="total-pnl">
+        <Balance balance={totalPnl} />
+        <div className="total-label">
+          P / L
+        </div>
+      </div>
       <div className="total-assets">{totalAssetCount} records across {assetCurrencies.length} assets</div>
     </div>
   </>);

@@ -8,4 +8,8 @@ div.asset-summary-row {
     flex-flow: column nowrap;
     justify-content: center;
   }
+
+  div.summary-label {
+    color: rgba(0,0,0,0.4);
+  }
 }
