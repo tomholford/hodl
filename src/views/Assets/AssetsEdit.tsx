@@ -20,7 +20,7 @@ export const AssetsEdit = () => {
   }, [editingAsset, navigate]);
 
   return (<>
-    <h1>Edit an Asset</h1>
+    <h2><span className="subdued">Assets</span> / Edit</h2>
     <AssetsForm asset={editingAsset} />
   </>)
 }

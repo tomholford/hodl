@@ -4,6 +4,10 @@ div.cell-label {
   color: $value-hint;
 }
 
+span.subdued {
+  color: $value-hint;
+}
+
 div.App {
   min-height: 100vh;
   background-color: $bg;

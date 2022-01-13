@@ -27,7 +27,7 @@ export const CURRENCIES = {
   DOGE: {
     label: 'Dogecoin',
     value: 'DOGE',
-    id: 'doge',
+    id: 'dogecoin',
   },
 }
 

@@ -6,7 +6,7 @@ import { Currency } from "../../types/Currency.type";
 import { BITCOIN_ORIGIN_DATE, CURRENCIES, DEFAULT_VS_CURRENCY } from "../../constants";
 import { Asset } from "../../types/Asset.type";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import useCoinHistory from "../../queries/useCoinHistory";
 import { currencyToCoinId } from "../../lib/currencyToCoinId";
 import { DateTime } from 'luxon';
@@ -90,6 +90,8 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
     }
   }, [asset, coinHistoryQuery, setValue]);
 
+  const handleCancelClick = useCallback(() => navigate('/'), [navigate]);
+
   return (
     <>
       {asset ? <p>{`Editing ${asset.uuid}`}</p> : null}
@@ -114,6 +116,7 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
         <label htmlFor="note">note</label>
         <input type="text" defaultValue={asset?.note} {...register('note')} />
         <input type="submit" disabled={coinHistoryQuery.isFetching} />
+        <button onClick={handleCancelClick}>cancel</button>
       </form>
     </>
   );

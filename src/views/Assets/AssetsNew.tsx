@@ -1,8 +1,14 @@
 import AssetsForm from "./AssetsForm"
+import { ImportAssetsButton } from "./ImportAssetsButton"
 
 export const AssetsNew = () => {
   return (<>
-    <h1>Add an Asset</h1>
+    <h2><span className="subdued">Assets</span> / Add an Asset</h2>
+    <p>Import from CSV:</p>
+    <ImportAssetsButton />
+
+    <br/>
+    <p>Or, add one below:</p>
     <AssetsForm />
   </>)
 }
