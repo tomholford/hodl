@@ -24,6 +24,11 @@ export const CURRENCIES = {
     value: 'XMR',
     id: 'monero',
   },
+  DOGE: {
+    label: 'Dogecoin',
+    value: 'DOGE',
+    id: 'doge',
+  },
 }
 
 export const DEFAULT_VS_CURRENCY = 'usd';

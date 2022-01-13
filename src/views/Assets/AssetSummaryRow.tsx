@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { CURRENCY_SYMBOLS } from "../../constants";
+import { pluralize } from "../../lib/presenters";
 import { useExchangeRate } from "../../lib/useExchangeRate";
 import { useSettings } from "../../store/Settings";
 import { Asset } from "../../types/Asset.type";
@@ -45,7 +46,7 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
   }, [currentValue, initialValue]);
 
   return (<>
-    <h2>{currency} <small>{exchangeRate ? `(${symbol} ${exchangeRate})` : 'Loading...'}</small></h2>
+    <h3>{currency} <small>{exchangeRate ? `(${symbol} ${exchangeRate})` : 'Loading...'}</small></h3>
     <div className="asset-summary-row">
       <div className="summary-balance">
         {balance} {currency}
@@ -65,7 +66,7 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
           P / L
         </div>
       </div>
-      <div className="summary-count">{count} records</div>
+      <div className="summary-count">{count} {pluralize('record', count)}</div>
       <div className="summary-action">
         <button onClick={handleShowDetailsClick}>{showDetails ? 'less' : 'more'}</button>
       </div>

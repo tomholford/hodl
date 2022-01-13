@@ -1,0 +1,19 @@
+@import '../../styles/base';
+
+a.export-button {
+  padding: 5px 15px;
+  color: $button !important;
+  background-color: $button-bg !important;
+  border-color: $button-border !important;
+  width: 50px;
+  height: 30px;
+  border: solid 2px;
+}
+
+.darkMode {
+  a.export-button {
+    color: $dark-button !important;
+    background-color: $dark-button-bg !important;
+    border-color: $dark-button-border !important;
+  }
+}

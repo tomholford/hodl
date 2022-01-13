@@ -4,6 +4,7 @@ import { abbreviatedAddress } from "../../lib/presenters";
 import { getBalance } from "../../services/Avalanche.service";
 import { useAccounts } from "../../store/Accounts";
 import { Account } from "../../types/Account.type";
+import './AccountRow.scss';
 
 export const AccountRow = ({ account }: { account: Account }) => {
   const { removeAccount } = useAccounts();

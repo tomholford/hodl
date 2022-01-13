@@ -31,6 +31,7 @@ Current supported currencies:
   - [ ] basic styling
 - [ ] Asset enhancements
   - [x] cost basis
+  - [ ] cost basis currency
   - [x] date acquired
   - [x] note
   - [ ] associate to Account or Wallet
@@ -47,4 +48,6 @@ Current supported currencies:
 - [ ] Data Model
   - [ ] Wallets
   - [ ] Accounts
-  - [ ] Support additional currencies
+- [ ] Currency
+  - [ ] coinId
+  - [ ] data from Coingecko

@@ -1,0 +1,49 @@
+@import '../../styles/base';
+
+div.header {
+  @include flex-col();
+  min-height: 40px;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  div.header-top {
+    @include flex-row();
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  div.header-toggles {
+    @include flex-row();
+    justify-content: space-between;
+    width: 115px;
+  }
+}
+
+div.header-links {
+  @include flex-row();
+  justify-content: space-evenly;
+
+  a {
+    text-decoration: none;
+    background-color: unset;
+    border-bottom: unset;
+    color: $link;
+
+    &.active {
+      border-bottom: 1px solid $link;
+    }
+  }
+}
+
+.darkMode {
+  div.header-links {
+    a{
+      border-bottom: unset;
+    }
+
+    a.active {
+      border-bottom: 1px solid $dark-link-underline;
+    }  
+  }
+}

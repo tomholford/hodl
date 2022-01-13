@@ -1,32 +1,61 @@
-div.header-links {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-evenly
-}
-
-div.account-row {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-evenly;
-}
+@import './styles/base';
 
 div.cell-label {
-  color: rgba(0,0,0,0.4);
+  color: $value-hint;
 }
 
 div.App {
-  height: 100vh;
+  min-height: 100vh;
+  background-color: $bg;
+  color: $default;
 
+  div.app-inner {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  a {
+    color: $link;
+    background-color: $link-bg;
+    text-decoration: none;
+    border-bottom: 1px solid $link-underline;
+
+    &:hover {
+      color: $link-hover;
+      background-color: $link-hover-bg;
+    }
+  }
+
+  button {
+    padding: 5px 15px;
+    color: $button;
+    background-color: $button-bg;
+    border-color: $button-border;
+  }
+
+  // Dark Mode styles
   &.darkMode {
-    background-color: rgba(0,0,0,0.8);
-    color: rgba(255, 255, 255, 0.9);
+    background-color: $dark-bg;
+    color: $dark-default;
 
     a {
-      color: rgba(40,180,240,0.8);
+      color: $dark-link;
+      background-color: $dark-link-bg;
+      border-bottom: 1px solid $dark-link-underline;
+    }
+    
+    button {
+      background-color: $dark-button-bg;
+      color: $dark-button;
+      border-color: $dark-button-border;
     }
 
     div.cell-label {
-      color: rgba(255,255,255,0.4);
+      color: $dark-value-hint;
     }
   }
+
+  // @include min-width($md) {
+  //   width: 
+  // }
 }

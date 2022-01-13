@@ -1,3 +1,10 @@
+@import '../../styles/base';
+
+div.asset-actions {
+  @include flex-row();
+  align-items: center;
+}
+
 div.asset-summary-row-container {
   display: flex;
   flex-flow: column nowrap;

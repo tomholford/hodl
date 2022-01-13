@@ -1,0 +1,17 @@
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+@mixin min-width($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin max-width($bp) {
+  @media (max-width: $bp) {
+    @content;
+  }
+}

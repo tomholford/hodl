@@ -5,6 +5,7 @@ import useSimpleCoinPrices from '../../queries/useSimpleCoinPrices';
 import { currencyToCoinId } from '../../lib/currencyToCoinId';
 import { Balance } from '../Shared/Balance';
 import { useSettings } from '../../store/Settings';
+import { pluralize } from '../../lib/presenters';
 
 export const AssetTotals = () => {
   const { assetCurrencies, groupedAssets } = useAssets();
@@ -65,7 +66,7 @@ export const AssetTotals = () => {
   }, [assetCurrencies, groupedAssets])
 
   return (<>
-    <h2>TOTAL</h2>
+    <h3>TOTAL</h3>
     <div className="asset-totals">
       <div className="total-value">
         <Balance balance={totalCurrentValue} />
@@ -79,7 +80,7 @@ export const AssetTotals = () => {
           P / L
         </div>
       </div>
-      <div className="total-assets">{totalAssetCount} records across {assetCurrencies.length} assets</div>
+      <div className="total-assets">{totalAssetCount} {pluralize('record', totalAssetCount)} across {assetCurrencies.length} {pluralize('asset', assetCurrencies.length)}</div>
     </div>
   </>);
 }

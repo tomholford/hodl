@@ -106,7 +106,7 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
           }
         </select>
         <label htmlFor="balance">balance</label>
-        <input type="number" defaultValue={asset?.balance} min={0} step={'any'} max={Number.MAX_VALUE} { ...register('balance')} />
+        <input type="number" placeholder={'420.69'} defaultValue={asset?.balance} min={0} step={'any'} max={Number.MAX_VALUE} { ...register('balance')} />
         <label htmlFor="acquiredAt">date acquired</label>
         <input type="date" defaultValue={asset?.acquiredAt} {...register('acquiredAt')} />
         <label htmlFor="costBasis">costBasis</label>

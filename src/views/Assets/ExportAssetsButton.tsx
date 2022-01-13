@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { Asset } from "../../types/Asset.type";
+import './ExportAssetsButton.scss';
 
 // TODO: better filename, use less memos
 export function ExportAssetsButton({ assets }: { assets: Asset[] }) {
-
   const headers = useMemo(() => { 
     return [
       'currency',
@@ -50,6 +50,6 @@ export function ExportAssetsButton({ assets }: { assets: Asset[] }) {
   }, [file]);
 
   return (<>
-    {objectUrl ? <a href={objectUrl} download={`assets.csv`}>export csv</a> : 'generating csv ...'}
+    {objectUrl ? <a title={'export to csv'} className={'export-button'} href={objectUrl} download={`assets.csv`}>🖹</a> : 'generating csv ...'}
   </>);
 }

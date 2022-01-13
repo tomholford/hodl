@@ -20,7 +20,7 @@ import { Home } from './views/Home/Home';
 import { Settings } from './views/Settings/Settings';
 import Wallets from './views/Wallets/Wallets';
 
-const DarkModeApp = ({ children }: { children: React.ReactNode }) => {
+const AppContainer = ({ children }: { children: React.ReactNode }) => {
   const { isDarkMode } = useSettings();
   return (<>
     <div className={classNames('App', { darkMode: isDarkMode })}>
@@ -37,17 +37,19 @@ const App = () => {
           <AccountsProvider>
             <AssetsProvider>
               <Router>
-                <DarkModeApp>
+                <AppContainer>
                   <Header />
-                  <Routes>
-                    <Route path="/assets/*" element={<Assets />} />
-                    {/* <Route path="/accounts/*" element={<Accounts />} />
+                  <div className="app-inner">
+                    <Routes>
+                      <Route path="/assets/*" element={<Assets />} />
+                      {/* <Route path="/accounts/*" element={<Accounts />} />
                     <Route path="/wallets" element={<Wallets />} /> */}
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="*" element={<Navigate to={'/assets'} />} />
-                  </Routes>
+                      <Route path="/settings" element={<Settings />} />
+                      <Route path="*" element={<Navigate to={'/assets'} />} />
+                    </Routes>
+                  </div>
                   <Footer />
-                </DarkModeApp>
+                </AppContainer>
               </Router>
             </AssetsProvider>
           </AccountsProvider>

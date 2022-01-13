@@ -1,0 +1,22 @@
+$value-hint: rgba(0,0,0,0.4);
+$bg: rgba(0,0,0,0.02);
+$default: rgba(0,0,0,0.95);
+$link: $default;
+$link-bg: rgba(0,100,240,0.1);
+$link-hover: #131313;
+$link-hover-bg: rgba(187,239,253,0.7);
+$link-underline: rgba(0,0,0,0.2);
+$active-link-underline: rgba(40,180,240,0.8);
+$button: $default;
+$button-bg: $bg;
+$button-border: $default;
+
+$dark-bg: rgba(0,0,0,0.8);
+$dark-default: rgba(255, 255, 255, 0.9);
+$dark-link: rgba(128, 217, 255, 0.8);
+$dark-link-bg: rgba(255, 255, 255, 0.1);
+$dark-link-underline: $dark-link;
+$dark-value-hint: rgba(255,255,255,0.4);
+$dark-button: rgba(0,0,0, 0.8);
+$dark-button-bg: rgba(255, 255, 255, 0.9);
+$dark-button-border: $dark-button;
