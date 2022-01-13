@@ -69,13 +69,13 @@ export const AssetTotals = () => {
     <div className="asset-totals">
       <div className="total-value">
         <Balance balance={totalCurrentValue} />
-        <div className="total-label">
+        <div className="cell-label">
           balance
         </div>
       </div>
       <div className="total-pnl">
         <Balance balance={totalPnl} />
-        <div className="total-label">
+        <div className="cell-label">
           P / L
         </div>
       </div>

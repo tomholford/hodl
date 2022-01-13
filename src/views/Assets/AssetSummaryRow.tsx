@@ -49,19 +49,19 @@ export const AssetSummaryRow = ({ assets, currency }: { assets: Asset[], currenc
     <div className="asset-summary-row">
       <div className="summary-balance">
         {balance} {currency}
-        <div className="summary-label">
+        <div className="cell-label">
           balance
         </div>
       </div>
       <div className="summary-value">
         <Balance balance={currentValue} />
-        <div className="summary-label">
+        <div className="cell-label">
           current value
         </div>
       </div>
       <div className="summary-pnl">
         <Balance balance={pnl} />
-        <div className="summary-label">
+        <div className="cell-label">
           P / L
         </div>
       </div>

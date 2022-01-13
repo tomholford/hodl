@@ -10,6 +10,10 @@ div.account-row {
   justify-content: space-evenly;
 }
 
+div.cell-label {
+  color: rgba(0,0,0,0.4);
+}
+
 div.App {
   height: 100vh;
 
@@ -19,6 +23,10 @@ div.App {
 
     a {
       color: rgba(40,180,240,0.8);
+    }
+
+    div.cell-label {
+      color: rgba(255,255,255,0.4);
     }
   }
 }
