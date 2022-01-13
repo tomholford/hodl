@@ -6,6 +6,22 @@
 1. `npm install`
 1. `npm start`
 
+## Usage
+
+Click 'add an asset', or import a CSV file with the following schema:
+
+```csv
+currency,balance,costBasis,acquiredAt,note
+ETH,1.337,420.69,2021-01-01,funding secured
+```
+
+Current supported currencies:
+- BTC
+- ETH
+- AVAX
+- SOL
+- XMR
+
 ## Roadmap
 
 - [ ] UX
@@ -31,3 +47,4 @@
 - [ ] Data Model
   - [ ] Wallets
   - [ ] Accounts
+  - [ ] Support additional currencies
