@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useAssets } from "../../store/Assets";
 import { v4 as uuidv4 } from 'uuid';
 import { Currency } from "../../types/Currency.type";
-import { BITCOIN_ORIGIN_DATE, CURRENCIES } from "../../constants";
+import { BITCOIN_ORIGIN_DATE, CURRENCIES, DEFAULT_VS_CURRENCY } from "../../constants";
 import { Asset } from "../../types/Asset.type";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo } from "react";
@@ -80,13 +80,15 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
 
   const coinHistoryQuery = useCoinHistory(coinId, queryDate);
   useEffect(() => {
+    // Do not overwrite an existing costbasis
+    // Already persisted, or field touched
     if(asset?.costBasis) { return };
 
-    if(coinHistoryQuery.isSuccess && coinHistoryQuery.data && coinHistoryQuery.data.market_data?.current_price && ('usd' in coinHistoryQuery.data.market_data.current_price)) {
-      const basis = parseFloat(coinHistoryQuery.data.market_data.current_price['usd'].toFixed(2));
+    if(coinHistoryQuery.isSuccess && coinHistoryQuery.data && coinHistoryQuery.data.market_data?.current_price && (DEFAULT_VS_CURRENCY in coinHistoryQuery.data.market_data.current_price)) {
+      const basis = parseFloat(coinHistoryQuery.data.market_data.current_price[DEFAULT_VS_CURRENCY].toFixed(2));
       setValue('costBasis', basis)
     }
-  }, [asset?.costBasis, coinHistoryQuery, setValue]);
+  }, [asset, coinHistoryQuery, setValue]);
 
   return (
     <>

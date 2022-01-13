@@ -38,7 +38,7 @@ const App = () => {
             <AssetsProvider>
               <Router>
                 <DarkModeApp>
-                  .<Header />
+                  <Header />
                   <Routes>
                     <Route path="/assets/*" element={<Assets />} />
                     {/* <Route path="/accounts/*" element={<Accounts />} />

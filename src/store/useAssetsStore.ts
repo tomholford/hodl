@@ -23,7 +23,7 @@ export const useAssetsStore = () => {
   }, [groupedAssets]);
 
   const addAsset = (asset: Asset) => {
-    assets ? setAssets([...assets, asset]) : setAssets([asset]);
+    setAssets(state => state ? [...state, asset] : [asset]);
   }
 
   const removeAsset = (uuid: string) => {

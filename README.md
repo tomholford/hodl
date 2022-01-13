@@ -10,8 +10,9 @@
 
 - [ ] UX
   - [ ] test data mode
-  - [ ] CSV import
+  - [x] CSV import
   - [x] CSV export
+  - [ ] basic styling
 - [ ] Asset enhancements
   - [x] cost basis
   - [x] date acquired
@@ -23,7 +24,7 @@
   - [x] privacy mode
   - [x] toggle vs currency
   - [x] dark mode
-  - [ ] improved settings management
+  - [ ] improved settings UX
 - [ ] Visualization
   - [ ] historical portfolio performance chart
   - [ ] forecast chart

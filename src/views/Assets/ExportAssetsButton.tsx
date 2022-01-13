@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { Asset } from "../../types/Asset.type";
 
 // TODO: better filename, use less memos
@@ -44,6 +44,8 @@ export function ExportAssetsButton({ assets }: { assets: Asset[] }) {
   const objectUrl = useMemo(() => {
     if(!file) { return null };
 
+    // TODO: revoke URL when no longer needed
+    // https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL
     return window.URL.createObjectURL(file);
   }, [file]);
 
