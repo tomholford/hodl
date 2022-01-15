@@ -44,14 +44,14 @@ export const AssetRow = ({ asset }: { asset: Asset }) => {
         <div className="asset-balance">
           {asset.balance} {asset.currency}
         </div>
-        <div className="asset-value"><Balance balance={currentValue} /></div>
+        <div className="asset-value"></div>
         <div className="asset-pnl">{pnl && <Balance balance={pnl} />}</div>
         <div className="asset-cost-basis">{asset.costBasis ? `$ ${asset.costBasis} / unit` : null}</div>
         <div className="asset-acquired-date">{asset.acquiredAt}</div>
         <div className="asset-note">{asset.note}</div>
         <div className="asset-action">
-          <button onClick={handleEditClick}>edit</button>
-          <button onClick={handleRemoveClick}>remove</button>
+          <button onClick={handleEditClick}>✏️</button>
+          <button onClick={handleRemoveClick}>💣</button>
         </div>
       </div>
     </>

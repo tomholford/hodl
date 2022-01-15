@@ -1,14 +1,10 @@
+import CurrencyFormat from 'react-currency-format';
 import { useMemo } from "react";
 import { CURRENCY_SYMBOLS } from "../../constants";
 import { useSettings } from "../../store/Settings";
 
 export const Balance = ({ balance }: { balance: number }) => {
   const { isPrivacyMode, vsCurrency } = useSettings();
-  const presentedBalance = useMemo(() => {
-    if(isPrivacyMode) { return 'hidden' };
-
-    return balance.toFixed(2);
-  }, [balance, isPrivacyMode]);
 
   const symbol = useMemo(() => {
     if(vsCurrency in CURRENCY_SYMBOLS) {
@@ -18,7 +14,15 @@ export const Balance = ({ balance }: { balance: number }) => {
     }
   }, [vsCurrency]);
 
+  const presentedBalance = useMemo(() => {
+    if(isPrivacyMode) { return 'hidden' };
+
+    return (
+      <CurrencyFormat displayType={'text'} thousandSeparator={true} prefix={symbol} value={balance.toFixed(2)} />
+    )
+  }, [balance, isPrivacyMode, symbol]);
+
   return (<>
-    <span>{symbol} {presentedBalance}</span>
+    <span>{presentedBalance}</span>
   </>);
 };

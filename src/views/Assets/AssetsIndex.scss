@@ -1,8 +1,10 @@
-@import '../../styles/base';
+@import "../../styles/base";
 
-div.asset-actions {
+div.assets-actions {
   @include flex-row();
+  width: 115px;
   align-items: center;
+  justify-content: space-between;
 }
 
 div.asset-summary-row-container {

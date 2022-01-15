@@ -1,5 +1,11 @@
+@import '../../styles/base';
+
 div.asset-totals {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-evenly;
+  @include flex-col();
+  justify-content: center;
+
+  @include min-width($sm) {
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+  }
 }

@@ -6,6 +6,7 @@ import { currencyToCoinId } from '../../lib/currencyToCoinId';
 import { Balance } from '../Shared/Balance';
 import { useSettings } from '../../store/Settings';
 import { pluralize } from '../../lib/presenters';
+import { TotalCell } from './TotalCell';
 
 export const AssetTotals = () => {
   const { assetCurrencies, groupedAssets } = useAssets();
@@ -69,16 +70,10 @@ export const AssetTotals = () => {
     <h3>TOTAL</h3>
     <div className="asset-totals">
       <div className="total-value">
-        <Balance balance={totalCurrentValue} />
-        <div className="cell-label">
-          balance
-        </div>
+        <TotalCell balance={totalCurrentValue} label='balance' />
       </div>
       <div className="total-pnl">
-        <Balance balance={totalPnl} />
-        <div className="cell-label">
-          P / L
-        </div>
+        <TotalCell balance={totalPnl} label='P / L' />
       </div>
       <div className="total-assets">{totalAssetCount} {pluralize('record', totalAssetCount)} across {assetCurrencies.length} {pluralize('asset', assetCurrencies.length)}</div>
     </div>
