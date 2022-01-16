@@ -25,7 +25,7 @@ export const AssetRow = ({ asset }: { asset: Asset }) => {
   }, [asset.balance, asset.costBasis]);
 
   const pnl = useMemo(() => {
-    if(!(initialValue && currentValue)) { return null };
+    if(!(initialValue && currentValue)) { return 0 };
 
     return currentValue - initialValue;
   }, [currentValue, initialValue]);
@@ -44,8 +44,8 @@ export const AssetRow = ({ asset }: { asset: Asset }) => {
         <div className="asset-balance">
           {asset.balance} {asset.currency}
         </div>
-        <div className="asset-value"></div>
-        <div className="asset-pnl">{pnl && <Balance balance={pnl} />}</div>
+        <div className="asset-value">{<Balance balance={currentValue} />}</div>
+        <div className="asset-pnl">{<Balance balance={pnl} />}</div>
         <div className="asset-cost-basis">{asset.costBasis ? `$ ${asset.costBasis} / unit` : null}</div>
         <div className="asset-acquired-date">{asset.acquiredAt}</div>
         <div className="asset-note">{asset.note}</div>
