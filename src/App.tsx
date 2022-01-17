@@ -38,8 +38,8 @@ const App = () => {
             <AssetsProvider>
               <Router>
                 <AppContainer>
-                  <Header />
                   <div className="app-inner">
+                    <Header />
                     <Routes>
                       <Route path="/assets/*" element={<Assets />} />
                       {/* <Route path="/accounts/*" element={<Accounts />} />
@@ -47,8 +47,8 @@ const App = () => {
                       <Route path="/settings" element={<Settings />} />
                       <Route path="*" element={<Navigate to={'/assets'} />} />
                     </Routes>
+                    <Footer />
                   </div>
-                  <Footer />
                 </AppContainer>
               </Router>
             </AssetsProvider>

@@ -16,7 +16,7 @@ div.header {
   div.header-toggles {
     @include flex-row();
     justify-content: space-between;
-    width: 115px;
+    width: 195px;
   }
 }
 

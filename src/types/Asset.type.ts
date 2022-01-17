@@ -14,3 +14,12 @@ export interface Asset {
   type: AssetType;
   uuid: string;
 }
+
+export interface CoinAsset extends Asset {
+  type: 'COIN',
+};
+
+export interface UrbitIDAsset extends Asset {
+  type: 'NFT',
+  idSize: 'PLANET' | 'STAR' | 'GALAXY',
+};

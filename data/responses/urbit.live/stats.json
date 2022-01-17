@@ -1,0 +1,1011 @@
+{
+  "sales": [
+    {
+      "date": "11/18",
+      "priceEth": 0.029,
+      "priceUsd": 124.78134500000002,
+      "priceBtc": 0.002062335,
+      "txHashes": [
+        "0xd12ad52249e18517b3270fe34cf446eae0494b5eaad0cff9652b977a25da647d"
+      ],
+      "points": [
+        "207220288"
+      ]
+    },
+    {
+      "date": "11/18",
+      "priceEth": 0.06,
+      "priceUsd": 258.1683,
+      "priceBtc": 0.0042669,
+      "txHashes": [
+        "0xea7da64e1f4c241c22cd446a1d9ca0d4f8d71677204de6797989b9dec084fe21"
+      ],
+      "points": [
+        "1498261970"
+      ]
+    },
+    {
+      "date": "11/19",
+      "priceEth": 0.025,
+      "priceUsd": 99.84617500000002,
+      "priceBtc": 0.001758,
+      "txHashes": [
+        "0x1dd5204c87a998eeea99919089709b08f80be87c4f575a159be13e00e40cb6bf",
+        "0xab9c048d45f6cbe09c21a3e2e47bb921a822f977846db21baab778a063f4f606"
+      ],
+      "points": [
+        "1583612578",
+        "3888318255"
+      ]
+    },
+    {
+      "date": "11/20",
+      "priceEth": 0.025,
+      "priceUsd": 107.94007500000001,
+      "priceBtc": 0.0018508,
+      "txHashes": [
+        "0x271b074e2133b3c7142323f7b5fe11437e61bd5b1e3e8b8adf920f435c2be4d9",
+        "0xd93175c99cca9397602447248348cd88a2ad8c61afd67344eddeeafefc41fcee",
+        "0x30a14fb7f1ee50b9fd06912d6096c6940cbc47a32afba11d6b14fa684550719c"
+      ],
+      "points": [
+        "3062495416",
+        "2625176367",
+        "2756801181"
+      ]
+    },
+    {
+      "date": "11/20",
+      "priceEth": 0.039,
+      "priceUsd": 168.386517,
+      "priceBtc": 0.002887248,
+      "txHashes": [
+        "0x2e8522c18db22d905d4a009080e9c10ba8703f2eea4a0df91c0a904be1f13709",
+        "0xa1c7c048313530a81f05f945f89c1348757882f2e5663479eaf7dfcd896f4815",
+        "0x36bc424d32714dc59b640c20fce9a6c68c6ca7226b431d8818bbeec131ace75b"
+      ],
+      "points": [
+        "2829451192",
+        "2891382712",
+        "2805268408"
+      ]
+    },
+    {
+      "date": "11/20",
+      "priceEth": 0.049,
+      "priceUsd": 211.56254700000002,
+      "priceBtc": 0.0036275680000000003,
+      "txHashes": [
+        "0x736269aa6f1178b5bf384d794957aeab92112bcc800b02be9f36b9cee8c065dc"
+      ],
+      "points": [
+        "1387819677"
+      ]
+    },
+    {
+      "date": "11/20",
+      "priceEth": 0.1,
+      "priceUsd": 431.76030000000003,
+      "priceBtc": 0.0074032,
+      "txHashes": [
+        "0x29055422eb806b00cec6a2d1fa933e9521cc620def3008bd53cd71728e87ca8e",
+        "0x07d9edfadf94ba83de639d6486e55fdba23a3f978b789e7681d8c250de6e6ae9",
+        "0x6dcf88ad0f8a0f768864ee8bb2f63a2c7032aedb8e3d7633b0e9acd4358650b8"
+      ],
+      "points": [
+        "2648416792",
+        "1303817752",
+        "345877784"
+      ]
+    },
+    {
+      "date": "11/20",
+      "priceEth": 0.029,
+      "priceUsd": 125.21048700000001,
+      "priceBtc": 0.002146928,
+      "txHashes": [
+        "0x6c97a91279edd35e78dc02fdf88a17cea85902d8337df4ddbac12475a9fd26f1",
+        "0xfe7f95042746472766b2e752fcab55f95674773bcc57b3f6c0559bf4270deac4"
+      ],
+      "points": [
+        "318107200",
+        "497481397"
+      ]
+    },
+    {
+      "date": "11/20",
+      "priceEth": 0.035,
+      "priceUsd": 151.116105,
+      "priceBtc": 0.00259112,
+      "txHashes": [
+        "0x16590fde30b7be70a8c10c5a58007000b4b52abc03acfd24964a018ae9ee5620"
+      ],
+      "points": [
+        "1354825369"
+      ]
+    },
+    {
+      "date": "11/21",
+      "priceEth": 0.039,
+      "priceUsd": 173.011527,
+      "priceBtc": 0.0028827239999999997,
+      "txHashes": [
+        "0x3218b4097a4d52a6ca11d24ac27dc5ed3b1fa4511a557aa86302adec121562a0",
+        "0xfd02a9de30a68eff3511335ead714994ac871af450759bb0cb84bab28b367df3",
+        "0x3c612eaa82202b9ce2101e5ccd26b4eaed19e621503c7143be2bdc298afc812e",
+        "0x7a84717dd0a57d3c3cee77237404188b851d8945666a18a257304667ca9f29c8",
+        "0x7df7060e9f43d3106f47f2dbc2977d5bdd95b3ee93c911493240c34d98205aad",
+        "0xdaf1759e44855745299eb9d2f52bfbfd5dd8eb46fba5b3e872f7bda5d8b1d56f",
+        "0x2a0f4b28c3bf1db07a5ef0c4e7838f31b394ef4b1d53af1fb8f1f15d3f25c079"
+      ],
+      "points": [
+        "3143434168",
+        "4259577784",
+        "2489857204",
+        "2184708024",
+        "2999844792",
+        "2476343224",
+        "3527278520"
+      ]
+    },
+    {
+      "date": "11/21",
+      "priceEth": 0.043,
+      "priceUsd": 190.75629899999998,
+      "priceBtc": 0.0031783879999999994,
+      "txHashes": [
+        "0x5e8cf86f90c86e0859777ca83902e5df9f963a7524b86d340477396244bf0756"
+      ],
+      "points": [
+        "2473931988"
+      ]
+    },
+    {
+      "date": "11/21",
+      "priceEth": 0.045,
+      "priceUsd": 199.628685,
+      "priceBtc": 0.0033262199999999995,
+      "txHashes": [
+        "0x8eeb600d6a7d35b2aad91a27fb1be178d89bbec1ccedd5a72e982e17591a756a"
+      ],
+      "points": [
+        "4192534456"
+      ]
+    },
+    {
+      "date": "11/21",
+      "priceEth": 0.05,
+      "priceUsd": 221.80965000000003,
+      "priceBtc": 0.0036958,
+      "txHashes": [
+        "0xa7e0329d27482db57e50616f07121c3b964f6b5fe8f5620cced3bdc3dd07f6f5",
+        "0x24a05a13cf50439ae4a6867b04e6c8ca0e753cab2eed70587888dd6ec603a4f2",
+        "0x2abd0058dcdf71b128022e6621aef065cc900d8923145c97a978425224239586",
+        "0xba1bd275deaeafae48b622c6af7b5a73db787bb598c60424a1fd9dcc3355d024",
+        "0xc9ca46dffaf31940ef4624885e8c8f2d14227915e6a33b5904ba54056f996deb",
+        "0x634733c2f22cb75af4d2c37e7c301e8f888030819fbb83b567367af04e6c0c62"
+      ],
+      "points": [
+        "185207731",
+        "495066781",
+        "1547634342",
+        "622788249",
+        "2226650777",
+        "742715830"
+      ]
+    },
+    {
+      "date": "11/21",
+      "priceEth": 0.07,
+      "priceUsd": 310.53351000000004,
+      "priceBtc": 0.00517412,
+      "txHashes": [
+        "0x700931457f1073a03c589366d5360e0a2c7608303b70c498897787957bad51b1"
+      ],
+      "points": [
+        "2968890528"
+      ]
+    },
+    {
+      "date": "11/21",
+      "priceEth": 0.1,
+      "priceUsd": 443.61930000000007,
+      "priceBtc": 0.0073916,
+      "txHashes": [
+        "0x461635cb94fe7346a41b100857c714a2af363558e09ef4b3f512cddbe5287ec8"
+      ],
+      "points": [
+        "3515191576"
+      ]
+    },
+    {
+      "date": "11/21",
+      "priceEth": 0.025,
+      "priceUsd": 110.90482500000002,
+      "priceBtc": 0.0018479,
+      "txHashes": [
+        "0xcfdbe1fbdd8d8456fdc4bcb67d65c52cc3b35da066671848be2a3497afd776cc",
+        "0xb8741ac68b7fca0dabdd36a026784e35eeb6af01f456c0c7ffb383066d020912",
+        "0x617b48a417dbe78b0dbf6f5de509cc0f4359714bb822fb0e1ebea4e7e37133b1"
+      ],
+      "points": [
+        "71937206",
+        "589206063",
+        "2234952146"
+      ]
+    },
+    {
+      "date": "11/21",
+      "priceEth": 0.04,
+      "priceUsd": 177.44772,
+      "priceBtc": 0.00295664,
+      "txHashes": [
+        "0x92b69b109e68d66d2a2f179291aa7b25b129850f2cd9c52c65546827bb02d8c0"
+      ],
+      "points": [
+        "1390739097"
+      ]
+    },
+    {
+      "date": "11/22",
+      "priceEth": 0.055,
+      "priceUsd": 237.56491,
+      "priceBtc": 0.004010435,
+      "txHashes": [
+        "0x1ff79e901e039f3024b19cb6723f684d4849668820c71a75b6ca583c03b769ab"
+      ],
+      "points": [
+        "2116353976"
+      ]
+    },
+    {
+      "date": "11/22",
+      "priceEth": 0.058,
+      "priceUsd": 250.522996,
+      "priceBtc": 0.004229186,
+      "txHashes": [
+        "0x5cdfd9be37b13a15f5afd557d22a5243add88f9c6f8477c33f82c98d913db8b8"
+      ],
+      "points": [
+        "3446734776"
+      ]
+    },
+    {
+      "date": "11/22",
+      "priceEth": 0.025,
+      "priceUsd": 107.98405000000001,
+      "priceBtc": 0.001822925,
+      "txHashes": [
+        "0x1eeed387bbd19c3e1552d84eb3706da2de310d0b1566e21e428794ef473d46d6",
+        "0x2f7d33aa6ed65f520793bb7309a7181382f6650bf6332ac936161cc18c7c6e34",
+        "0x18509224c8a5d69bf763782c660f38acf2812803aa596011a63e3c644836dcef"
+      ],
+      "points": [
+        "2470576802",
+        "3332650400",
+        "2865525405"
+      ]
+    },
+    {
+      "date": "11/22",
+      "priceEth": 0.099,
+      "priceUsd": 427.61683800000003,
+      "priceBtc": 0.007218783,
+      "txHashes": [
+        "0x4e2646d5417aec99ae82afaa8be821ffd8e637481ac2d8c1ed7ab6e33db444f6"
+      ],
+      "points": [
+        "2972628504"
+      ]
+    },
+    {
+      "date": "11/22",
+      "priceEth": 0.065,
+      "priceUsd": 280.75853,
+      "priceBtc": 0.004739605,
+      "txHashes": [
+        "0x588ddda2fdd829057eb4e950cbe2a1a5f217de83987a067f19b219f7660d437c"
+      ],
+      "points": [
+        "4254658998"
+      ]
+    },
+    {
+      "date": "11/23",
+      "priceEth": 0.059,
+      "priceUsd": 241.962717,
+      "priceBtc": 0.004291542,
+      "txHashes": [
+        "0xda9e049711123bddec6713dd0ceb36f7d795c44d88131690f87151e5d39865ff"
+      ],
+      "points": [
+        "54718902"
+      ]
+    },
+    {
+      "date": "11/23",
+      "priceEth": 0.099,
+      "priceUsd": 406.005237,
+      "priceBtc": 0.007201062,
+      "txHashes": [
+        "0x6b4961a091acead5f922901ac5ac3e83ffcdd385a173aeae0db2106b8fcd794d"
+      ],
+      "points": [
+        "1950720536"
+      ]
+    },
+    {
+      "date": "11/23",
+      "priceEth": 0.25,
+      "priceUsd": 1025.26575,
+      "priceBtc": 0.0181845,
+      "txHashes": [
+        "0x3c3d876f3c9a341050fe166a86710576c8e5810d21d3722cb5a068175e628b04"
+      ],
+      "points": [
+        "298554392"
+      ]
+    },
+    {
+      "date": "11/23",
+      "priceEth": 0.06,
+      "priceUsd": 246.06378,
+      "priceBtc": 0.00436428,
+      "txHashes": [
+        "0xac28c6497337765a0171d8fd6d8a84f824a3bf8ed877c813f3661d94be0b4f70"
+      ],
+      "points": [
+        "725022389"
+      ]
+    },
+    {
+      "date": "11/24",
+      "priceEth": 0.055,
+      "priceUsd": 239.548155,
+      "priceBtc": 0.00415514,
+      "txHashes": [
+        "0x52cc763ea59aa02a39ee82f729218aff30374f54834587b3c99c0afd5ec30d94"
+      ],
+      "points": [
+        "3367174072"
+      ]
+    },
+    {
+      "date": "11/24",
+      "priceEth": 0.06,
+      "priceUsd": 261.32526,
+      "priceBtc": 0.00453288,
+      "txHashes": [
+        "0x749f6ba0fcfa42edac3e35d8772e21f2ce236cdce28b910a2df372b6b661dc10"
+      ],
+      "points": [
+        "664832466"
+      ]
+    },
+    {
+      "date": "11/24",
+      "priceEth": 0.025,
+      "priceUsd": 108.88552500000002,
+      "priceBtc": 0.0018887,
+      "txHashes": [
+        "0x5520ad27e4ed298062546da6da4507197420f4f545f3f28d48778ba125bbfead",
+        "0x4ae7c067fd36ad72992930b9ca9ebf3615b9feded42a43fc05ea26dc11622390",
+        "0x2996cb3ccd85531f898d2693b199148cc3418680c855ae5821bea572da54a67b",
+        "0xc1de8d983011df73f37e60a33881f24f95fa53d260878f447cb4f0d63face210",
+        "0x786d498874ba865256dd9ddf48489d5f299d7a6d63ce337f582c9a43e6a4fa12"
+      ],
+      "points": [
+        "3423316434",
+        "3683036320",
+        "2664625845",
+        "1300166840",
+        "2947167648"
+      ]
+    },
+    {
+      "date": "11/24",
+      "priceEth": 0.08,
+      "priceUsd": 348.43368000000004,
+      "priceBtc": 0.006043840000000001,
+      "txHashes": [
+        "0x9b2c5248041ecbb9566897b59c69e1aa67beab3e295788619112449c1b661ce4"
+      ],
+      "points": [
+        "238231197"
+      ]
+    },
+    {
+      "date": "11/24",
+      "priceEth": 0.069,
+      "priceUsd": 300.52404900000005,
+      "priceBtc": 0.005212812000000001,
+      "txHashes": [
+        "0x3cfc591f35361baa712480bb37ed93ae75d925b4e55de5137c06a5fcebb04873"
+      ],
+      "points": [
+        "3357122149"
+      ]
+    },
+    {
+      "date": "11/25",
+      "priceEth": 0.025,
+      "priceUsd": 106.73592500000001,
+      "priceBtc": 0.00186595,
+      "txHashes": [
+        "0x168b63831652daac38329fb7a0a0395d08e90f39e09db5b4cb5dc7df88e0f165",
+        "0xa28499f5a1a76aa1d3530ce512dd2a0e46bee0eeb3136bb5d7b7cb6a9c2fd520"
+      ],
+      "points": [
+        "310834869",
+        "809282002"
+      ]
+    },
+    {
+      "date": "11/25",
+      "priceEth": 3.7,
+      "priceUsd": 15796.9169,
+      "priceBtc": 0.2761606,
+      "txHashes": [
+        "0xe31602ff883c4c19a41ac9f7b7d432c97af2e031f927172ab73e2b7da4cd3f66"
+      ],
+      "points": [
+        "3367174072"
+      ]
+    },
+    {
+      "date": "11/26",
+      "priceEth": 0.025,
+      "priceUsd": 112.896075,
+      "priceBtc": 0.0019161750000000002,
+      "txHashes": [
+        "0x8a344f5015c2978abee83962c95448096a353c1ad24e6389f70b117a5d52207b",
+        "0x817bb4af4a2ad2fbf2ab5cbb07ba469cfffede5539c0e3e1d7ceff7a4dc8ceec",
+        "0x634facd225103857850dde54e36dfe51437ad3ec6c09816df9d768a518d5ab33",
+        "0x84b41f75921f8b0820d050e719ee95b0f5505974902f800f76628524c28a1e04"
+      ],
+      "points": [
+        "2955355302",
+        "2757753016",
+        "1548922038",
+        "1671496495"
+      ]
+    },
+    {
+      "date": "11/26",
+      "priceEth": 0.05,
+      "priceUsd": 225.79215,
+      "priceBtc": 0.0038323500000000004,
+      "txHashes": [
+        "0xe36d6c24f91aa31a5d467cbd3e2a9637c9449679fa40685f7923984f33e2af5e"
+      ],
+      "points": [
+        "7229088"
+      ]
+    },
+    {
+      "date": "11/26",
+      "priceEth": 0.07,
+      "priceUsd": 316.10901,
+      "priceBtc": 0.005365290000000001,
+      "txHashes": [
+        "0xfac05e92e51028e5109e25af42efe5a0dc9988dc5563a58df6c265d36a6e8d5d"
+      ],
+      "points": [
+        "1445133977"
+      ]
+    },
+    {
+      "date": "11/28",
+      "priceEth": 0.025,
+      "priceUsd": 102.10220000000001,
+      "priceBtc": 0.0018715,
+      "txHashes": [
+        "0xe9ac32b33967499d86e96c322ac02a888d0b67acbceb6d9b6a79cb440a40a518",
+        "0x56a2947d81596cedd33ec3149ff71967e16ec9bfdd4c8d17a27f0ea0a656c24f",
+        "0x57cbdf29d0d9b7f23d0597ddf7af67c6155c45fd790dd812d9ac2da5ef6de18b",
+        "0xa2486604b20911b82e517a7725244eb8bac4aba92ed8992477f8bc7fccb7a0ac",
+        "0xddd048336d69f9eeab8a0484546202fee5414672e5496bf67a5528172590cbc1",
+        "0x330e8dbf5f9310012937ec0596a326af452b0f705f93ad8b848ffdca82bb5f11"
+      ],
+      "points": [
+        "3542708893",
+        "1732706978",
+        "2757849757",
+        "1039268024",
+        "3804736694",
+        "572863904"
+      ]
+    },
+    {
+      "date": "11/29",
+      "priceEth": 0.025,
+      "priceUsd": 107.25229999999999,
+      "priceBtc": 0.0018727500000000003,
+      "txHashes": [
+        "0xa68bef9ee7950a05ec01a3dd6ae161595199e57bec5398b54a424efc9f496f74",
+        "0x6c33d2fb32fff81589383a30c36835bb6f1059844cbede6e587a2911fe5d528a"
+      ],
+      "points": [
+        "3473934127",
+        "2639200930"
+      ]
+    },
+    {
+      "date": "12/1",
+      "priceEth": 0.025,
+      "priceUsd": 115.92805000000001,
+      "priceBtc": 0.002034025,
+      "txHashes": [
+        "0x83945d70d6cb4e0e7189e80757586f7bd7de23f4021a50ff7cf321ea522c8017",
+        "0xbe03c5867ab4eccfd18884a6a83dcccd8f2258bf63922becaf19f98631e8bf7c"
+      ],
+      "points": [
+        "1887372079",
+        "1231747256"
+      ]
+    },
+    {
+      "date": "12/2",
+      "priceEth": 0.025,
+      "priceUsd": 114.740275,
+      "priceBtc": 0.00200655,
+      "txHashes": [
+        "0x89498d10247aded937083efd0f474fab1ea4f49a78f90c935affc899d8db3239",
+        "0x990416c8494faa20950f31b0673870eaf4866da065dad82238de293186c922a3",
+        "0x5bcd1fd5d0390170c9ede58800fd9622dec69307d3d7fc5c87749ce57228ab94"
+      ],
+      "points": [
+        "2204235445",
+        "2917271343",
+        "1157586"
+      ]
+    },
+    {
+      "date": "12/3",
+      "priceEth": 0.025,
+      "priceUsd": 112.986025,
+      "priceBtc": 0.0020006250000000002,
+      "txHashes": [
+        "0xa977db2c347f85b97ee7b992f4c3d5bcaccca32e9202cd3019be970f2721cf56"
+      ],
+      "points": [
+        "338884792"
+      ]
+    },
+    {
+      "date": "12/5",
+      "priceEth": 0.025,
+      "priceUsd": 102.541425,
+      "priceBtc": 0.0020877,
+      "txHashes": [
+        "0x17ec89bafc8e7a77a2ce0de866f24bd999ac2e125b3378320fcf4301a91971e4"
+      ],
+      "points": [
+        "1023867064"
+      ]
+    },
+    {
+      "date": "12/6",
+      "priceEth": 0.025,
+      "priceUsd": 104.96432500000002,
+      "priceBtc": 0.00213085,
+      "txHashes": [
+        "0x3b785c490f7d33687641d58ad649e2ffd01db241f83683f32a53fced728ffdc1"
+      ],
+      "points": [
+        "3619204256"
+      ]
+    },
+    {
+      "date": "12/8",
+      "priceEth": 0.025,
+      "priceUsd": 107.76417500000001,
+      "priceBtc": 0.0021306,
+      "txHashes": [
+        "0x2c1366d2ee0b0237e7f1cc4fbdc206f582c93dc291f2d8832e1747597ec39f9a",
+        "0x3ae7f4f7ac29800e059be27c055b63479d6cffe8fca3c5bc6c462315399e275c",
+        "0xd369279e7f5d3f50ab0de747b8991915e81a5c52f3ad017e0fd23c98c9c64c6d",
+        "0xdc47f805611292e2b367a1882ce1582ad8d4ae06a70930dbaae3d6c74b548c9f"
+      ],
+      "points": [
+        "4071241120",
+        "2416079517",
+        "1434858912",
+        "2234660256"
+      ]
+    },
+    {
+      "date": "12/9",
+      "priceEth": 0.025,
+      "priceUsd": 110.788525,
+      "priceBtc": 0.0021949,
+      "txHashes": [
+        "0x9b98cb7647454e5d3bba2487c72601f22a1282d7b6b894fd7f2fbe6205118789",
+        "0xe6b0eb9597f370e7d2d21e477245ec4671b90fddd2445cac66311ad5746860aa",
+        "0x1f446809f221fd1a059ac227cfd2bea3d12a235afd25d52c0c2a0146325ee372"
+      ],
+      "points": [
+        "3801350818",
+        "1411069344",
+        "2049208989"
+      ]
+    },
+    {
+      "date": "12/10",
+      "priceEth": 0.025,
+      "priceUsd": 103.833325,
+      "priceBtc": 0.0021678,
+      "txHashes": [
+        "0x765fafd4315296fc729149d5c7224ce009961e3a59b32d5cc334a89b9c44c07a"
+      ],
+      "points": [
+        "2429004982"
+      ]
+    },
+    {
+      "date": "12/11",
+      "priceEth": 0.025,
+      "priceUsd": 97.955025,
+      "priceBtc": 0.00207025,
+      "txHashes": [
+        "0xb1ce24bf6b6f733d78de465782534b25b8ca3aa63c591923f52ed2a13a648eec"
+      ],
+      "points": [
+        "1494461600"
+      ]
+    },
+    {
+      "date": "12/12",
+      "priceEth": 0.025,
+      "priceUsd": 101.99537500000001,
+      "priceBtc": 0.00207205,
+      "txHashes": [
+        "0x86810e44a0f4c11754c659a9dd0fa6d60f0f9b03fa0b868aba8e71f7acd98a6f",
+        "0x19943e55832f21662c379be50b8acd529211031bb9f82872431155df6cfbff2f"
+      ],
+      "points": [
+        "827459375",
+        "974826678"
+      ]
+    },
+    {
+      "date": "12/13",
+      "priceEth": 0.025,
+      "priceUsd": 103.39605,
+      "priceBtc": 0.00206595,
+      "txHashes": [
+        "0x1122843140dce6ac68e2ab4e96231beef59861cda7ffebd3e71a418bc6c48dfd",
+        "0x8a6c4e01c07220186e16e67622df141dfa498fec076973814ddd2e4879a05a34"
+      ],
+      "points": [
+        "3385758255",
+        "3035067037"
+      ]
+    },
+    {
+      "date": "12/14",
+      "priceEth": 0.025,
+      "priceUsd": 94.57237500000001,
+      "priceBtc": 0.0020246500000000002,
+      "txHashes": [
+        "0xa40fd64809817c30b86629770f206bb567b505fb06beb7c48a1472fa6dba1187"
+      ],
+      "points": [
+        "3620206776"
+      ]
+    },
+    {
+      "date": "12/15",
+      "priceEth": 0.025,
+      "priceUsd": 96.45410000000001,
+      "priceBtc": 0.00199915,
+      "txHashes": [
+        "0x4434ad2ee9d5ec23abcccbdea97ef592c3a4bf8378f5c9f433f110362e932c10",
+        "0xf16b960d881f72f80302bc586c273c5a0a2833c777b9c737efe3a15ca34758ba"
+      ],
+      "points": [
+        "2951149237",
+        "3938101714"
+      ]
+    },
+    {
+      "date": "12/15",
+      "priceEth": 0.033,
+      "priceUsd": 127.31941200000001,
+      "priceBtc": 0.002638878,
+      "txHashes": [
+        "0x8c43199d244fca13d992a4d5c1832a318765e6e4f9837bf94d5ea1e84f418021"
+      ],
+      "points": [
+        "8581558"
+      ]
+    },
+    {
+      "date": "12/16",
+      "priceEth": 0.025,
+      "priceUsd": 100.39307500000001,
+      "priceBtc": 0.002057525,
+      "txHashes": [
+        "0xaafa2a65e8e2deb345904ac472b2210e64cd9ba154fe2731fb8dd144761ddff3"
+      ],
+      "points": [
+        "636027554"
+      ]
+    },
+    {
+      "date": "12/18",
+      "priceEth": 0.025,
+      "priceUsd": 97.16867500000001,
+      "priceBtc": 0.0020981750000000003,
+      "txHashes": [
+        "0xc1314a8c80175b643bb04ef4783c706e625707cab1423fa5d3a0d481398b7e4e"
+      ],
+      "points": [
+        "4245292847"
+      ]
+    },
+    {
+      "date": "12/19",
+      "priceEth": 0.025,
+      "priceUsd": 99.16062500000001,
+      "priceBtc": 0.002111775,
+      "txHashes": [
+        "0xe17d8d4ef8a64e41ac51022b073e70868fb82b3bbf170cdf635765ff47fc09d1"
+      ],
+      "points": [
+        "4033311389"
+      ]
+    },
+    {
+      "date": "12/21",
+      "priceEth": 0.025,
+      "priceUsd": 98.76205,
+      "priceBtc": 0.00209555,
+      "txHashes": [
+        "0x84cfa4d71fc621e2af4be173c1c7a6401f66e27e5f5a7125b360fedd398bd720",
+        "0xec780926ae4ab86305c5779423856276a7467ae3127e7071cca7445f7427f172"
+      ],
+      "points": [
+        "1477326240",
+        "4128110776"
+      ]
+    },
+    {
+      "date": "12/23",
+      "priceEth": 0.025,
+      "priceUsd": 99.814875,
+      "priceBtc": 0.0020453,
+      "txHashes": [
+        "0x53aa477c1b28e469d410ea63833e97943e9ea3bf2157af63b26c534669e20fca"
+      ],
+      "points": [
+        "2923898022"
+      ]
+    },
+    {
+      "date": "12/24",
+      "priceEth": 0.025,
+      "priceUsd": 102.83825,
+      "priceBtc": 0.0020217,
+      "txHashes": [
+        "0x564d51769f4479ebae95006321b53ce36c5af22f40a4d673c1e76044538bf7f3",
+        "0xe93730041db0b461aa5546ec0309af8f79a085ec2571858e2f5984b1da6d408d"
+      ],
+      "points": [
+        "1502063798",
+        "952968358"
+      ]
+    },
+    {
+      "date": "12/26",
+      "priceEth": 0.025,
+      "priceUsd": 102.7643,
+      "priceBtc": 0.002025875,
+      "txHashes": [
+        "0x098834c293c23ddeeec20628eb5e400f620fc48fb25c91965fb76fd4ada5bacb",
+        "0x2d7bdda4d8ca86d028cc8d49ede8a9ce4a2fb6a5806adfeecc36c1db2140ef03"
+      ],
+      "points": [
+        "1875706530",
+        "2839028902"
+      ]
+    },
+    {
+      "date": "12/27",
+      "priceEth": 0.025,
+      "priceUsd": 101.87580000000001,
+      "priceBtc": 0.002004075,
+      "txHashes": [
+        "0x20c5c1d02de3bad5c1b1e10cc3538260a506a2f544726b3c94a19630c93b63d3"
+      ],
+      "points": [
+        "4109501090"
+      ]
+    },
+    {
+      "date": "12/28",
+      "priceEth": 0.025,
+      "priceUsd": 101.126275,
+      "priceBtc": 0.001991675,
+      "txHashes": [
+        "0x8624063bcb601f973640842f20791275c86b8616f8c0dc065de87d82fbd9c0e4"
+      ],
+      "points": [
+        "922383005"
+      ]
+    },
+    {
+      "date": "12/30",
+      "priceEth": 0.025,
+      "priceUsd": 91.11015,
+      "priceBtc": 0.001956175,
+      "txHashes": [
+        "0x505517730fbca1d982cea2f7bbb52aa4f5138aba05029e248d517776a2e3b988",
+        "0xbb648f5e524bf809d3c44063fe6563470424fcfc0f8102285c312e4e3051361f",
+        "0xa85792ac6fcdf572dad26fd1f72f98d19a4205cd923c05f03a22114641010197",
+        "0x5d4914a3dabf1a0e448630fd4b2f70fce81258d0fc8c5168bf37317f869ccd7b"
+      ],
+      "points": [
+        "4005670070",
+        "2031158063",
+        "3000104629",
+        "3567036882"
+      ]
+    },
+    {
+      "date": "12/31",
+      "priceEth": 0.025,
+      "priceUsd": 92.873625,
+      "priceBtc": 0.00196765,
+      "txHashes": [
+        "0xd549d2f9cef266a34e3763ce4f199ac79261cb9254c87a885e162062ddcc1099",
+        "0xe8d593337fb63a3725333025ad4fb392ddc6ca80b9c5ee5068abf7a0aff20d14",
+        "0x7d8dbbc8a76ab07fbdb4e76bc5fb6022df6a8c8c58e79a8180d4e2e065d5a82a"
+      ],
+      "points": [
+        "2653881135",
+        "571503261",
+        "2011833510"
+      ]
+    },
+    {
+      "date": "1/1",
+      "priceEth": 0.025,
+      "priceUsd": 92.160075,
+      "priceBtc": 0.001986425,
+      "txHashes": [
+        "0xdaefb9c44cfd10cf8300964b69879df883b894b28a9d3d5fc0a63c30b98dbac4",
+        "0x551b5eb0abaca62a349e31a97e03eaaae73617030100ac331208b262802cd6b7",
+        "0xee0e08dee346a667f89575e082126836579b3f3f2bcbe30d3fa46c684e2c7958"
+      ],
+      "points": [
+        "3530796192",
+        "1816724130",
+        "4040685752"
+      ]
+    },
+    {
+      "date": "1/4",
+      "priceEth": 0.025,
+      "priceUsd": 94.23512500000001,
+      "priceBtc": 0.002026075,
+      "txHashes": [
+        "0x7d299c9d1fad01d92d75d1a733e85de37b1883af9edc4391ddf81b22e2bbd9d3",
+        "0x76f9ac12c7b0df18d0fdd839ca7e076535cf35846fbcb865b6412ee2d4cd5b4d"
+      ],
+      "points": [
+        "2123010607",
+        "1337652917"
+      ]
+    },
+    {
+      "date": "1/5",
+      "priceEth": 0.15,
+      "priceUsd": 569.2361999999999,
+      "priceBtc": 0.0123942,
+      "txHashes": [
+        "0x05dc3912a82f4fe7e4e9f632e20485d8ab3fc5d3d380d693be044c02a752adea"
+      ],
+      "points": [
+        "2885256599"
+      ]
+    },
+    {
+      "date": "1/5",
+      "priceEth": 0.155,
+      "priceUsd": 588.21074,
+      "priceBtc": 0.012807339999999999,
+      "txHashes": [
+        "0x831b156811841c382f73e870daa84da8ebdaed95b5d118fe37fafc2db6618284"
+      ],
+      "points": [
+        "3804801490"
+      ]
+    },
+    {
+      "date": "1/6",
+      "priceEth": 0.025,
+      "priceUsd": 88.92265,
+      "priceBtc": 0.0020402000000000003,
+      "txHashes": [
+        "0x8654ca072e0a93b636e69fd58f1904aac8fbfa5b5343f6ad6a27c1b41744a142"
+      ],
+      "points": [
+        "791738552"
+      ]
+    },
+    {
+      "date": "1/7",
+      "priceEth": 0.025,
+      "priceUsd": 85.42065000000001,
+      "priceBtc": 0.0019774000000000003,
+      "txHashes": [
+        "0x20354ec0f00efeb980b087d151d924083fb83f7166ff094c304b3b2657dd82b0",
+        "0x54f2214cff8beed1759ea124d62c357108c3778f47ddd2e7a14572d9e4375dc0"
+      ],
+      "points": [
+        "3790415014",
+        "4288195744"
+      ]
+    },
+    {
+      "date": "1/8",
+      "priceEth": 0.025,
+      "priceUsd": 80.044875,
+      "priceBtc": 0.00192465,
+      "txHashes": [
+        "0x9c6d8d8f0921fdd5def76eb167f8f54e21890b931a1d45a07ae2bbbc2fce2855"
+      ],
+      "points": [
+        "2067048914"
+      ]
+    },
+    {
+      "date": "1/9",
+      "priceEth": 0.025,
+      "priceUsd": 77.526025,
+      "priceBtc": 0.0018536250000000002,
+      "txHashes": [
+        "0x5a2b3423ac029cda4fb7eb9c74df7939d372d2cf2125aa62cc29313ddf50f6d7",
+        "0x428ef6ded203c1068065e06b4fc25711ad38d0e25fab0ae39c2bdb5f1ed30fa6"
+      ],
+      "points": [
+        "939456696",
+        "3158049583"
+      ]
+    },
+    {
+      "date": "1/10",
+      "priceEth": 0.025,
+      "priceUsd": 78.924175,
+      "priceBtc": 0.00188195,
+      "txHashes": [
+        "0x910d76aacab77eef4e5a1c0f1949c123ef50b02843beddc683874ebff5f15bfc",
+        "0xbf0c17f29e5599981a3200f354a371676dd993303edd0e9161eb417a168ef0e3"
+      ],
+      "points": [
+        "3854906784",
+        "451048093"
+      ]
+    }
+  ],
+  "count": 134,
+  "volumeEth": 8.836000000000006,
+  "volumeUsd": 37295.40336399999,
+  "volumeBtc": 0.6690477820000004
+}{
+  "stats": [
+    {
+      "date": "1/16",
+      "priceEth": 0,
+      "priceUsd": 0,
+      "priceBtc": 0,
+      "txHashes": [],
+      "points": []
+    }
+  ],
+  "count": 37,
+  "volumeEth": 200.4365,
+  "volumeUsd": 849176.1770455,
+  "volumeBtc": 14.6093607
+}

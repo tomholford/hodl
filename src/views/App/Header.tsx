@@ -1,9 +1,10 @@
-import { NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useSettings } from "../../store/Settings"
 import './Header.scss';
 
 export const Header = () => {
   const { isDarkMode, isPrivacyMode, setIsPrivacyMode, toggleDarkMode } = useSettings();
+  const navigate = useNavigate();
 
   return (
     <div className="header">
@@ -12,14 +13,8 @@ export const Header = () => {
         <div className="header-toggles">
           <button title={`${isPrivacyMode ? 'show' : 'hide'} balances`} onClick={() => setIsPrivacyMode(!isPrivacyMode)}>{isPrivacyMode ? '👁️' : '🤫'}</button>
           <button title={`${isDarkMode ? 'disable' : 'enable'} dark theme`} onClick={() => toggleDarkMode()}>{isDarkMode ? '☀️' : '🌙'}</button>
+          <button title={'settings'} onClick={() => navigate('/settings')}>{'⚙️'}</button>
         </div>
-      </div>
-      <div className="header-links">
-        {/* <Link to="/">Home</Link> */}
-        {/* <Link to="wallets">Wallets</Link>
-        <Link to="accounts">Accounts</Link> */}
-        <NavLink to="assets">Assets</NavLink>
-        <NavLink to="settings">Settings</NavLink>
       </div>
     </div>
   )

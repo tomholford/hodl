@@ -1,0 +1,33 @@
+{
+  "salesStatsSummary": {
+    "spanMs": 604800000,
+    "planets": {
+      "recent": {
+        "volumeEth": 0.2,
+        "volumeUsd": 653.0069500000001,
+        "volumeBtc": 0.015259925,
+        "txCount": 5
+      },
+      "prior": {
+        "volumeEth": 0.5050000000000001,
+        "volumeUsd": 1840.7780650000004,
+        "volumeBtc": 0.04088058999999999,
+        "txCount": 10
+      }
+    },
+    "stars": {
+      "recent": {
+        "volumeEth": 4.1,
+        "volumeUsd": 12655.588899999999,
+        "volumeBtc": 0.30225609999999997,
+        "txCount": 1
+      },
+      "prior": {
+        "volumeEth": 5,
+        "volumeUsd": 18847.025,
+        "volumeBtc": 0.405215,
+        "txCount": 1
+      }
+    }
+  }
+}

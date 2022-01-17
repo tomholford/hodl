@@ -4,6 +4,8 @@ $lg: 992px;
 $xl: 1200px;
 $xxl: 1400px;
 
+$app-gutter-width: 32px;
+
 @mixin min-width($bp) {
   @media (min-width: $bp) {
     @content;

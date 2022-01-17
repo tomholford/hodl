@@ -14,8 +14,20 @@ div.App {
   color: $default;
 
   div.app-inner {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 0 auto;
+
+    @include min-width($md) {
+      max-width: $md + $app-gutter-width;
+    }
+    @include min-width($lg) {
+      max-width: $lg + $app-gutter-width;
+    }
+    @include min-width($xl) {
+      max-width: $xl + $app-gutter-width;
+    }
+    @include min-width($xxl) {
+      max-width: $xxl + $app-gutter-width;
+    }
   }
 
   a {
@@ -58,8 +70,4 @@ div.App {
       color: $dark-value-hint;
     }
   }
-
-  // @include min-width($md) {
-  //   width: 
-  // }
 }

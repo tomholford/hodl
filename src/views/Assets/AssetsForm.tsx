@@ -80,6 +80,7 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
 
   const coinHistoryQuery = useCoinHistory(coinId, queryDate);
   useEffect(() => {
+    // TODO: what is the ideal UX?
     // Do not overwrite an existing costbasis
     // Already persisted, or field touched
     if(asset?.costBasis) { return };
