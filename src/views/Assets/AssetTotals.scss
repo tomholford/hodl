@@ -1,6 +1,8 @@
 @import '../../styles/base';
 
 div.asset-totals {
+  margin-top: 20px;
+
   @include flex-col();
   justify-content: center;
 

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useSettings } from "../../store/Settings"
 import './Header.scss';
 
@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <div className="header">
       <div className="header-top">
-        <div className="header-logo"><code>%hodl</code></div>
+        <div className="header-logo"><Link to={'/'}><code>%hodl</code></Link></div>
         <div className="header-toggles">
           <button title={`${isPrivacyMode ? 'show' : 'hide'} balances`} onClick={() => setIsPrivacyMode(!isPrivacyMode)}>{isPrivacyMode ? '👁️' : '🤫'}</button>
           <button title={`${isDarkMode ? 'disable' : 'enable'} dark theme`} onClick={() => toggleDarkMode()}>{isDarkMode ? '☀️' : '🌙'}</button>

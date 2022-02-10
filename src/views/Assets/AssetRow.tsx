@@ -39,21 +39,19 @@ export const AssetRow = ({ asset }: { asset: Asset }) => {
   }, [asset.uuid, removeAsset]);
 
   return (
-    <>
-      <div className="asset-row">
-        <div className="asset-balance">
+      <tr className="asset-row">
+        <td className="asset-balance">
           {asset.balance} {asset.currency}
-        </div>
-        <div className="asset-value">{<Balance balance={currentValue} />}</div>
-        <div className="asset-pnl">{<Balance balance={pnl} />}</div>
-        <div className="asset-cost-basis">{asset.costBasis ? `$ ${asset.costBasis} / unit` : null}</div>
-        <div className="asset-acquired-date">{asset.acquiredAt}</div>
-        <div className="asset-note">{asset.note}</div>
-        <div className="asset-action">
+        </td>
+        <td className="asset-value">{<Balance balance={currentValue} />}</td>
+        <td className="asset-pnl">{<Balance balance={pnl} />}</td>
+        <td className="asset-cost-basis">{asset.costBasis ? `$ ${asset.costBasis} / unit` : null}</td>
+        <td className="asset-acquired-date">{asset.acquiredAt}</td>
+        <td className="asset-note">{asset.note}</td>
+        <td className="asset-action">
           <button onClick={handleEditClick}>✏️</button>
           <button onClick={handleRemoveClick}>💣</button>
-        </div>
-      </div>
-    </>
+        </td>
+      </tr>
   )
 }

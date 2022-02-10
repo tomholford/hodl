@@ -67,7 +67,6 @@ export const AssetTotals = () => {
   }, [assetCurrencies, groupedAssets])
 
   return (<>
-    <h3>TOTAL</h3>
     <div className="asset-totals">
       <div className="total-value">
         <TotalCell balance={totalCurrentValue} label='balance' />
