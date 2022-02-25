@@ -23,6 +23,11 @@ tr.asset-table-row {
     opacity: 1;
     background-color: transparentize($color: gray, $amount: 0.9);
   }
+
+  span.details-button {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 tr.asset-table-details {

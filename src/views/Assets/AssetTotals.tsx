@@ -3,7 +3,6 @@ import { useAssets } from '../../store/Assets';
 import { useMemo } from 'react';
 import useSimpleCoinPrices from '../../queries/useSimpleCoinPrices';
 import { currencyToCoinId } from '../../lib/currencyToCoinId';
-import { Balance } from '../Shared/Balance';
 import { useSettings } from '../../store/Settings';
 import { pluralize } from '../../lib/presenters';
 import { TotalCell } from './TotalCell';

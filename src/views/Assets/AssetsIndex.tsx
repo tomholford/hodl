@@ -22,7 +22,7 @@ export const AssetsIndex = () => {
       (
       <>
         <div className="assets-actions">
-          <button title="add another asset" onClick={handleAddClick}>➕</button>
+          <button title="add another asset" onClick={handleAddClick}>💲</button>
           {assets && assets.length > 0 && <ExportAssetsButton assets={assets} />}
         </div>
         <AssetTotals />

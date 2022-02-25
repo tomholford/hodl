@@ -29,13 +29,13 @@ Current supported currencies:
   - [x] CSV import
   - [x] CSV export
   - [ ] basic styling
-  - [ ] alignment of columns
+  - [x] alignment of columns
   - [ ] add some margin on the side
   - [ ] seek inspiration from CMC
   - [ ] table should not have duplicated headers
-  - [ ] asset form should be inline ,with animation
-  - [ ] settings as gear icon
-  - [ ] use coin icons
+  - [ ] asset form should be inline (bonus: with animation)
+  - [x] settings as gear icon
+  - [x] use coin icons
 - [ ] Asset enhancements
   - [x] cost basis
   - [ ] cost basis currency

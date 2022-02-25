@@ -17,6 +17,6 @@ $dark-link: rgba(128, 217, 255, 0.8);
 $dark-link-bg: rgba(255, 255, 255, 0.1);
 $dark-link-underline: $dark-link;
 $dark-value-hint: rgba(255,255,255,0.4);
-$dark-button: rgba(0,0,0, 0.8);
-$dark-button-bg: rgba(255, 255, 255, 0.9);
+$dark-button: $dark-default;
+$dark-button-bg: rgba(255, 255, 255, 0.1);
 $dark-button-border: $dark-button;

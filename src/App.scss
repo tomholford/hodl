@@ -4,15 +4,16 @@ div.cell-label {
   color: $value-hint;
 }
 
-span.subdued {
-  color: $value-hint;
-}
 
 div.App {
   min-height: 100vh;
   background-color: $bg;
   color: $default;
 
+  span.subdued {
+    color: $value-hint;
+  }
+  
   div.app-inner {
     margin: 0 auto;
 
@@ -42,7 +43,7 @@ div.App {
     }
   }
 
-  button {
+  button, input[type = submit], input[type = file] {
     padding: 5px 15px;
     color: $button;
     background-color: $button-bg;
@@ -61,13 +62,17 @@ div.App {
       border-bottom: 1px solid $dark-link-underline;
     }
     
-    button {
+    button, input[type = submit], input[type = file] {
       background-color: $dark-button-bg;
       color: $dark-button;
       border-color: $dark-button-border;
     }
 
     div.cell-label {
+      color: $dark-value-hint;
+    }
+
+    span.subdued {
       color: $dark-value-hint;
     }
   }

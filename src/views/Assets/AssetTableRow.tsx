@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { CURRENCIES, CURRENCY_SYMBOLS } from "../../constants";
-import { pluralize } from "../../lib/presenters";
 import { useCoinImage } from "../../lib/useCoinImage";
 import { useExchangeRate } from "../../lib/useExchangeRate";
 import { useSettings } from "../../store/Settings";
@@ -8,10 +7,11 @@ import { Asset } from "../../types/Asset.type";
 import { Balance } from "../Shared/Balance";
 import { AssetHeaderRow } from "./AssetHeaderRow";
 import { AssetRow } from "./AssetRow";
+import { ReactComponent as ChevronDown } from '../../images/chevron-down.svg';
+import { ReactComponent as ChevronUp } from '../../images/chevron-up.svg';
 import './AssetTableRow.scss';
 
 export const AssetTableRow = ({ assets, currency }: { assets: Asset[], currency: string }) => {
-  const count = assets.length;
   const balance = assets.reduce((memo, a) => memo + Number(a.balance), 0);
   const presentedBalance = useMemo(() => {
     if(balance === 0) { return 0.0 };
@@ -71,7 +71,7 @@ export const AssetTableRow = ({ assets, currency }: { assets: Asset[], currency:
       <td className="align-right">{<Balance balance={currentValue} />}</td>
       <td className="align-right">{<Balance balance={pnl} />}</td>
       <td className="align-right">
-        <button onClick={handleShowDetailsClick}>{showDetails ? 'hide' : 'show'} {count} {pluralize('record', count)}</button>
+        <span className="details-button" onClick={handleShowDetailsClick}>{showDetails ? <ChevronUp/> : <ChevronDown/>}</span>
       </td>
     </tr>
     {

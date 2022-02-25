@@ -12,13 +12,10 @@ import { AccountsProvider } from './store/Accounts';
 import { AssetsProvider } from './store/Assets';
 import { SettingsProvider, useSettings } from './store/Settings';
 import { WalletsProvider } from './store/Wallets';
-import Accounts from './views/Accounts/Accounts';
 import { Footer } from './views/App/Footer';
 import { Header } from './views/App/Header';
 import { Assets } from './views/Assets/Assets';
-import { Home } from './views/Home/Home';
 import { Settings } from './views/Settings/Settings';
-import Wallets from './views/Wallets/Wallets';
 
 const AppContainer = ({ children }: { children: React.ReactNode }) => {
   const { isDarkMode } = useSettings();
