@@ -29,6 +29,11 @@ export const CURRENCIES = {
     value: 'DOGE',
     id: 'dogecoin',
   },
+  WSTR: {
+    label: 'Wrapped Star',
+    value: 'WSTR',
+    id: 'wrapped-star',
+  },
 }
 
 export const DEFAULT_VS_CURRENCY = 'usd';
