@@ -12,6 +12,7 @@ import { AccountsProvider } from './store/Accounts';
 import { AssetsProvider } from './store/Assets';
 import { SettingsProvider, useSettings } from './store/Settings';
 import { WalletsProvider } from './store/Wallets';
+import { About } from './views/About/About';
 import { Footer } from './views/App/Footer';
 import { Header } from './views/App/Header';
 import { Assets } from './views/Assets/Assets';
@@ -38,6 +39,7 @@ const App = () => {
                   <div className="app-inner">
                     <Header />
                     <Routes>
+                      <Route path="/about" element={<About />} />
                       <Route path="/assets/*" element={<Assets />} />
                       {/* <Route path="/accounts/*" element={<Accounts />} />
                     <Route path="/wallets" element={<Wallets />} /> */}

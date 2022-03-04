@@ -4,16 +4,12 @@ tr.asset-table-row {
   opacity: 0.85;
   height: 60px;
   border-bottom: solid 1px gray;
+  cursor: pointer;
 
   td {
     padding-left: 7px;
     padding-right: 7px;
   }
-
-  // td:first {
-  //   padding-left: unset;
-  //   padding-right: unset
-  // }
 
   .align-right {
     text-align: right;

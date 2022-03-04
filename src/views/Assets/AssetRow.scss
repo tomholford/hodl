@@ -8,12 +8,8 @@ tr.asset-row {
   td {
     padding-left: 7px;
     padding-right: 7px;
+    text-align: center;
   }
-
-  // td:first {
-  //   padding-left: unset;
-  //   padding-right: unset
-  // }
 
   .align-right {
     text-align: right;
@@ -24,9 +20,3 @@ tr.asset-row {
     background-color: transparentize($color: gray, $amount: 0.9);
   }
 }
-
-// div.asset-row {
-//   // display: flex;
-//   // flex-flow: row nowrap;
-//   // justify-content: space-evenly;
-// }
