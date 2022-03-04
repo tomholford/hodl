@@ -33,7 +33,7 @@ const App = () => {
         <WalletsProvider>
           <AccountsProvider>
             <AssetsProvider>
-              <Router>
+              <Router basename={process.env.REACT_APP_BASENAME}>
                 <AppContainer>
                   <div className="app-inner">
                     <Header />
