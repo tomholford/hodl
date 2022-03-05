@@ -22,6 +22,9 @@ export const About = () => {
       <p>
         For now, this means that data is not synced between different devices.
       </p>
+      <p>
+        Until the backend is implemented, use the Import / Export CSV feature as a workaround.
+      </p>
 
       <h2>Roadmap</h2>
       <ul>
@@ -32,7 +35,7 @@ export const About = () => {
 
       <h2>Questions or Feedback</h2>
       <p>
-        DM me at <code>~datder-sonnet</code> or join <code>~dister-datder-sonnet/hodl</code>
+        DM <code>~datder-sonnet</code> or join <code>~dister-datder-sonnet/hodl</code>
       </p>
     </div>
   )

@@ -18,16 +18,16 @@ div.App {
     margin: 0 auto;
 
     @include min-width($md) {
-      max-width: $md + $app-gutter-width;
+      max-width: $md - $app-gutter-width;
     }
     @include min-width($lg) {
-      max-width: $lg + $app-gutter-width;
+      max-width: $lg - (3 * $app-gutter-width);
     }
     @include min-width($xl) {
-      max-width: $xl + $app-gutter-width;
+      max-width: $xl - (5 * $app-gutter-width);
     }
     @include min-width($xxl) {
-      max-width: $xxl + $app-gutter-width;
+      max-width: $xxl - (7 * $app-gutter-width);
     }
   }
 
