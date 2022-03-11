@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useAssets } from "../../store/Assets";
 import { v4 as uuidv4 } from 'uuid';
 import { Currency } from "../../types/Currency.type";
@@ -12,6 +12,8 @@ import { currencyToCoinId } from "../../lib/currencyToCoinId";
 import { DateTime } from 'luxon';
 import { useDebounce } from "usehooks-ts";
 import './AssetsForm.scss';
+import useCoinsList from "../../queries/useCoinsList";
+import Select from "react-select";
 
 type FormData = {
   type: string;
@@ -26,13 +28,12 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
   const isEditing = asset !== undefined;
   const navigate = useNavigate()
   const { addAsset, updateAsset } = useAssets();
-  const { register, handleSubmit, reset, watch, setValue } = useForm<FormData>();
+  const { control, register, handleSubmit, reset, watch, setValue } = useForm<FormData>();
   const onSubmit = handleSubmit(data => {
     reset();
 
     if (isEditing) {
       updateAsset(asset.uuid, {
-        type: 'COIN',
         currency: data.currency,
         balance: data.balance,
         costBasis: data.costBasis,
@@ -41,7 +42,6 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
       })
     } else {
       addAsset({
-        type: 'COIN',
         currency: data.currency,
         balance: data.balance,
         costBasis: data.costBasis,
@@ -93,6 +93,16 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
     }
   }, [asset, coinHistoryQuery, setValue]);
 
+  // const coinsListQuery = useCoinsList();
+
+  // const currencySelectOptions = useMemo(() => {
+  //   if(coinsListQuery.)
+  //   if(coinsListQuery.isSuccess && )
+  // }, [])
+
+  // TODO: use the coinslistquer loading
+  const isLoading = false;
+
   const handleCancelClick = useCallback(() => navigate('/'), [navigate]);
 
   return (
@@ -101,7 +111,7 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
       <form id="assets-form" onSubmit={onSubmit}>
         <div>
           <label>currency</label>
-          <select defaultValue={asset?.currency} {...register("currency")}>
+          {/* <select defaultValue={asset?.currency} {...register("currency")}>
             {
               Object.keys(CURRENCIES).map(c => {
                 return (
@@ -110,7 +120,26 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
                 )
               })
             }
-          </select>
+          </select> */}
+
+          <Controller
+            name="currency"
+            control={control}
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <Select
+                isLoading={isLoading}
+                isSearchable={true}
+                placeholder={isLoading ? "Loading..." : "Select a currency..."}
+                onChange={onChange}
+                onBlur={onBlur}
+                options={
+                  Object.keys(CURRENCIES).map(c => { 
+                    return { label: CURRENCIES[c as Currency].label, value: CURRENCIES[c as Currency].value }
+                  })
+                }
+              />
+            )}
+          />
         </div>
         <div>
           <label htmlFor="balance">balance</label>
