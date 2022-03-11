@@ -49,8 +49,8 @@ export const AssetRow = ({ asset }: { asset: Asset }) => {
         <td className="asset-acquired-date">{asset.acquiredAt}</td>
         <td className="asset-note">{asset.note}</td>
         <td className="asset-action">
-          <button onClick={handleEditClick}>✏️</button>
-          <button onClick={handleRemoveClick}>💣</button>
+          <button title="edit" onClick={handleEditClick}>✏️</button>
+          <button title="remove" onClick={handleRemoveClick}>💣</button>
         </td>
       </tr>
   )

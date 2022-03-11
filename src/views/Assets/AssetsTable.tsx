@@ -15,7 +15,7 @@ export const AssetsTable = () => {
             <th>balance</th>
             <th>value</th>
             <th>P / L</th>
-            <th>actions</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
