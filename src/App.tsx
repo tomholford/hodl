@@ -16,6 +16,7 @@ import { About } from './views/About/About';
 import { Footer } from './views/App/Footer';
 import { Header } from './views/App/Header';
 import { Assets } from './views/Assets/Assets';
+import { MigrateCoinID } from './views/MigrateCoinID';
 import { Settings } from './views/Settings/Settings';
 
 const AppContainer = ({ children }: { children: React.ReactNode }) => {
@@ -36,6 +37,7 @@ const App = () => {
             <AssetsProvider>
               <Router basename={process.env.REACT_APP_BASENAME}>
                 <AppContainer>
+                  <MigrateCoinID/>
                   <div className="app-inner">
                     <Header />
                     <Routes>

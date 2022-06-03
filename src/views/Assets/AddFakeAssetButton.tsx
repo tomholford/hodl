@@ -18,7 +18,6 @@ export const AddFakeAssetButton = () => {
 
   const handleFakeClick = useCallback(() => {
     addAsset({
-      type: 'COIN',
       currency: randomElement(Object.keys(CURRENCIES)) as Currency,
       balance: randomFloat(),
       costBasis: randomFloat(),

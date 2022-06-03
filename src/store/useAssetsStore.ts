@@ -22,6 +22,25 @@ export const useAssetsStore = () => {
     return currencies;
   }, [groupedAssets]);
 
+  const assetCoinIds = useMemo(() => {
+    if(!assets) {
+      return [];
+    }
+
+    const coinIds = assets.reduce((memo, a) => {
+      if(!a.coinId || a.coinId in memo) {
+        return memo;
+      }
+
+      memo.push(a.coinId);
+  
+      return memo;
+    }, [] as string[])
+
+    coinIds.sort();
+    return coinIds;
+  }, [assets]);
+
   const addAsset = (asset: Asset) => {
     setAssets(state => state ? [...state, asset] : [asset]);
   }
@@ -69,6 +88,7 @@ export const useAssetsStore = () => {
 
   return {
     assets,
+    assetCoinIds,
     assetCurrencies,
     groupedAssets,
     addAsset,

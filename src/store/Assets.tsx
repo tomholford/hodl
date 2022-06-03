@@ -3,6 +3,7 @@ import { useAssetsStore } from './useAssetsStore';
 
 const initialContext = {
   assets: null,
+  assetCoinIds: [],
   assetCurrencies: [],
   groupedAssets: {},
   addAsset: () => {},

@@ -28,6 +28,7 @@ export const About = () => {
 
       <h2>Roadmap</h2>
       <ul>
+        <li>Use any currency supported by Coingecko</li>
         <li>Backend persistence</li>
         <li>Connect a wallet to autoload account information</li>
         <li>Charts</li>
@@ -37,6 +38,17 @@ export const About = () => {
       <p>
         DM <code>~datder-sonnet</code> or join <code>~dister-datder-sonnet/hodl</code>
       </p>
+
+      <h2>Changelog</h2>
+      <h3>0.0.2</h3>
+      <p>
+        <ul>
+          <li>Refactor state management in preparation for supporting multiple currencies</li>
+        </ul>
+      </p>
+
+      <h3>0.0.1</h3>
+      <p>Initial version</p>
     </div>
   )
 }

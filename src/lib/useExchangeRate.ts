@@ -1,10 +1,8 @@
 import { useMemo } from "react";
 import useSimpleCoinPrice from "../queries/useSimpleCoinPrice";
 import { useSettings } from "../store/Settings";
-import { currencyToCoinId } from "./currencyToCoinId";
 
-export const useExchangeRate = (currency: string) => {
-  const coinId = currencyToCoinId(currency);
+export const useExchangeRate = (coinId: string) => {
   const { vsCurrency } = useSettings();
   const simpleCoinPriceQuery = useSimpleCoinPrice(coinId, vsCurrency);
 

@@ -12,5 +12,12 @@ timestamp
 
 secure-ls --> useSecureLocalstorage
 
-dister moon on DO
+
+- replace currency with coinId
+- select
+
+
+aggregate more then one source (Coingecko & coinmarketcap)
+
+replacing current to coin id , using asset coin ids
 

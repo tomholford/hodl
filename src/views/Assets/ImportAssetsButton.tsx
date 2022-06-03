@@ -45,7 +45,6 @@ export const ImportAssetsButton = () => {
       try {
         console.log(`adding ${r.currency} ${r.balance}`)
         addAsset({
-          type: 'COIN',
           currency: r.currency as Currency,
           balance: Number(r.balance),
           costBasis: Number(r.costBasis),

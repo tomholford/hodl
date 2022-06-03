@@ -3,25 +3,25 @@ import { Controller, useForm } from "react-hook-form";
 import { useAssets } from "../../store/Assets";
 import { v4 as uuidv4 } from 'uuid';
 import { Currency } from "../../types/Currency.type";
-import { BITCOIN_ORIGIN_DATE, CURRENCIES, DEFAULT_VS_CURRENCY } from "../../constants";
+import { BITCOIN_ORIGIN_DATE, DEFAULT_VS_CURRENCY } from "../../constants";
 import { Asset } from "../../types/Asset.type";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useMemo } from "react";
 import useCoinHistory from "../../queries/useCoinHistory";
-import { currencyToCoinId } from "../../lib/currencyToCoinId";
 import { DateTime } from 'luxon';
 import { useDebounce } from "usehooks-ts";
 import './AssetsForm.scss';
 import useCoinsList from "../../queries/useCoinsList";
-import Select from "react-select";
+import Select, { createFilter } from "react-select";
 
 type FormData = {
   type: string;
-  currency: Currency;
+  currency: ;
   balance: number;
   costBasis: number;
   note: string;
   acquiredAt: string;
+  coinId: string;
 };
 
 export default function AssetsForm({ asset }: { asset?: Asset }) {
@@ -39,6 +39,7 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
         costBasis: data.costBasis,
         note: data.note,
         acquiredAt: data.acquiredAt,
+        coinId: data.coinId,
       })
     } else {
       addAsset({
@@ -47,6 +48,7 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
         costBasis: data.costBasis,
         note: data.note,
         acquiredAt: data.acquiredAt,
+        coinId: data.coinId,
         uuid: uuidv4()
       });
     }
@@ -60,9 +62,10 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
 
   const coinId = useMemo(() => {
     // TODO: what is a good default?
+    // something like: useForm#watch the selected coingecko currency's coinId
     if (!selectedCurrency) { return 'bitcoin' };
 
-    return currencyToCoinId(selectedCurrency)
+    return selectedCurrency.
   }, [selectedCurrency]);
 
   const queryDate = useMemo(() => {
@@ -87,21 +90,29 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
     // Already persisted, or field touched
     if (asset?.costBasis) { return };
 
+    // TODO: change VS currency
     if (coinHistoryQuery.isSuccess && coinHistoryQuery.data && coinHistoryQuery.data.market_data?.current_price && (DEFAULT_VS_CURRENCY in coinHistoryQuery.data.market_data.current_price)) {
       const basis = parseFloat(coinHistoryQuery.data.market_data.current_price[DEFAULT_VS_CURRENCY].toFixed(2));
       setValue('costBasis', basis)
     }
   }, [asset, coinHistoryQuery, setValue]);
 
-  // const coinsListQuery = useCoinsList();
+  const coinsListQuery = useCoinsList();
 
-  // const currencySelectOptions = useMemo(() => {
-  //   if(coinsListQuery.)
-  //   if(coinsListQuery.isSuccess && )
-  // }, [])
-
-  // TODO: use the coinslistquer loading
-  const isLoading = false;
+  const currencySelectOptions = useMemo(() => {
+    if(coinsListQuery.isLoading || coinsListQuery.isError) {
+      return [];
+    }
+    if(coinsListQuery.isSuccess && coinsListQuery.data) {
+      return coinsListQuery.data.map(d => {
+        return {
+          value: d.id,
+          label: `${d.name} ${d.symbol}`,
+          symbol: d.symbol,
+        }
+      })
+    }
+  }, [coinsListQuery.data, coinsListQuery.isError, coinsListQuery.isLoading, coinsListQuery.isSuccess])
 
   const handleCancelClick = useCallback(() => navigate('/'), [navigate]);
 
@@ -110,8 +121,8 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
       {asset ? <p>{`Editing ${asset.uuid}`}</p> : null}
       <form id="assets-form" onSubmit={onSubmit}>
         <div>
-          <label>currency</label>
-          {/* <select defaultValue={asset?.currency} {...register("currency")}>
+          <label>asset</label>
+          {/* <select defaultValue={asset?.coinId} {...register("coinId")}>
             {
               Object.keys(CURRENCIES).map(c => {
                 return (
@@ -127,16 +138,13 @@ export default function AssetsForm({ asset }: { asset?: Asset }) {
             control={control}
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <Select
-                isLoading={isLoading}
+                isLoading={coinsListQuery.isLoading}
                 isSearchable={true}
-                placeholder={isLoading ? "Loading..." : "Select a currency..."}
+                placeholder={coinsListQuery.isLoading ? "Loading..." : "Select a currency..."}
                 onChange={onChange}
                 onBlur={onBlur}
-                options={
-                  Object.keys(CURRENCIES).map(c => { 
-                    return { label: CURRENCIES[c as Currency].label, value: CURRENCIES[c as Currency].value }
-                  })
-                }
+                filterOption={createFilter({ignoreAccents: false})}
+                options={currencySelectOptions}
               />
             )}
           />

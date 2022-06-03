@@ -3,7 +3,7 @@ import { AssetTableRow } from "./AssetTableRow";
 import './AssetsTable.scss';
 
 export const AssetsTable = () => {
-  const { groupedAssets, assetCurrencies } = useAssets();
+  const { groupedAssets, assetCoinIds } = useAssets();
 
   return (<>
     <div className="asset-summary-table-container">
@@ -19,7 +19,7 @@ export const AssetsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {assetCurrencies.map(c => <AssetTableRow currency={c} assets={groupedAssets[c]} key={c} />)}
+          {assetCoinIds.map(id => <AssetTableRow coinId={id} assets={groupedAssets[id]} key={id} />)}
         </tbody>
         <tfoot></tfoot>
       </table>
