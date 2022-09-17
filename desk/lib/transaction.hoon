@@ -27,6 +27,6 @@
     ^-  json
     %-  pairs
     :~  ['id' (numb id.txn)]
-        ['txt' s+txt.txn]
+        :: ['coin-id' coin-id.txn] :: TODO
     ==
 --

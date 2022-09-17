@@ -27,7 +27,7 @@
       =type
   ==
 +$  action
-  $%  [%add =amount =coin-id =note =cost-basis =type]
+  $%  [%add =id =amount =coin-id =note =cost-basis =type]
       [%edit =id =amount =note =cost-basis =type]
       [%del =id]
   ==
