@@ -1,0 +1,16 @@
+# init:
+#   - "./create.sh"
+merge:
+  - "merge %garden our %base"
+  - "merge %hodl our %base"
+mount:
+  - "mount %garden"
+  - "mount %hodl"
+sync:
+  - "./sync.sh"
+commit:
+  - "commit %garden"
+  - "commit %hodl"
+install:
+  - "install our %garden"
+  - "install our %hodl"

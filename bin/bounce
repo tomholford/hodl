@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+SHIP="${1:-dev}"
+PORT="${2:-12321}"
+ruby ./bin/main.rb $SHIP $PORT
