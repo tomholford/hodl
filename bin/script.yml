@@ -1,5 +1,3 @@
-# init:
-#   - "./create.sh"
 merge:
   - "merge %garden our %base"
   - "merge %hodl our %base"

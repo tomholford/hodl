@@ -1,10 +1,10 @@
 ::  /sur/transaction.hoon
 |%
 ::  Transaction ID - uuid used for edit, del, query
-+$  id  @
++$  id  @ud
 ::  CoinGecko Coin ID - external ID that maps to a CG entity (e.g. BTC is 1).
 ::  Used for querying CG API
-+$  coin-id  @
++$  coin-id  @ud
 ::  Timestamp of transaction
 +$  date  @da
 ::  Optional description of the TX
@@ -27,8 +27,8 @@
       =type
   ==
 +$  action
-  $%  [%add =id =amount =coin-id =note =cost-basis =type]
-      [%edit =id =amount =note =cost-basis =type]
+  $%  [%add =id =coin-id =date =note =amount =cost-basis =type]
+      [%edit =id =coin-id =date =note =amount =cost-basis =type]
       [%del =id]
   ==
 +$  update

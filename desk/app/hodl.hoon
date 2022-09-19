@@ -41,30 +41,27 @@
   ^-  (quip card _this)
   |^
   ?>  (team:title our.bowl src.bowl)
-  ?.  ?=(%hodl-action mark)  (on-poke:def mark vase)  :: TODO: where is this @ta defined
+  ?.  ?=(%hodl-action mark)  (on-poke:def mark vase)
   =/  act  !<(action.t vase)
   =.  state  (poke-action act)
   :_  this
-  ~[(fact:io hodl-update+!>(`update.t`[act]) ~[/updates])]  :: TODO: this cell needs now? also hodl-update?
+  ~[(fact:io hodl-update+!>(`update.t`[act]) ~[/updates])]
   ::
   ++  poke-action
     |=  act=action.t
     ^-  _state
     ?-    -.act
         %add
-      !!
-      :: ?<  (has:t-orm txns id.act)
-      :: state(txns (put:t-orm txns id.act ...)) ::  TODO: make new TX?
+      ?<  (has:t-orm txns id.act)
+      state(txns (put:t-orm txns id.act [id=id.act coin-id=coin-id.act date=date.act note=note.act amount=amount.act cost-basis=cost-basis.act type=type.act])) ::  TODO: move to gen/ ?
     ::
         %edit
-      !!
-      :: ?>  (has:t-orm txns id.act)
-      :: state(txns (put:t-orm txns id.act ...))
+      ?>  (has:t-orm txns id.act)
+      state(txns (put:t-orm txns id.act [id=id.act coin-id=coin-id.act date=date.act note=note.act amount=amount.act cost-basis=cost-basis.act type=type.act])) ::  TODO: move to gen/ ? should all fields be editable?
     ::
         %del
-      !!
-      :: ?>  (has:t-orm txns id.act)
-      :: state(txns +:(del:t-orm txns id.act))
+      ?>  (has:t-orm txns id.act)
+      state(txns +:(del:t-orm txns id.act))
     ==
   --
 ::
