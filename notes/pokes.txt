@@ -1,0 +1,5 @@
+:hodl &hodl-action [%add id=1 coin-id=2 date=~2002.1.1 note='some note' amount=0 cost-basis=0 type=%buy]
+
+:hodl &hodl-action [%edit id=0 coin-id=0 date=~2000.1.1 note='' amount=1 cost-basis=0 type=%buy]
+
+:hodl &hodl-action [%del id=1]
