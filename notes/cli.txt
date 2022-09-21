@@ -1,0 +1,4 @@
+> =t -build-file /=hodl=/sur/transaction/hoon
+> =a .^(* %gx /=hodl=/transactions/all/noun)
+
+> =a .^(update:t %gx /=hodl=/transactions/all/noun)
