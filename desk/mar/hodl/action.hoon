@@ -1,4 +1,3 @@
-/-  *transaction
 /+  *transaction
 |_  act=action
 ++  grow
@@ -8,7 +7,7 @@
 ++  grab
   |%
   ++  noun  action
-  ++  json  dejs-action
+  ++  json  action:dejs
   --
 ++  grad  %noun
 --

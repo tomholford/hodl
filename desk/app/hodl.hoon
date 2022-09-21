@@ -6,15 +6,14 @@
 ::  mainly for orchestration. But, first focus on getting a working TX CRUD
 ::  agent before optimizing. So, one day :)
 ::
-/-  t=transaction
+/+  *transaction
 /+  default-agent, dbug, agentio
 |%
 +$  versioned-state
   $%  state-0
   ==
-+$  state-0  [%0 txns=transactions.t]
++$  state-0  [%0 txns=transactions]
 +$  card  card:agent:gall
-++  t-orm  ((on id.t txn.t) gth)
 --
 %-  agent:dbug
 =|  state-0
@@ -42,22 +41,40 @@
   |^
   ?>  (team:title our.bowl src.bowl)
   ?.  ?=(%hodl-action mark)  (on-poke:def mark vase)
-  =/  act  !<(action.t vase)
+  =/  act  !<(action vase)
   =.  state  (poke-action act)
   :_  this
-  ~[(fact:io hodl-update+!>(`update.t`[act]) ~[/updates])]
+  ~[(fact:io hodl-update+!>(`update`[act]) ~[/updates])]
   ::
   ++  poke-action
-    |=  act=action.t
+    |=  act=action
     ^-  _state
     ?-    -.act
         %add
       ?<  (has:t-orm txns id.act)
-      state(txns (put:t-orm txns id.act [id=id.act coin-id=coin-id.act date=date.act note=note.act amount=amount.act cost-basis=cost-basis.act type=type.act])) ::  TODO: move to gen/ ?
+      =/  txn=txn
+        :*  id=id.act
+            coin-id=coin-id.act
+            date=date.act
+            note=note.act
+            amount=amount.act
+            cost-basis=cost-basis.act
+            type=type.act
+        ==
+      state(txns (put:t-orm txns id.act txn))
     ::
         %edit
       ?>  (has:t-orm txns id.act)
-      state(txns (put:t-orm txns id.act [id=id.act coin-id=coin-id.act date=date.act note=note.act amount=amount.act cost-basis=cost-basis.act type=type.act])) ::  TODO: move to gen/ ? should all fields be editable?
+      =/  txn=txn
+        :*  id=id.act
+            coin-id=coin-id.act
+            date=date.act
+            note=note.act
+            amount=amount.act
+            cost-basis=cost-basis.act
+            type=type.act
+        ==
+      state(txns (put:t-orm txns id.act txn)) ::  TODO: should all fields be editable?
     ::
         %del
       ?>  (has:t-orm txns id.act)
@@ -81,28 +98,31 @@
   =/  now=@  (unm:chrono:userlib now.bowl)
   ?+    path  (on-peek:def path)
       [%x %transactions *]
-    (on-peek:def path)
-    :: ?+    t.t.path  (on-peek:def path)
-    ::     [%all ~]
-    ::   :^  ~  ~  %hodl-update
-    ::   !>  ^-  update.t
-    ::   [now %txns (tap:t-orm txns)]
-    :: ::
-    ::     [%before @ @ ~]
-    ::   =/  before=@  (rash i.t.t.t.path dem)
-    ::   =/  max=@  (rash i.t.t.t.t.path dem)
-    ::   :^  ~  ~  %hodl-update
-    ::   !>  ^-  update.t
-    ::   [now %txns (tab:t-orm txns `before max)]
-    :: ::
-    ::     [%between @ @ ~]
-    ::   =/  start=@
-    ::     =+  (rash i.t.t.t.path dem)
-    ::     ?:(=(0 -) - (sub - 1))
-    ::   =/  end=@  (add 1 (rash i.t.t.t.t.path dem))
-    ::   :^  ~  ~  %hodl-update
-    ::   !>  ^-  update.t
-    ::   [now %txns (tap:t-orm (lot:t-orm txns `end `start))]
+    :: ~&  t.path
+    :: (on-peek:def path)
+    ?+    t.t.path  (on-peek:def path)
+        [%all ~]
+      :^  ~  ~  %hodl-update
+      !>  ^-  update
+      [%txns txns]
+      :: [%txns (tap:t-orm txns)]
+      :: [now %txns (tap:t-orm txns)]
+    ==
+      ::   [%before @ @ ~]
+      :: =/  before=@  (rash i.t.t.t.path dem)
+      :: =/  max=@  (rash i.t.t.t.t.path dem)
+      :: :^  ~  ~  %hodl-update
+      :: !>  ^-  update
+      :: [now %txns (tab:t-orm txns `before max)]
+    ::
+      ::   [%between @ @ ~]
+      :: =/  start=@
+      ::   =+  (rash i.t.t.t.path dem)
+      ::   ?:(=(0 -) - (sub - 1))
+      :: =/  end=@  (add 1 (rash i.t.t.t.t.path dem))
+      :: :^  ~  ~  %hodl-update
+      :: !>  ^-  update
+      :: [now %txns (tap:t-orm (lot:t-orm txns `end `start))]
     :: ==
   ==
 ::

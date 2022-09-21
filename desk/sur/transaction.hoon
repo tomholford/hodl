@@ -26,14 +26,21 @@
       =cost-basis
       =type
   ==
-+$  action
-  $%  [%add =id =coin-id =date =note =amount =cost-basis =type]
-      [%edit =id =coin-id =date =note =amount =cost-basis =type]
-      [%del =id]
-  ==
+++  action
+  =<  action
+  |%
+  +$  action
+    $%  [%add add]
+        [%edit edit]
+        [%del del]
+    ==
+  +$  add   [=id =coin-id =date =note =amount =cost-basis =type]
+  +$  edit  [=id =coin-id =date =note =amount =cost-basis =type]
+  +$  del   [=id]
+  --
 +$  update
   $%  action
-      [%txns list=(list txn)]  :: Should this be a mop instead of list?
+      [%txns txns=transactions]  :: Should this be a mop instead of list?
   ==
 +$  transactions  ((mop id txn) gth)
 --
