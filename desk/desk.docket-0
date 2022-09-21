@@ -1,0 +1,10 @@
+:~  title+'hodl'
+    info+'A simple cryptocurrency portfolio app for all that you hodl.'
+    color+0x60.94d2
+    image+'https://bootstrap.urbit.org/icon-groups.svg'
+    base+'hodl'
+    glob-ames+[~dev 0v0]
+    version+[0 0 2]
+    website+'https://github.com/tomholford/hodl'
+    license+'MIT'
+==
