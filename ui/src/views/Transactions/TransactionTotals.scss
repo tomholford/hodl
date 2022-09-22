@@ -1,0 +1,13 @@
+@import '../../styles/base';
+
+div.transaction-totals {
+  margin-top: 20px;
+
+  @include flex-col();
+  justify-content: center;
+
+  @include min-width($sm) {
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+  }
+}

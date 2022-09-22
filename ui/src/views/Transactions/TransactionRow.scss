@@ -1,14 +1,14 @@
 @import "../../styles/base";
 
-tr.transaction-table-row {
+tr.transaction-row {
   opacity: 0.85;
   height: 60px;
   border-bottom: solid 1px gray;
-  cursor: pointer;
 
   td {
     padding-left: 7px;
     padding-right: 7px;
+    text-align: center;
   }
 
   .align-right {
@@ -18,18 +18,5 @@ tr.transaction-table-row {
   &:hover {
     opacity: 1;
     background-color: transparentize($color: gray, $amount: 0.9);
-  }
-
-  span.details-button {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-tr.transaction-table-details {
-  table.transaction-transactions {
-    border-collapse: collapse; 
-
-    width: 100%;
   }
 }
