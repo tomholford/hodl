@@ -1,3 +1,4 @@
+import React from 'react';
 import { QueryClientProvider, QueryClient } from "react-query";
 
 export const QueryProvider = ({ children }: { children: React.ReactNode }) => {

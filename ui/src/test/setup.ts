@@ -42,3 +42,5 @@
 //     dispatchEvent: vi.fn(),
 //   })),
 // });
+
+export {}

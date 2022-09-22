@@ -1,3 +1,4 @@
+import React from 'react';
 import { useIsFetching } from 'react-query'
 import { pluralize } from '../../lib/presenters';
 

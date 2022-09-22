@@ -4,6 +4,7 @@ import { loadEnv, defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import { urbitPlugin } from '@urbit/vite-plugin-urbit';
 import pluginRewriteAll from 'vite-plugin-rewrite-all';
+import svgr from "vite-plugin-svgr";
 import { fileURLToPath } from 'url';
 
 // https://vitejs.dev/config/
@@ -26,7 +27,7 @@ export default ({ mode }: { mode: string }) => {
 
   const plugins = (mode: string, app: string) => {
     if (mode === 'mock' || mode === 'staging') {
-      return [reactRefresh(), pluginRewriteAll()];
+      return [reactRefresh(), svgr(), pluginRewriteAll()];
     }
 
     return [
@@ -37,6 +38,7 @@ export default ({ mode }: { mode: string }) => {
         secure: false,
       }),
       reactRefresh(),
+      svgr(),
     ];
   };
 
