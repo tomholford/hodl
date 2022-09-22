@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Routes } from "react-router-dom"
 import { AssetsEdit } from "./AssetsEdit"
 import { AssetsIndex } from "./AssetsIndex"

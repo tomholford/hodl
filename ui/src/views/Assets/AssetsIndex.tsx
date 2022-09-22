@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useAssets } from "../../store/Assets";
 import './AssetsIndex.scss';
