@@ -1,4 +1,6 @@
-:hodl &hodl-action [%add id=1 coin-id=2 date=~2002.1.1 note='some note' amount=0 cost-basis=0 type=%buy]
+:hodl &hodl-action [%add id=0 coin-id=1 date=~2002.1.1 note='some note' amount=10 cost-basis=1 type=%buy]
+:hodl &hodl-action [%add id=1 coin-id=2 date=~2002.1.2 note='another note' amount=100 cost-basis=20 type=%buy]
+:hodl &hodl-action [%add id=3 coin-id=2 date=~2002.1.2 note='yet another note' amount=100 cost-basis=20 type=%buy]
 
 :hodl &hodl-action [%edit id=0 coin-id=0 date=~2000.1.1 note='' amount=1 cost-basis=0 type=%buy]
 

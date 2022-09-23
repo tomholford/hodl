@@ -1,3 +1,4 @@
+import React from 'react';
 import { Balance } from '../Shared/Balance';
 import './TotalCell.scss'
 

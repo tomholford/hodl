@@ -1,3 +1,4 @@
+import React from 'react';
 import { TransactionTableRow } from "./TransactionTableRow";
 import { useGroupedTransactions, useTransactionCoins } from "../../state/transactions";
 import './TransactionsTable.scss';

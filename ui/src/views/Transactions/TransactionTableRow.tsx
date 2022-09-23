@@ -52,7 +52,8 @@ export const TransactionTableRow = ({ transactions, coinId }: { transactions: Tr
   }, [currentValue, initialValue]);
 
   const coinIdLabel = useMemo(() => {
-    return CURRENCIES[coinId as keyof typeof CURRENCIES].label;
+    return 'todo';
+    // return CURRENCIES[coinId as keyof typeof CURRENCIES].label;
   }, [coinId]);
 
   const apiCoinImage = useCoinImage(coinId);

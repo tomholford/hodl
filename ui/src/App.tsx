@@ -34,10 +34,9 @@ const App = () => {
   const handleError = useErrorHandler();
 
   useEffect(() => {
-    // @ts-ignore TODO: why does this err in hodl, but not homestead?
-    // handleError(() => {
+    handleError(() => {
       useTransactionsState.getState().start();
-    // })();
+    });
   }, [handleError]);
 
   return (

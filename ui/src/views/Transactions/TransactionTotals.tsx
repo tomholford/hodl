@@ -1,10 +1,11 @@
-import './TransactionTotals.scss';
+import React from 'react';
 import { useMemo } from 'react';
 import useSimpleCoinPrices from '../../queries/useSimpleCoinPrices';
 import { useSettings } from '../../store/Settings';
 import { pluralize } from '../../lib/presenters';
 import { TotalCell } from './TotalCell';
 import { useGroupedTransactions, useTransactionCoins } from '../../state/transactions';
+import './TransactionTotals.scss';
 
 export const TransactionTotals = () => {
   const groupedTransactions = useGroupedTransactions();

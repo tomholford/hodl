@@ -41,20 +41,23 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
       path: '/transactions/all',
     });
 
+    // TODO: fix the backend data type? 
+    console.log(Object.values(transactions));
+
     set((s) => ({
       ...s,
-      transactions,
+      transactions: Object.values(transactions),
     }));
 
     await api.subscribe({
       app: 'hodl',
-      path: '/transactions/all',
+      path: '/updates',
       event: (data) => {
         console.log('update');
         console.log(data);
         get().batchSet((draft) => {
 
-          draft.transactions = data;
+          // draft.transactions = data;
         });
       },
     });
