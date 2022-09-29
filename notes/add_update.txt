@@ -1,0 +1,9 @@
+[ %add
+  id=0
+  coin-id='bitcoin'
+  date=~2002.1.1
+  note='some note'
+  amount=10
+  cost-basis=1
+  type=~.buy
+]

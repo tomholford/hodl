@@ -20,3 +20,5 @@ urbit plugin for vite
 
 Update package.json with the installed deps
 update glob in desk docket
+
+coinid is a string

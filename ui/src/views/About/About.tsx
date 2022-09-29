@@ -1,3 +1,4 @@
+import React from 'react';
 import { ExternalLink } from "../Shared/ExternalLink"
 import './About.scss';
 
@@ -13,22 +14,10 @@ export const About = () => {
       <p>
         Add some assets and get a real time summary of your crypto net worth.
       </p>
-
-      <h2>How it works</h2>
-      <p>
-        Currently the asset data is persisted using the browser's &nbsp;
-        <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">localStorage</ExternalLink>.
-      </p>
-      <p>
-        For now, this means that data is not synced between different devices.
-      </p>
-      <p>
-        Until the backend is implemented, use the Import / Export CSV feature as a workaround.
-      </p>
+      <p>All data you enter is stored on your Urbit ship.</p>
 
       <h2>Roadmap</h2>
       <ul>
-        <li>Backend persistence</li>
         <li>Connect a wallet to autoload account information</li>
         <li>Charts</li>
       </ul>

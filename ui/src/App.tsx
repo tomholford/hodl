@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import {
   BrowserRouter as Router,
   Navigate,
@@ -15,8 +16,10 @@ import { WalletsProvider } from './store/Wallets';
 import { About } from './views/About/About';
 import { Footer } from './views/App/Footer';
 import { Header } from './views/App/Header';
-import { Assets } from './views/Assets/Assets';
 import { Settings } from './views/Settings/Settings';
+import { useTransactionsState } from './state/transactions';
+import { Transactions } from './views/Transactions/Transactions';
+import ErrorAlert from './components/ErrorAlert';
 
 const AppContainer = ({ children }: { children: React.ReactNode }) => {
   const { isDarkMode } = useSettings();
@@ -28,33 +31,47 @@ const AppContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 const App = () => {
+  const handleError = useErrorHandler();
+
+  useEffect(() => {
+    handleError(() => {
+      useTransactionsState.getState().start();
+    });
+  }, [handleError]);
+
   return (
-    <SettingsProvider>
-      <QueryProvider>
-        <WalletsProvider>
-          <AccountsProvider>
-            <AssetsProvider>
-              <Router basename={import.meta.env.VITE_BASENAME as string}>
-                <AppContainer>
-                  <div className="app-inner">
-                    <Header />
-                    <Routes>
-                      <Route path="/about" element={<About />} />
-                      <Route path="/assets/*" element={<Assets />} />
-                      {/* <Route path="/accounts/*" element={<Accounts />} />
-                    <Route path="/wallets" element={<Wallets />} /> */}
-                      <Route path="/settings" element={<Settings />} />
-                      <Route path="*" element={<Navigate to={'/assets'} />} />
-                    </Routes>
-                    <Footer />
-                  </div>
-                </AppContainer>
-              </Router>
-            </AssetsProvider>
-          </AccountsProvider>
-        </WalletsProvider>
-      </QueryProvider>
-    </SettingsProvider>
+    <ErrorBoundary
+      FallbackComponent={ErrorAlert}
+      onReset={() => window.location.reload()}
+    >
+      {/* TODO: Remove provider stack */}
+      <SettingsProvider>
+        <QueryProvider>
+          <WalletsProvider>
+            <AccountsProvider>
+              <AssetsProvider>
+                <Router basename={import.meta.env.VITE_BASENAME as string}>
+                  <AppContainer>
+                    <div className="app-inner">
+                      <Header />
+                      <Routes>
+                        <Route path="/about" element={<About />} />
+                        <Route path="/transactions/*" element={<Transactions />} />
+                        <Route path="/settings" element={<Settings />} />
+                        <Route path="*" element={<Navigate to={'/transactions'} />} />
+                        {/* <Route path="/accounts/*" element={<Accounts />} />
+                      <Route path="/wallets" element={<Wallets />} /> */}
+                      </Routes>
+                      <Footer />
+                    </div>
+                  </AppContainer>
+                </Router>
+              </AssetsProvider>
+            </AccountsProvider>
+          </WalletsProvider>
+        </QueryProvider>
+      </SettingsProvider>
+    </ErrorBoundary>
   );
 }
 

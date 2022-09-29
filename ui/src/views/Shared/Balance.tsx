@@ -1,3 +1,4 @@
+import React from 'react';
 import CurrencyFormat from 'react-currency-format';
 import { useMemo } from "react";
 import { CURRENCY_SYMBOLS } from "../../constants";

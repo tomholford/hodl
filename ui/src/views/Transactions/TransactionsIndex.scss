@@ -1,0 +1,14 @@
+@import "../../styles/base";
+
+div.transactions-actions {
+  @include flex-row();
+  width: 115px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.transaction-summary-table-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
