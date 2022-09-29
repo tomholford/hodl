@@ -1,3 +1,4 @@
+import React from 'react';
 import './TransactionHeaderRow.scss';
 
 export const TransactionHeaderRow = () => {

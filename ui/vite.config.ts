@@ -4,6 +4,8 @@ import { loadEnv, defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import { urbitPlugin } from '@urbit/vite-plugin-urbit';
 import pluginRewriteAll from 'vite-plugin-rewrite-all';
+// @ts-expect-error no types available
+import nodePolyfills from 'vite-plugin-node-stdlib-browser';
 import svgr from "vite-plugin-svgr";
 import { fileURLToPath } from 'url';
 
@@ -27,7 +29,7 @@ export default ({ mode }: { mode: string }) => {
 
   const plugins = (mode: string, app: string) => {
     if (mode === 'mock' || mode === 'staging') {
-      return [reactRefresh(), svgr(), pluginRewriteAll()];
+      return [reactRefresh(), svgr(), pluginRewriteAll(), nodePolyfills()];
     }
 
     return [
@@ -39,11 +41,9 @@ export default ({ mode }: { mode: string }) => {
       }),
       reactRefresh(),
       svgr(),
+      nodePolyfills(),
     ];
   };
-
-  console.log(process.env.APP);
-  console.log(mode, app, base(mode, app));
 
   return defineConfig({
     base: base(mode, app),

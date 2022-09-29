@@ -13,7 +13,7 @@ import './TransactionsForm.scss';
 
 type FormData = {
   type: string;
-  "coin-id": number;
+  "coin-id": string;
   amount: number;
   costBasis: number;
   note: string;
@@ -95,11 +95,11 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
 
   return (
     <>
-      {transaction ? <p>{`Editing ${transaction.uuid}`}</p> : null}
+      {transaction ? <p>{`Editing ${transaction.id}`}</p> : null}
       <form id="transactions-form" onSubmit={onSubmit}>
         <div>
           <label>coin-id</label>
-          <select defaultValue={transaction?.coin-id} {...register("coin-id")}>
+          <select defaultValue={transaction['coin-id']} {...register("coin-id")}>
             {
               Object.keys(CURRENCIES).map(c => {
                 return (

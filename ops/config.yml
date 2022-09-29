@@ -1,0 +1,29 @@
+env:
+  desk: 'hodl'
+  urbit_path: '~/dev/urbit/urbit'
+  repo_path: '~/dev/hodl'
+  ship_path: '~/dev/urbit/ships'
+script:
+  - merge:
+    - cmd: 'merge %garden our %base'
+      type: 'urbit:app'
+    - cmd: 'merge %hodl our %base'
+      type: 'urbit:app'
+  - mount:
+    - cmd: 'mount %garden'
+      type: 'urbit:app'
+    - cmd: 'mount %hodl'
+      type: 'urbit:app'
+  - sync:
+    - cmd: '~/dev/hodl/ops/sync.sh'
+      type: 'system'
+  - commit:
+    - cmd: 'commit %garden'
+      type: 'urbit:app'
+    - cmd: 'commit %hodl'
+      type: 'urbit:app'
+  - install:
+    - cmd: 'install our %garden'
+      type: 'urbit:app'
+    - cmd: 'install our %hodl'
+      type: 'urbit:app'

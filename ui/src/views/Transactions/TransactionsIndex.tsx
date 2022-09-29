@@ -29,7 +29,7 @@ export const TransactionsIndex = () => {
         ) :
         (
           <div>
-            <p>No transactions available, <Link to={'/transactions/new'}>add one here</Link></p>
+            <p>No transactions yet, <Link to={'/transactions/new'}>add one here</Link></p>
           </div>
         )
       }

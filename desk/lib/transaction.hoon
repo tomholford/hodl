@@ -15,7 +15,7 @@
     ^-  $-(json add:^action) 
     %-  ot
     :~  id+ni
-        coin-id+ni
+        coin-id+so
         date+di
         note+so
         amount+ni
@@ -26,7 +26,7 @@
     ^-  $-(json edit:^action) 
     %-  ot
     :~  id+ni
-        coin-id+ni
+        coin-id+so
         date+di
         note+so
         amount+ni
@@ -44,6 +44,7 @@
   |%
   ++  update
     |=  upd=^update
+    ~&  upd
     ^-  json
     ?+    -.upd  ~|  %unimplemented  !!
         %txns
@@ -52,13 +53,20 @@
       |=  [=id t=^txn]
       ^-  (pair @t json)
       [(scot %ud id) (txn t)]
+        %add
+      ~&  id.upd
+      !!
+      :: %-  pairs
+      :: |=  [=id t=^txn]
+      :: ^-  (pair @t json)
+      :: [(scot %ud id) (txn t)]      
     ==
   ++  txn
     |=  ^txn
     ^-  json
     %-  pairs
     :~  id+s+(scot %ud id)
-        coin-id+s+(scot %ud coin-id)
+        coin-id+s+coin-id
         date+s+(scot %da date)
         note+s+note
         amount+s+(scot %ud amount)

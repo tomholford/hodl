@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useExchangeRate } from "../../lib/useExchangeRate";
@@ -10,7 +11,7 @@ export const TransactionRow = ({ transaction }: { transaction: Transaction }) =>
 
   const del = (id: any) => { console.log(`TODO: remove ${id}`) };
 
-  const exchangeRate = useExchangeRate(transaction['coin-id'].toString());
+  const exchangeRate = useExchangeRate(transaction['coin-id']);
 
   const currentValue = useMemo(() => {
     if(!exchangeRate) { return 0 };

@@ -2,9 +2,9 @@
 |%
 ::  Transaction ID - uuid used for edit, del, query
 +$  id  @ud
-::  CoinGecko Coin ID - external ID that maps to a CG entity (e.g. BTC is 1).
+::  CoinGecko Coin ID - external ID that maps to a CG entity (e.g. BTC is 'bitcoin').
 ::  Used for querying CG API
-+$  coin-id  @ud
++$  coin-id  @t
 ::  Timestamp of transaction
 +$  date  @da
 ::  Optional description of the TX

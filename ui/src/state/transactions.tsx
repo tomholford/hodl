@@ -49,18 +49,18 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
       transactions: Object.values(transactions),
     }));
 
-    await api.subscribe({
-      app: 'hodl',
-      path: '/updates',
-      event: (data) => {
-        console.log('update');
-        console.log(data);
-        get().batchSet((draft) => {
+    // await api.subscribe({
+    //   app: 'hodl',
+    //   path: '/updates',
+    //   event: (data) => {
+    //     console.log('update');
+    //     console.log(data);
+    //     get().batchSet((draft) => {
 
-          // draft.transactions = data;
-        });
-      },
-    });
+    //       // draft.transactions = data;
+    //     });
+    //   },
+    // });
     // TODO: 
     // get().retrieve();
     // api.subscribe({
