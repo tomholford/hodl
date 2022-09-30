@@ -46,9 +46,7 @@ export default function ErrorAlert({
           </div>
         )}
         <div className="flex space-x-6">
-          {/* @ts-ignore TODO */}
           <DialogClose className="button">Try Again</DialogClose>
-          {/* @ts-ignore TODO */}
           <DialogClose asChild>
             <SubmitIssue error={error} />
           </DialogClose>

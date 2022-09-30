@@ -12,7 +12,7 @@ export const Header = () => {
       <div className="header-top">
         <div className="header-logo">
           <Link to={'/'}><code>%hodl</code></Link>
-          <Link to={'/about'}>About</Link>
+          <Link to={'/about'}>about</Link>
         </div>
         <div className="header-toggles">
           <button title={`${isPrivacyMode ? 'show' : 'hide'} balances`} onClick={() => setIsPrivacyMode(!isPrivacyMode)}>{isPrivacyMode ? '👁️' : '🤫'}</button>

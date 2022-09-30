@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
-import { Currency } from "../../types/Currency.type";
 import { BITCOIN_ORIGIN_DATE, CURRENCIES, DEFAULT_VS_CURRENCY } from "../../constants";
 import { Transaction } from "../../types/Transaction.type";
 import { useNavigate } from "react-router-dom";
@@ -10,100 +9,103 @@ import useCoinHistory from "../../queries/useCoinHistory";
 import { DateTime } from 'luxon';
 import { useDebounce } from "usehooks-ts";
 import './TransactionsForm.scss';
+import { useTransactionsState } from "../../state/transactions";
 
 type FormData = {
   type: string;
   "coin-id": string;
   amount: number;
-  costBasis: number;
+  "cost-basis": number;
   note: string;
-  acquiredAt: string;
+  date: string;
 };
 
 export default function TransactionsForm({ transaction }: { transaction?: Transaction }) {
   const isEditing = transaction !== undefined;
   const navigate = useNavigate()
-  const { register, handleSubmit, reset, watch, setValue } = useForm<FormData>();
-  const onSubmit = handleSubmit(data => {
-    // TODO: confirm isValid
+  const { register, handleSubmit, reset, watch, setValue, formState: { isValid }  } = useForm<FormData>();
 
+  const onSubmit = async (data: Transaction) => {
     if (isEditing) {
-      updateTransaction(transaction.uuid, {
+      useTransactionsState.getState().edit({
         type: 'buy',
-        "coin-id": data.coin-id,
+        "coin-id": data['coin-id'],
         amount: data.amount,
-        costBasis: data.costBasis,
+        "cost-basis": data['cost-basis'],
         note: data.note,
-        acquiredAt: data.acquiredAt,
+        date: data.date,
+        id: transaction.id,
       })
     } else {
-      add({
+      useTransactionsState.getState().add({
         type: 'buy',
-        "coin-id": data.coin-id,
+        "coin-id": data['coin-id'],
         amount: data.amount,
-        costBasis: data.costBasis,
+        "cost-basis": data['cost-basis'],
         note: data.note,
-        acquiredAt: data.acquiredAt,
-        uuid: uuidv4()
+        date: data.date,
+        id: uuidv4(),
       });
     }
 
-    reset();
+    // reset();
     navigate('/transactions');
-  });
+  };
 
-  const selectedCoinId = watch('coin-id', transaction["coin-id"]);
-  const selectedDate = watch('acquiredAt', transaction?.acquiredAt);
+  const selectedCoinId = watch('coin-id', transaction?.['coin-id']);
+  const selectedDate = watch('date', transaction?.date);
   const debouncedDate = useDebounce(selectedDate, 500);
 
-  const coinId = useMemo(() => {
-    // TODO: what is a good default?
-    if (!selectedCoinId) { return 'bitcoin' };
+  // const coinId = useMemo(() => {
+  //   // TODO: what is a good default?
+  //   if (!selectedCoinId) { return 'bitcoin' };
 
-    return selectedCoinId;
-  }, [selectedCoinId]);
+  //   return selectedCoinId;
+  // }, [selectedCoinId]);
 
-  const queryDate = useMemo(() => {
-    if (debouncedDate) {
-      const d = DateTime.fromFormat(debouncedDate, 'yyyy-LL-dd');
+  // const queryDate = useMemo(() => {
+  //   if (debouncedDate) {
+  //     const d = DateTime.fromFormat(debouncedDate, 'yyyy-LL-dd');
 
-      // TODO: check if in range (origin date and before or today)
-      if (d.isValid) {
-        return d.toFormat('dd-LL-yyyy');
-      } else {
-        return BITCOIN_ORIGIN_DATE;
-      }
-    } else {
-      return BITCOIN_ORIGIN_DATE;
-    }
-  }, [debouncedDate]);
+  //     // TODO: check if in range (origin date and before or today)
+  //     if (d.isValid) {
+  //       return d.toFormat('dd-LL-yyyy');
+  //     } else {
+  //       return BITCOIN_ORIGIN_DATE;
+  //     }
+  //   } else {
+  //     return BITCOIN_ORIGIN_DATE;
+  //   }
+  // }, [debouncedDate]);
 
-  const coinHistoryQuery = useCoinHistory(coinId, queryDate);
-  useEffect(() => {
-    // TODO: what is the ideal UX?
-    // Do not overwrite an existing costbasis
-    // Already persisted, or field touched
-    if (transaction?.costBasis) { return };
+  // TODO: suggest cost basis based on date?
+  // const coinHistoryQuery = useCoinHistory(coinId, queryDate);
+  // useEffect(() => {
+  //   // TODO: what is the ideal UX?
+  //   // Do not overwrite an existing costbasis
+  //   // Already persisted, or field touched
+  //   if (transaction?.cost-basis) { return };
 
-    if (coinHistoryQuery.isSuccess && coinHistoryQuery.data && coinHistoryQuery.data.market_data?.current_price && (DEFAULT_VS_CURRENCY in coinHistoryQuery.data.market_data.current_price)) {
-      const basis = parseFloat(coinHistoryQuery.data.market_data.current_price[DEFAULT_VS_CURRENCY].toFixed(2));
-      setValue('costBasis', basis)
-    }
-  }, [transaction, coinHistoryQuery, setValue]);
+  //   if (coinHistoryQuery.isSuccess && coinHistoryQuery.data && coinHistoryQuery.data.market_data?.current_price && (DEFAULT_VS_CURRENCY in coinHistoryQuery.data.market_data.current_price)) {
+  //     const basis = parseFloat(coinHistoryQuery.data.market_data.current_price[DEFAULT_VS_CURRENCY].toFixed(2));
+  //     setValue('cost-basis', basis)
+  //   }
+  // }, [transaction, coinHistoryQuery, setValue]);
 
   const handleCancelClick = useCallback(() => navigate('/'), [navigate]);
 
   return (
     <>
       {transaction ? <p>{`Editing ${transaction.id}`}</p> : null}
-      <form id="transactions-form" onSubmit={onSubmit}>
+      <form id="transactions-form" onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label>coin-id</label>
-          <select defaultValue={transaction['coin-id']} {...register("coin-id")}>
+          <label>coingecko ID</label>
+          <select defaultValue={transaction?.['coin-id']} {...register("coin-id")}>
             {
               Object.keys(CURRENCIES).map(c => {
                 return (
-                  <option value={c} key={c}>{c}</option>
+                  // @ts-expect-error TODO  
+                  <option value={CURRENCIES[c as keyof CURRENCIES].id} key={c}>{c}</option>
 
                 )
               })
@@ -115,12 +117,12 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
           <input type="number" placeholder={'420.69'} defaultValue={transaction?.amount} min={0} step={'any'} max={Number.MAX_VALUE} {...register('amount')} />
         </div>
         <div>
-          <label htmlFor="acquiredAt">date acquired</label>
-          <input type="date" defaultValue={transaction?.acquiredAt} {...register('acquiredAt')} />
+          <label htmlFor="date">date acquired</label>
+          <input type="date" defaultValue={transaction?.date} {...register('date')} />
         </div>
         <div>
-          <label htmlFor="costBasis">costBasis</label>
-          <input type="number" defaultValue={transaction?.costBasis} min={0} step={'any'} max={Number.MAX_VALUE} {...register('costBasis')} />
+          <label htmlFor="cost-basis">cost-basis</label>
+          <input type="number" defaultValue={transaction?.['cost-basis']} min={0} step={'any'} max={Number.MAX_VALUE} {...register('cost-basis')} />
         </div>
         <div>
           <label htmlFor="note">note</label>
@@ -128,7 +130,8 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
         </div>
         <div>
           <button onClick={handleCancelClick}>cancel</button>
-          <input type="submit" disabled={coinHistoryQuery.isFetching} />
+          {/* <input type="submit" disabled={coinHistoryQuery.isFetching} /> */}
+          <input type="submit" disabled={!isValid} />
         </div>
       </form>
     </>

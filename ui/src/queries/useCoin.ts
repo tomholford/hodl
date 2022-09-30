@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { CoinFullInfo, CoinGeckoClient } from 'coingecko-api-v3';
 
 // ​/coins​/{id}

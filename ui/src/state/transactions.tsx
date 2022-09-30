@@ -5,12 +5,39 @@ import { Transaction } from '../types/Transaction.type';
 import api from '../services/API';
 import { groupBy } from 'lodash';
 
+
+export interface TransactionAddDiff {
+  add: Transaction;
+}
+
+export interface TransactionEditDiff {
+  edit: Transaction;
+}
+
+export interface TransactionDelDiff {
+  del: number; // id to delete
+}
+
+export type TransactionDiff =
+  | TransactionAddDiff
+  | TransactionEditDiff
+  | TransactionDelDiff;
+
+function txAction(diff: TransactionDiff) {
+  return {
+    app: 'hodl',
+    mark: 'hodl-action',
+    json: diff,
+  };
+}
+
 export interface TransactionsState {
   set: (fn: (sta: TransactionsState) => void) => void;
   batchSet: (fn: (sta: TransactionsState) => void) => void;
+  initialized: boolean;
   transactions: Transaction[];
   add: (transaction: Transaction) => Promise<void>;
-  edit: (id: number, transaction: Partial<Transaction>) => Promise<void>;
+  edit: (transaction: Transaction) => Promise<void>;
   del: (id: number) => Promise<void>;
   start: () => void;
 }
@@ -24,31 +51,41 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
       get().set(fn);
     });
   },
+  initialized: false,
   transactions: [],
   add: async (transaction) => {
-    console.log(`TODO: add ${transaction.id}`);
+    await api.poke(
+      txAction({
+        add: transaction
+      })
+    );
   },
-  edit: async (id, transaction) => {
-    console.log(`TODO: edit ${id}`);
+  edit: async (transaction) => {
+    await api.poke(
+      txAction({
+        edit: transaction
+      })
+    );
   },
   del: async (id) => {
     console.log(`TODO: del ${id}`);
   },
   start: async () => {
-    console.log('start');
     const transactions = await api.scry<Transaction[]>({
       app: 'hodl',
       path: '/transactions/all',
     });
 
-    // TODO: fix the backend data type? 
+    // TODO: fix the backend data type?
     console.log(Object.values(transactions));
 
     set((s) => ({
       ...s,
       transactions: Object.values(transactions),
+      initialized: true,
     }));
 
+    // TODO:
     // await api.subscribe({
     //   app: 'hodl',
     //   path: '/updates',
@@ -56,32 +93,21 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
     //     console.log('update');
     //     console.log(data);
     //     get().batchSet((draft) => {
-
-    //       // draft.transactions = data;
-    //     });
-    //   },
-    // });
-    // TODO: 
-    // get().retrieve();
-    // api.subscribe({
-    //   app: 'hodl',
-    //   path: '/ui', // TODO: updates path?
-    //   event: (event: HarkAction) => {
-    //     console.log(event, get().carpet);
-    //     const { groupSubs, retrieve, retrieveGroup } = get();
-    //     retrieve();
-
-    //     groupSubs.forEach((g) => {
-    //       retrieveGroup(g);
+    //       // switch on update tag  
+    //       draft.transactions = data;
     //     });
     //   },
     // });
   },
 }));
 
+const selTransactionsInitialized = (s: TransactionsState) => s.initialized;
+export function useTransactionsInitialized() {
+  return useTransactionsState(selTransactionsInitialized);
+}
 
 const selTransactions = (s: TransactionsState) => s.transactions;
-export function useTransactions(): Transaction[] {
+export function useTransactions() {
   return useTransactionsState(selTransactions);
 }
 

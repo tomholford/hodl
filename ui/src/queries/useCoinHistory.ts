@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { CoinGeckoClient, CoinHistoryResponse } from 'coingecko-api-v3';
 
 const getCoinHistory = async (coinId: string, date: string): Promise<CoinHistoryResponse> => {

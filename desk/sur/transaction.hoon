@@ -1,7 +1,7 @@
 ::  /sur/transaction.hoon
 |%
-::  Transaction ID - uuid used for edit, del, query
-+$  id  @ud
+::  Transaction ID - uuid string used for edit, del, query (not an ETH 0x...)
++$  id  @t
 ::  CoinGecko Coin ID - external ID that maps to a CG entity (e.g. BTC is 'bitcoin').
 ::  Used for querying CG API
 +$  coin-id  @t
@@ -40,7 +40,7 @@
   --
 +$  update
   $%  action
-      [%txns txns=transactions]  :: Should this be a mop instead of list?
+      [%txns txns=transactions]
   ==
-+$  transactions  ((mop id txn) gth)
++$  transactions  (map id txn)
 --

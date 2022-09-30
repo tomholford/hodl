@@ -14,7 +14,7 @@ export const TransactionsTable = () => {
       <table className="transactions-table">
         <thead>
           <tr>
-            <th colSpan={2}>transaction</th>
+            <th colSpan={2}>asset</th>
             <th>price</th>
             <th>balance</th>
             <th>value</th>

@@ -9,10 +9,7 @@ import {
 } from "react-router-dom";
 import './App.scss';
 import { QueryProvider } from './queries/QueryProvider';
-import { AccountsProvider } from './store/Accounts';
-import { AssetsProvider } from './store/Assets';
 import { SettingsProvider, useSettings } from './store/Settings';
-import { WalletsProvider } from './store/Wallets';
 import { About } from './views/About/About';
 import { Footer } from './views/App/Footer';
 import { Header } from './views/App/Header';
@@ -44,31 +41,22 @@ const App = () => {
       FallbackComponent={ErrorAlert}
       onReset={() => window.location.reload()}
     >
-      {/* TODO: Remove provider stack */}
       <SettingsProvider>
         <QueryProvider>
-          <WalletsProvider>
-            <AccountsProvider>
-              <AssetsProvider>
-                <Router basename={import.meta.env.VITE_BASENAME as string}>
-                  <AppContainer>
-                    <div className="app-inner">
-                      <Header />
-                      <Routes>
-                        <Route path="/about" element={<About />} />
-                        <Route path="/transactions/*" element={<Transactions />} />
-                        <Route path="/settings" element={<Settings />} />
-                        <Route path="*" element={<Navigate to={'/transactions'} />} />
-                        {/* <Route path="/accounts/*" element={<Accounts />} />
-                      <Route path="/wallets" element={<Wallets />} /> */}
-                      </Routes>
-                      <Footer />
-                    </div>
-                  </AppContainer>
-                </Router>
-              </AssetsProvider>
-            </AccountsProvider>
-          </WalletsProvider>
+          <Router basename={import.meta.env.VITE_BASENAME as string}>
+            <AppContainer>
+              <div className="app-inner">
+                <Header />
+                <Routes>
+                  <Route path="/about" element={<About />} />
+                  <Route path="/transactions/*" element={<Transactions />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="*" element={<Navigate to={'/transactions'} />} />
+                </Routes>
+                <Footer />
+              </div>
+            </AppContainer>
+          </Router>
         </QueryProvider>
       </SettingsProvider>
     </ErrorBoundary>

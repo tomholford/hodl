@@ -51,7 +51,7 @@
     ^-  _state
     ?-    -.act
         %add
-      ?<  (has:t-orm txns id.act)
+      ?<  (~(has by txns) id.act)
       =/  txn=txn
         :*  id=id.act
             coin-id=coin-id.act
@@ -61,10 +61,10 @@
             cost-basis=cost-basis.act
             type=type.act
         ==
-      state(txns (put:t-orm txns id.act txn))
+      state(txns `(map @t ^txn)`(~(put by txns) id.act txn))
     ::
         %edit
-      ?>  (has:t-orm txns id.act)
+      ?>  (~(has by txns) id.act)
       =/  txn=txn
         :*  id=id.act
             coin-id=coin-id.act
@@ -74,11 +74,11 @@
             cost-basis=cost-basis.act
             type=type.act
         ==
-      state(txns (put:t-orm txns id.act txn)) ::  TODO: should all fields be editable?
+      state(txns `(map @t ^txn)`(~(put by txns) id.act txn)) ::  TODO: should all fields be editable? probably not id
     ::
         %del
-      ?>  (has:t-orm txns id.act)
-      state(txns +:(del:t-orm txns id.act))
+      ?>  (~(has by txns) id.act)
+      state(txns `(map @t ^txn)`(~(del by txns) id.act))
     ==
   --
 ::

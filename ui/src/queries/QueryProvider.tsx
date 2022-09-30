@@ -1,5 +1,5 @@
 import React from 'react';
-import { QueryClientProvider, QueryClient } from "react-query";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 export const QueryProvider = ({ children }: { children: React.ReactNode }) => {
 

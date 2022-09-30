@@ -1,7 +1,9 @@
-:hodl &hodl-action [%add id=0 coin-id='bitcoin' date=~2002.1.1 note='some note' amount=10 cost-basis=1 type=%buy]
-:hodl &hodl-action [%add id=1 coin-id='ethereum' date=~2002.1.2 note='another note' amount=100 cost-basis=20 type=%buy]
-:hodl &hodl-action [%add id=3 coin-id='monero' date=~2002.1.2 note='yet another note' amount=100 cost-basis=20 type=%buy]
+:hodl &hodl-action [%add id='0' coin-id='bitcoin' date=~2002.1.1 note='some note' amount=10 cost-basis=1 type=%buy]
+:hodl &hodl-action [%add id='1' coin-id='ethereum' date=~2002.1.2 note='another note' amount=100 cost-basis=20 type=%buy]
+:hodl &hodl-action [%add id='3' coin-id='monero' date=~2002.1.2 note='yet another note' amount=100 cost-basis=20 type=%buy]
+:hodl &hodl-action [%add id='4' coin-id='bitcoin' date=~2002.1.2 note='it is another note' amount=20 cost-basis=5 type=%buy]
 
-:hodl &hodl-action [%edit id=0 coin-id='bitcoin' date=~2000.1.1 note='' amount=1 cost-basis=0 type=%buy]
 
-:hodl &hodl-action [%del id=1]
+:hodl &hodl-action [%edit id='0' coin-id='bitcoin' date=~2000.1.1 note='' amount=1 cost-basis=0 type=%buy]
+
+:hodl &hodl-action [%del id='1']

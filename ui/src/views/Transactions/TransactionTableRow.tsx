@@ -10,6 +10,7 @@ import { TransactionRow } from "./TransactionRow";
 import { ReactComponent as ChevronDown } from '../../images/chevron-down.svg';
 import { ReactComponent as ChevronUp } from '../../images/chevron-up.svg';
 import './TransactionTableRow.scss';
+import { useCoinName } from "../../lib/useCoinName";
 
 export const TransactionTableRow = ({ transactions, coinId }: { transactions: Transaction[], coinId: string }) => {
   const balance = transactions.reduce((memo, t) => memo + Number(t.amount), 0);
@@ -51,10 +52,7 @@ export const TransactionTableRow = ({ transactions, coinId }: { transactions: Tr
     return currentValue - initialValue;
   }, [currentValue, initialValue]);
 
-  const coinIdLabel = useMemo(() => {
-    return 'todo';
-    // return CURRENCIES[coinId as keyof typeof CURRENCIES].label;
-  }, [coinId]);
+  const coinName = useCoinName(coinId);
 
   const apiCoinImage = useCoinImage(coinId);
   const transactionIcon = useMemo(() => {
@@ -66,7 +64,7 @@ export const TransactionTableRow = ({ transactions, coinId }: { transactions: Tr
   return (<>
     <tr className="transaction-table-row" onClick={handleShowDetailsClick}>
       <td>{transactionIcon}</td>
-      <td className="">{coinIdLabel} <small>{coinId}</small></td>
+      <td className="">{coinName} <small>{coinId}</small></td>
       <td className="align-right">{exchangeRate ? `${symbol} ${exchangeRate}` : 'Loading...'}</td>
       <td className="align-right">{presentedBalance} <small>{coinId}</small></td>
       <td className="align-right">{<Balance balance={currentValue} />}</td>
@@ -83,7 +81,9 @@ export const TransactionTableRow = ({ transactions, coinId }: { transactions: Tr
               (
                 <table className="transaction-transactions">
                   <TransactionHeaderRow />
-                  {transactions.map(a => <TransactionRow transaction={a} key={a.id} />)}
+                  <tbody>
+                    {transactions.map(a => <TransactionRow transaction={a} key={a.id} />)}
+                  </tbody>
                 </table>
               )
             }

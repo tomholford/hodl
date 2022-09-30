@@ -71,7 +71,7 @@ export const TransactionTotals = () => {
       <div className="total-pnl">
         <TotalCell balance={totalPnl} label='P / L' />
       </div>
-      <div className="total-transactions">{totalTransactionCount} {pluralize('record', totalTransactionCount)} across {transactionCoins.length} {pluralize('transaction', transactionCoins.length)}</div>
+      <div className="total-transactions">{totalTransactionCount} {pluralize('transaction', totalTransactionCount)} across {transactionCoins.length} {pluralize('asset', transactionCoins.length)}</div>
     </div>
   </>);
 }

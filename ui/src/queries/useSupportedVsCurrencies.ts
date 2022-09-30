@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { CoinGeckoClient } from 'coingecko-api-v3';
 
 const getSupportedVsCurrencies = async (): Promise<string[]> => {
@@ -11,5 +11,5 @@ const getSupportedVsCurrencies = async (): Promise<string[]> => {
 };
 
 export default function useSupportedVsCurrencies() {
-  return useQuery("getSupportedVsCurrencies", getSupportedVsCurrencies, { cacheTime: Infinity });
+  return useQuery(["getSupportedVsCurrencies"], getSupportedVsCurrencies, { cacheTime: Infinity });
 }

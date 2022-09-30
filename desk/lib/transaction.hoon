@@ -1,6 +1,5 @@
 /-  *transaction
 |%
-++  t-orm  ((on id txn) gth)
 ++  dejs
   =,  dejs:format
   |%
@@ -14,7 +13,7 @@
   ++  add
     ^-  $-(json add:^action) 
     %-  ot
-    :~  id+ni
+    :~  id+so
         coin-id+so
         date+di
         note+so
@@ -25,7 +24,7 @@
   ++  edit
     ^-  $-(json edit:^action) 
     %-  ot
-    :~  id+ni
+    :~  id+so
         coin-id+so
         date+di
         note+so
@@ -36,7 +35,7 @@
   ++  del
     ^-  $-(json del:^action) 
     %-  ot
-    :~  id+ni
+    :~  id+so
     ==
   --
 ++  enjs
@@ -49,10 +48,10 @@
     ?+    -.upd  ~|  %unimplemented  !!
         %txns
       %-  pairs
-      %+  turn  (tap:t-orm txns.upd)
+      %+  turn  ~(tap by txns.upd)
       |=  [=id t=^txn]
       ^-  (pair @t json)
-      [(scot %ud id) (txn t)]
+      [id (txn t)]
         %add
       ~&  id.upd
       !!
@@ -65,7 +64,7 @@
     |=  ^txn
     ^-  json
     %-  pairs
-    :~  id+s+(scot %ud id)
+    :~  id+s+id
         coin-id+s+coin-id
         date+s+(scot %da date)
         note+s+note

@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { CoinGeckoClient, CoinListResponseItem } from 'coingecko-api-v3';
 
 const getCoinsList = async (): Promise<CoinListResponseItem[]> => {
@@ -11,5 +11,5 @@ const getCoinsList = async (): Promise<CoinListResponseItem[]> => {
 };
 
 export default function useCoinsList() {
-  return useQuery("getCoinsList", getCoinsList, { cacheTime: Infinity });
+  return useQuery(["getCoinsList"], getCoinsList, { cacheTime: Infinity });
 }

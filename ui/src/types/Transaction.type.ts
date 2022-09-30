@@ -4,7 +4,7 @@
  * See desk/lib/transaction.hoon
  */
 export interface Transaction {
-  id: number;
+  id: string;
   "coin-id": string;
   date: string;
   note: string;
