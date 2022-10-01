@@ -49,19 +49,21 @@
         %txns
       %-  pairs
       %+  turn  ~(tap by txns.upd)
-      |=  [=id t=^txn]
+      |=  [=id =txn]
       ^-  (pair @t json)
-      [id (txn t)]
+      [id (txjs txn)]
         %add
-      ~&  id.upd
+      ~&  upd
+      :: [id txn.upd]
       !!
-      :: %-  pairs
-      :: |=  [=id t=^txn]
-      :: ^-  (pair @t json)
-      :: [(scot %ud id) (txn t)]      
+      ::   %edit
+      :: ~&  upd
+      :: !!
+      ::   %del
+      :: ~
     ==
-  ++  txn
-    |=  ^txn
+  ++  txjs
+    |=  txn
     ^-  json
     %-  pairs
     :~  id+s+id

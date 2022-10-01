@@ -61,7 +61,7 @@
             cost-basis=cost-basis.act
             type=type.act
         ==
-      state(txns `(map @t ^txn)`(~(put by txns) id.act txn))
+      state(txns (~(put by txns) id.act txn))
     ::
         %edit
       ?>  (~(has by txns) id.act)
@@ -74,11 +74,11 @@
             cost-basis=cost-basis.act
             type=type.act
         ==
-      state(txns `(map @t ^txn)`(~(put by txns) id.act txn)) ::  TODO: should all fields be editable? probably not id
+      state(txns (~(put by txns) id.act txn)) ::  TODO: should all fields be editable? probably not id
     ::
         %del
       ?>  (~(has by txns) id.act)
-      state(txns `(map @t ^txn)`(~(del by txns) id.act))
+      state(txns (~(del by txns) id.act))
     ==
   --
 ::

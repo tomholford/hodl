@@ -1,0 +1,15 @@
+env:
+  desk: 'hodl'
+  urbit_path: '~/dev/urbit/urbit'
+  repo_path: '~/dev/hodl'
+  ship_path: '~/dev/urbit/ships'
+script:
+  - sync:
+    - cmd: '~/dev/hodl/ops/sync.sh'
+      type: 'system'
+  - commit:
+    - cmd: 'commit %hodl'
+      type: 'urbit:app'
+  - install:
+    - cmd: 'install our %hodl'
+      type: 'urbit:app'

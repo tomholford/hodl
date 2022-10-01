@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import cookies from 'browser-cookies';
 import React, { useEffect } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import {
@@ -26,9 +27,29 @@ const AppContainer = ({ children }: { children: React.ReactNode }) => {
     </div>
   </>)
 }
+function authRedirect() {
+  document.location = `${document.location.protocol}//${document.location.host}`;
+}
+
+function checkIfLoggedIn() {
+  if (!('ship' in window)) {
+    authRedirect();
+  }
+
+  const session = cookies.get(`urbauth-~${window.ship}`);
+  if (!session) {
+    authRedirect();
+  }
+}
 
 const App = () => {
   const handleError = useErrorHandler();
+
+  useEffect(() => {
+    handleError(() => {
+      checkIfLoggedIn();
+    });
+  }, [handleError]);  
 
   useEffect(() => {
     handleError(() => {
