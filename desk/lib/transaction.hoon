@@ -45,7 +45,7 @@
     |=  upd=^update
     ~&  upd
     ^-  json
-    ?+    -.upd  ~|  %unimplemented  !!
+    ?-    -.upd
         %txns
       %-  pairs
       %+  turn  ~(tap by txns.upd)
@@ -56,11 +56,11 @@
       ~&  upd
       :: [id txn.upd]
       !!
-      ::   %edit
-      :: ~&  upd
-      :: !!
-      ::   %del
-      :: ~
+        %edit
+      ~&  upd
+      !!
+        %del
+      ~
     ==
   ++  txjs
     |=  txn

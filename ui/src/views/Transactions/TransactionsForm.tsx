@@ -10,6 +10,7 @@ import { DateTime } from 'luxon';
 import { useDebounce } from "usehooks-ts";
 import './TransactionsForm.scss';
 import { useTransactionsState } from "../../state/transactions";
+import { getUnixTime } from 'date-fns'
 
 type FormData = {
   type: string;
@@ -26,29 +27,31 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
   const { register, handleSubmit, reset, watch, setValue, formState: { isValid }  } = useForm<FormData>();
 
   const onSubmit = async (data: Transaction) => {
+    // TODO: disable submit button when submitting
+    const formattedDate = getUnixTime(new Date(data.date)).toString();
+
     if (isEditing) {
       useTransactionsState.getState().edit({
-        type: 'buy',
+        id: transaction.id,
         "coin-id": data['coin-id'],
+        date: formattedDate,
+        note: data.note,
         amount: data.amount,
         "cost-basis": data['cost-basis'],
-        note: data.note,
-        date: data.date,
-        id: transaction.id,
+        type: 'buy',
       })
     } else {
       useTransactionsState.getState().add({
-        type: 'buy',
+        id: uuidv4(),
         "coin-id": data['coin-id'],
+        date: formattedDate,
+        note: data.note,
         amount: data.amount,
         "cost-basis": data['cost-basis'],
-        note: data.note,
-        date: data.date,
-        id: uuidv4(),
+        type: 'buy',
       });
     }
 
-    // reset();
     navigate('/transactions');
   };
 

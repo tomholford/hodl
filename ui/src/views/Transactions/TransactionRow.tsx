@@ -2,6 +2,7 @@ import React from 'react';
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useExchangeRate } from "../../lib/useExchangeRate";
+import { useTransactionsState } from '../../state/transactions';
 import { Transaction } from "../../types/Transaction.type";
 import { Balance } from "../Shared/Balance";
 import './TransactionRow.scss';
@@ -35,8 +36,9 @@ export const TransactionRow = ({ transaction }: { transaction: Transaction }) =>
     navigate(`/transactions/edit/${transaction.id}`)
   }, [transaction.id, navigate]);
 
-  const handleRemoveClick = useCallback(() => {
-    del(transaction.id);
+  const handleRemoveClick = useCallback(async () => {
+    // TODO: disable button / gray out row
+    await useTransactionsState.getState().del(transaction.id);
   }, [transaction.id, del]);
 
   return (

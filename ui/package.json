@@ -28,6 +28,7 @@
     "coingecko-api-v3": "^0.0.13",
     "console-browserify": "^1.2.0",
     "core-js-pure": "^3.20.2",
+    "date-fns": "^2.29.3",
     "lodash": "^4.17.21",
     "luxon": "^2.3.0",
     "node-polyfill-webpack-plugin": "^1.1.4",

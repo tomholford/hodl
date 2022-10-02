@@ -15,7 +15,9 @@ export interface TransactionEditDiff {
 }
 
 export interface TransactionDelDiff {
-  del: number; // id to delete
+  del: {
+    id: string;
+  }
 }
 
 export type TransactionDiff =
@@ -24,6 +26,7 @@ export type TransactionDiff =
   | TransactionDelDiff;
 
 function txAction(diff: TransactionDiff) {
+  console.log(diff);
   return {
     app: 'hodl',
     mark: 'hodl-action',
@@ -38,7 +41,7 @@ export interface TransactionsState {
   transactions: Transaction[];
   add: (transaction: Transaction) => Promise<void>;
   edit: (transaction: Transaction) => Promise<void>;
-  del: (id: number) => Promise<void>;
+  del: (id: string) => Promise<void>;
   start: () => void;
 }
 
@@ -68,7 +71,11 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
     );
   },
   del: async (id) => {
-    console.log(`TODO: del ${id}`);
+    await api.poke(
+      txAction({
+        del: { id }
+      })
+    );
   },
   start: async () => {
     const transactions = await api.scry<Transaction[]>({
