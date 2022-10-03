@@ -17,8 +17,8 @@
         coin-id+so
         date+di
         note+so
-        amount+ni
-        cost-basis+ni
+        amount+so
+        cost-basis+so
         type+so
     ==
   ++  edit
@@ -28,8 +28,8 @@
         coin-id+so
         date+di
         note+so
-        amount+ni
-        cost-basis+ni
+        amount+so
+        cost-basis+so
         type+so
     ==
   ++  del
@@ -66,13 +66,13 @@
     |=  txn
     ^-  json
     %-  pairs
-    :~  id+s+id
-        coin-id+s+coin-id
-        date+s+(scot %da date)
-        note+s+note
-        amount+s+(scot %ud amount)
-        cost-basis+s+(scot %ud cost-basis)
-        type+s+type
+    :~  id/s+id
+        coin-id/s+coin-id
+        date/(time date)
+        note/s+note
+        amount/(numb amount)
+        cost-basis/(numb cost-basis)
+        type/s+type
     ==
   --
 --

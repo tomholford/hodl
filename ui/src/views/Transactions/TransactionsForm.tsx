@@ -6,11 +6,10 @@ import { Transaction } from "../../types/Transaction.type";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useMemo } from "react";
 import useCoinHistory from "../../queries/useCoinHistory";
-import { DateTime } from 'luxon';
 import { useDebounce } from "usehooks-ts";
 import './TransactionsForm.scss';
 import { useTransactionsState } from "../../state/transactions";
-import { getUnixTime } from 'date-fns'
+import { getTime } from 'date-fns'
 
 type FormData = {
   type: string;
@@ -28,26 +27,26 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
 
   const onSubmit = async (data: Transaction) => {
     // TODO: disable submit button when submitting
-    const formattedDate = getUnixTime(new Date(data.date)).toString();
+    const msDate = getTime(new Date(data.date));
 
     if (isEditing) {
       useTransactionsState.getState().edit({
         id: transaction.id,
         "coin-id": data['coin-id'],
-        date: formattedDate,
+        date: msDate,
         note: data.note,
-        amount: data.amount,
-        "cost-basis": data['cost-basis'],
+        amount: Number(data.amount),
+        "cost-basis": Number(data['cost-basis']),
         type: 'buy',
       })
     } else {
       useTransactionsState.getState().add({
         id: uuidv4(),
         "coin-id": data['coin-id'],
-        date: formattedDate,
+        date: msDate,
         note: data.note,
-        amount: data.amount,
-        "cost-basis": data['cost-basis'],
+        amount: Number(data.amount),
+        "cost-basis": Number(data['cost-basis']),
         type: 'buy',
       });
     }

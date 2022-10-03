@@ -10,11 +10,14 @@
 ::  Optional description of the TX
 +$  note  @t
 ::  TX Amount in currency
-+$  amount  @ud
+::  Note usage of a string for storage; since no maths will be done in the app
+::  (for now!), it is simpler for a noob like me to work with. Eventually this 
+::  will
++$  amount  @t
 ::  optional: cost per unit at the time of the TX (can be roughly auto-populated
 ::  with CoinGecko History API async, or manually entered by user... or if
 ::  imported from a CEX, use that value)
-+$  cost-basis  @ud
++$  cost-basis  @t
 ::  %buy, %sell
 +$  type  @ta
 +$  txn

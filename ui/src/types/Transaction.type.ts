@@ -6,7 +6,7 @@
 export interface Transaction {
   id: string;
   "coin-id": string;
-  date: string;
+  date: number;
   note: string;
   amount: number;
   "cost-basis": number;
