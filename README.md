@@ -10,7 +10,7 @@ Enter your transactions in the UI. The data is stored on your ship. [CoinGecko A
 
 On your Urbit's home screen, search for:
 ```
-~mister-dister-datder-sonnet
+~hodler-datder-sonnet
 ```
 
 Or you can manually install using the instructions below.
