@@ -9,7 +9,7 @@ import useCoinHistory from "../../queries/useCoinHistory";
 import { useDebounce } from "usehooks-ts";
 import './TransactionsForm.scss';
 import { useTransactionsState } from "../../state/transactions";
-import { getTime } from 'date-fns'
+import { format, getTime } from 'date-fns'
 
 type FormData = {
   type: string;
@@ -35,8 +35,8 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
         "coin-id": data['coin-id'],
         date: msDate,
         note: data.note,
-        amount: Number(data.amount),
-        "cost-basis": Number(data['cost-basis']),
+        amount: data.amount,
+        "cost-basis": data['cost-basis'],
         type: 'buy',
       })
     } else {
@@ -45,8 +45,8 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
         "coin-id": data['coin-id'],
         date: msDate,
         note: data.note,
-        amount: Number(data.amount),
-        "cost-basis": Number(data['cost-basis']),
+        amount: data.amount,
+        "cost-basis": data['cost-basis'],
         type: 'buy',
       });
     }
@@ -94,6 +94,8 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
   //   }
   // }, [transaction, coinHistoryQuery, setValue]);
 
+  const defaultDate = transaction?.date ? format(transaction.date, 'y-MM-dd') : undefined;
+
   const handleCancelClick = useCallback(() => navigate('/'), [navigate]);
 
   return (
@@ -101,7 +103,7 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
       {transaction ? <p>{`Editing ${transaction.id}`}</p> : null}
       <form id="transactions-form" onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label>coingecko ID</label>
+          <label>asset</label>
           <select defaultValue={transaction?.['coin-id']} {...register("coin-id")}>
             {
               Object.keys(CURRENCIES).map(c => {
@@ -120,7 +122,7 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
         </div>
         <div>
           <label htmlFor="date">date acquired</label>
-          <input type="date" defaultValue={transaction?.date} {...register('date')} />
+          <input type="date" defaultValue={defaultDate} {...register('date')} />
         </div>
         <div>
           <label htmlFor="cost-basis">cost-basis</label>

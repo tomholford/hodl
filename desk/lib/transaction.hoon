@@ -43,7 +43,6 @@
   |%
   ++  update
     |=  upd=^update
-    ~&  upd
     ^-  json
     ?-    -.upd
         %txns
@@ -53,14 +52,17 @@
       ^-  (pair @t json)
       [id (txjs txn)]
         %add
-      ~&  upd
-      :: [id txn.upd]
-      !!
+      %-  pairs
+      :~  add/(txjs +.upd)
+      ==
         %edit
-      ~&  upd
-      !!
+      %-  pairs
+      :~  edit/(txjs +.upd)
+      ==
         %del
-      ~
+      %-  pairs
+      :~  del/s+id.upd
+      ==
     ==
   ++  txjs
     |=  txn
@@ -70,8 +72,8 @@
         coin-id/s+coin-id
         date/(time date)
         note/s+note
-        amount/(numb amount)
-        cost-basis/(numb cost-basis)
+        amount/s+amount
+        cost-basis/s+cost-basis
         type/s+type
     ==
   --

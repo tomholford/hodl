@@ -5,25 +5,39 @@ import { Transaction } from '../types/Transaction.type';
 import api from '../services/API';
 import { groupBy } from 'lodash';
 
-
-export interface TransactionAddDiff {
+interface TransactionAddDiff {
   add: Transaction;
 }
 
-export interface TransactionEditDiff {
+interface TransactionEditDiff {
   edit: Transaction;
 }
 
-export interface TransactionDelDiff {
+interface TransactionDelDiff {
   del: {
     id: string;
   }
 }
 
-export type TransactionDiff =
+type TransactionDiff =
   | TransactionAddDiff
   | TransactionEditDiff
   | TransactionDelDiff;
+
+interface TransactionAddUpdate {
+  add: Transaction;
+} 
+interface TransactionEditUpdate {
+  edit: Transaction;
+} 
+interface TransactionDelUpdate {
+  del: string;
+}
+
+type TransactionUpdate =
+  | TransactionAddUpdate 
+  | TransactionEditUpdate 
+  | TransactionDelUpdate;
 
 function txAction(diff: TransactionDiff) {
   console.log(diff);
@@ -92,19 +106,27 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
       initialized: true,
     }));
 
-    // TODO:
-    // await api.subscribe({
-    //   app: 'hodl',
-    //   path: '/updates',
-    //   event: (data) => {
-    //     console.log('update');
-    //     console.log(data);
-    //     get().batchSet((draft) => {
-    //       // switch on update tag  
-    //       draft.transactions = data;
-    //     });
-    //   },
-    // });
+    await api.subscribe({
+      app: 'hodl',
+      path: '/updates',
+      event: (update: TransactionUpdate) => {
+        if('add' in update) {
+          get().batchSet((draft) => {
+            draft.transactions = [...draft.transactions, update.add]
+          })
+        }
+        if('edit' in update) {
+          get().batchSet((draft) => {
+            draft.transactions = [...draft.transactions.slice().filter(t => t.id !== update.edit.id), update.edit]
+          })
+        }
+        if('del' in update) {
+          get().batchSet((draft) => {
+            draft.transactions = draft.transactions.slice().filter(t => t.id !== update.del)
+          })
+        }
+      },
+    });
   },
 }));
 

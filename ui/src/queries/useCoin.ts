@@ -13,5 +13,5 @@ const getCoin = async (coinId: string): Promise<CoinFullInfo> => {
 };
 
 export default function useCoin(coinId: string) {
-  return useQuery(["getCoin", coinId], () => getCoin(coinId));
+  return useQuery(["getCoin", coinId], () => getCoin(coinId), { cacheTime: Infinity });
 }

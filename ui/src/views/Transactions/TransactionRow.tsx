@@ -2,6 +2,7 @@ import { formatDistanceToNow } from 'date-fns';
 import React from 'react';
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCoinData } from '../../lib/useCoinData';
 import { useExchangeRate } from "../../lib/useExchangeRate";
 import { useTransactionsState } from '../../state/transactions';
 import { Transaction } from "../../types/Transaction.type";
@@ -48,10 +49,12 @@ export const TransactionRow = ({ transaction }: { transaction: Transaction }) =>
     await useTransactionsState.getState().del(transaction.id);
   }, [transaction.id]);
 
+  const { symbol } = useCoinData(transaction['coin-id']);
+
   return (
       <tr className="transaction-row">
         <td className="transaction-balance">
-          {transaction.amount} {transaction['coin-id']}
+          {transaction.amount} {symbol}
         </td>
         <td className="transaction-value">{<Balance balance={currentValue} />}</td>
         <td className="transaction-pnl">{<Balance balance={pnl} />}</td>

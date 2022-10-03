@@ -1,6 +1,6 @@
 @import "../../styles/base";
 
-tr.asset-table-row {
+tr.transaction-table-row {
   opacity: 0.85;
   height: 60px;
   border-bottom: solid 1px gray;
@@ -26,8 +26,8 @@ tr.asset-table-row {
   }
 }
 
-tr.asset-table-details {
-  table.asset-transactions {
+tr.transaction-table-details {
+  table.transaction-transactions {
     border-collapse: collapse; 
 
     width: 100%;

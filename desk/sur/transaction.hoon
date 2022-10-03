@@ -44,9 +44,9 @@
 +$  update
   $%  action
       [%txns txns=transactions]
-      [%add txn]
-      [%edit txn]
-      [%del ~]
+      [%add =txn]
+      [%edit =txn]
+      [%del =id]
   ==
 +$  transactions  (map id txn)
 --

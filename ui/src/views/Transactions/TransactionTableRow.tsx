@@ -11,6 +11,7 @@ import { ReactComponent as ChevronDown } from '../../images/chevron-down.svg';
 import { ReactComponent as ChevronUp } from '../../images/chevron-up.svg';
 import './TransactionTableRow.scss';
 import { useCoinName } from "../../lib/useCoinName";
+import { useCoinData } from "../../lib/useCoinData";
 
 export const TransactionTableRow = ({ transactions, coinId }: { transactions: Transaction[], coinId: string }) => {
   const balance = transactions.reduce((memo, t) => memo + Number(t.amount), 0);
@@ -27,14 +28,6 @@ export const TransactionTableRow = ({ transactions, coinId }: { transactions: Tr
   }, []);
 
   const exchangeRate = useExchangeRate(coinId);
-  const { vsCurrency } = useSettings();
-  const symbol = useMemo(() => {
-    if (vsCurrency in CURRENCY_SYMBOLS) {
-      return CURRENCY_SYMBOLS[vsCurrency as keyof typeof CURRENCY_SYMBOLS];
-    } else {
-      return vsCurrency.toUpperCase();
-    }
-  }, [vsCurrency]);
 
   const currentValue = useMemo(() => {
     if (!exchangeRate) { return 0 };
@@ -52,21 +45,29 @@ export const TransactionTableRow = ({ transactions, coinId }: { transactions: Tr
     return currentValue - initialValue;
   }, [currentValue, initialValue]);
 
-  const coinName = useCoinName(coinId);
+  const { image, name, symbol } = useCoinData(coinId);
 
-  const apiCoinImage = useCoinImage(coinId);
   const transactionIcon = useMemo(() => {
-    if(!apiCoinImage) { return coinId };
+    if(!image) { return coinId };
     
-    return <img src={apiCoinImage.thumb} alt={symbol} />
-  }, [apiCoinImage, coinId, symbol]);
+    return <img src={image.thumb} alt={symbol} />
+  }, [image, coinId, symbol]);
+
+  const { vsCurrency } =  useSettings();
+  const currencySymbol = useMemo(() => {
+    if(vsCurrency in CURRENCY_SYMBOLS) {
+      return CURRENCY_SYMBOLS[vsCurrency as keyof typeof CURRENCY_SYMBOLS];
+    } else {
+      return vsCurrency.toUpperCase();
+    }
+  }, [vsCurrency]);
 
   return (<>
     <tr className="transaction-table-row" onClick={handleShowDetailsClick}>
       <td>{transactionIcon}</td>
-      <td className="">{coinName} <small>{coinId}</small></td>
-      <td className="align-right">{exchangeRate ? `${symbol} ${exchangeRate}` : 'Loading...'}</td>
-      <td className="align-right">{presentedBalance} <small>{coinId}</small></td>
+      <td className="">{name}</td>
+      <td className="align-right">{exchangeRate ? `${currencySymbol}${exchangeRate}` : 'Loading...'}</td>
+      <td className="align-right">{presentedBalance} <small>{symbol}</small></td>
       <td className="align-right">{<Balance balance={currentValue} />}</td>
       <td className="align-right">{<Balance balance={pnl} />}</td>
       <td className="align-right">
