@@ -15,6 +15,14 @@ On your Urbit's home screen, search for:
 
 Or you can manually install using the instructions below.
 
+## Usage
+
+1. Click Add a Transaction  button (the $)
+2. Enter the relevant data in the New Transaction form
+3. Submit and view the data in the dashboard
+
+It is also possible to programmatically add Transactions using pokes, see `notes/pokes.txt` for examples.
+
 ## Development
 
 0. Install the [bouncer desk sync tool](https://github.com/tloncorp/bouncer) and update the `env` values in `ops/*.yml` to match your system configuration.
