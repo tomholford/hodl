@@ -1,19 +1,29 @@
 import * as React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
-import { BITCOIN_ORIGIN_DATE, CURRENCIES, DEFAULT_VS_CURRENCY } from "../../constants";
 import { Transaction } from "../../types/Transaction.type";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useMemo } from "react";
-import useCoinHistory from "../../queries/useCoinHistory";
-import { useDebounce } from "usehooks-ts";
-import './TransactionsForm.scss';
+import { useCallback, useEffect } from "react";
 import { useTransactionsState } from "../../state/transactions";
 import { format, getTime } from 'date-fns'
+import { CURRENCIES } from "../../constants";
+import AsyncSelect from 'react-select/async';
+import { coinSearch, getCoin } from "../../services/CoinGecko.service";
+import debounce from 'debounce-promise';
+import './TransactionsForm.scss';
+
+interface Option {
+  value: string,
+  label: string,
+}
+
+interface ThumbOption extends Option {
+  thumb: string;
+}
 
 type FormData = {
   type: string;
-  "coin-id": string;
+  "coin-id": Option;
   amount: number;
   "cost-basis": number;
   note: string;
@@ -23,16 +33,16 @@ type FormData = {
 export default function TransactionsForm({ transaction }: { transaction?: Transaction }) {
   const isEditing = transaction !== undefined;
   const navigate = useNavigate()
-  const { register, handleSubmit, reset, watch, setValue, formState: { isValid }  } = useForm<FormData>();
+  const { control, register, handleSubmit, setValue, formState: { isValid } } = useForm<FormData>();
 
-  const onSubmit = async (data: Transaction) => {
+  const onSubmit = async (data: FormData) => {
     // TODO: disable submit button when submitting
     const msDate = getTime(new Date(data.date));
 
     if (isEditing) {
       useTransactionsState.getState().edit({
         id: transaction.id,
-        "coin-id": data['coin-id'],
+        "coin-id": data["coin-id"].value,
         date: msDate,
         note: data.note,
         amount: data.amount,
@@ -42,7 +52,7 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
     } else {
       useTransactionsState.getState().add({
         id: uuidv4(),
-        "coin-id": data['coin-id'],
+        "coin-id": data["coin-id"].value,
         date: msDate,
         note: data.note,
         amount: data.amount,
@@ -54,9 +64,9 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
     navigate('/transactions');
   };
 
-  const selectedCoinId = watch('coin-id', transaction?.['coin-id']);
-  const selectedDate = watch('date', transaction?.date);
-  const debouncedDate = useDebounce(selectedDate, 500);
+  // const selectedCoinId = watch('coin-id', transaction?.['coin-id']);
+  // const selectedDate = watch('date', transaction?.date);
+  // const debouncedDate = useDebounce(selectedDate, 500);
 
   // const coinId = useMemo(() => {
   //   // TODO: what is a good default?
@@ -98,23 +108,86 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
 
   const handleCancelClick = useCallback(() => navigate('/'), [navigate]);
 
+  const defaultOptions = React.useMemo(() => {
+    return Object.keys(CURRENCIES).map(c => {
+      const coin = CURRENCIES[c as keyof typeof CURRENCIES];
+      return { label: `${coin.label} (${coin.value})`, value: coin.id , thumb: coin.thumb }
+    })
+  }, []);
+
+  const loadOptions = async (q: string) => {
+    const { coins } = await coinSearch(q);
+    return coins ? coins.map(c => ({ label: `${c.name} (${c.symbol?.toUpperCase()})`, value: c.id ?? '', thumb: c.thumb })) : [];
+  }
+
+  const debouncedLoadOptions = debounce(loadOptions, 300);
+
+  const [editingCoinOption, setEditingCoinOption] = React.useState<ThumbOption | undefined>();
+  const defaultCoinOption = React.useMemo(() => {
+    if(transaction && defaultOptions.find(o => o.value === transaction['coin-id'])) {
+      return defaultOptions.find(o => o.value === transaction["coin-id"])
+    }
+  }, [defaultOptions, transaction]);
+
+  const findEditingCoin = useCallback(async () => {
+    if(!transaction) { return }
+    const c = await getCoin(transaction["coin-id"]);
+    setEditingCoinOption({ 
+      label: `${c.name} (${c.symbol?.toUpperCase()})`,
+      value: c.id ?? '', // TODO: is there a better fallback?
+      thumb: c.image?.thumb ?? ''
+   })
+  }, [transaction]);
+
+  // When editing, if the asset is not in the default set, query for it
+  useEffect(() => {
+    if (!isEditing) return;
+    if (defaultCoinOption) { return }
+
+    findEditingCoin();
+  }, [defaultCoinOption, findEditingCoin, isEditing]);
+
+  // Once found, update the Select
+  useEffect(() => {
+    if(editingCoinOption) {
+      setValue('coin-id', editingCoinOption)
+    }
+  }, [editingCoinOption, setValue]);
+
   return (
     <>
       {transaction ? <p>{`Editing ${transaction.id}`}</p> : null}
       <form id="transactions-form" onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label>asset</label>
-          <select defaultValue={transaction?.['coin-id']} {...register("coin-id")}>
-            {
-              Object.keys(CURRENCIES).map(c => {
+          <label className="mb-3 font-semibold">
+            <span>asset&nbsp;</span>
+            <Controller
+              name={"coin-id"}
+              control={control}
+              defaultValue={defaultCoinOption ?? editingCoinOption}
+              render={({ field }) => {
                 return (
-                  // @ts-expect-error TODO  
-                  <option value={CURRENCIES[c as keyof CURRENCIES].id} key={c}>{c}</option>
-
+                  <AsyncSelect
+                    {...field}
+                    isSearchable
+                    isClearable
+                    cacheOptions
+                    placeholder="Select or search for an asset"
+                    defaultValue={defaultCoinOption ?? editingCoinOption}
+                    defaultOptions={defaultOptions}
+                    loadOptions={debouncedLoadOptions}
+                    formatOptionLabel={(coin) => (
+                      <div className="coin-option">
+                        {/* @ts-expect-error Coin option has a thumb */}
+                        <img src={coin.thumb} alt="coin thumbnail" />
+                        <span>{coin.label}</span>
+                      </div>
+                    )}
+                  />
                 )
-              })
-            }
-          </select>
+              }}
+            />
+          </label>
         </div>
         <div>
           <label htmlFor="amount">amount</label>
@@ -134,7 +207,6 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
         </div>
         <div>
           <button onClick={handleCancelClick}>cancel</button>
-          {/* <input type="submit" disabled={coinHistoryQuery.isFetching} /> */}
           <input type="submit" disabled={!isValid} />
         </div>
       </form>

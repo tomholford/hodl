@@ -3,3 +3,5 @@ dister moon on DO
 update glob in desk docket
 
 improved query caching
+
+persist to / restore from localstorage using zustand middleware

@@ -56,7 +56,7 @@ export interface TransactionsState {
   add: (transaction: Transaction) => Promise<void>;
   edit: (transaction: Transaction) => Promise<void>;
   del: (id: string) => Promise<void>;
-  start: () => void;
+  start: () => Promise<number>;
 }
 
 export const useTransactionsState = create<TransactionsState>((set, get) => ({
@@ -97,16 +97,13 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
       path: '/transactions/all',
     });
 
-    // TODO: fix the backend data type?
-    console.log(Object.values(transactions));
-
     set((s) => ({
       ...s,
-      transactions: Object.values(transactions),
+      transactions: Object.values(transactions), // TODO: scry returns list?
       initialized: true,
     }));
 
-    await api.subscribe({
+    return await api.subscribe({
       app: 'hodl',
       path: '/updates',
       event: (update: TransactionUpdate) => {

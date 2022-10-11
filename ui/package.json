@@ -25,10 +25,11 @@
     "bn.js": "^5.2.0",
     "browser-cookies": "^1.2.0",
     "classnames": "^2.3.1",
-    "coingecko-api-v3": "^0.0.13",
+    "coingecko-api-v3": "github:tomholford/coingecko-api-v3#t/add-search-endpoint",
     "console-browserify": "^1.2.0",
     "core-js-pure": "^3.20.2",
     "date-fns": "^2.29.3",
+    "debounce-promise": "^3.1.2",
     "lodash": "^4.17.21",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "node-stdlib-browser": "^1.2.0",
@@ -39,6 +40,8 @@
     "react-error-boundary": "^3.1.4",
     "react-hook-form": "^7.22.5",
     "react-router-dom": "^6.2.1",
+    "react-select": "^5.4.0",
+    "react-virtuoso": "^2.19.1",
     "sass": "^1.45.2",
     "typescript": "^4.5.4",
     "usehooks-ts": "^2.4.1",
@@ -72,10 +75,13 @@
     ]
   },
   "devDependencies": {
+    "@types/debounce-promise": "^3.1.4",
     "@types/lodash": "^4.14.178",
     "@types/luxon": "^2.0.9",
     "@types/react-currency-format": "^1.0.0",
     "@types/uuid": "^8.3.3",
+    "eslint": "^8.25.0",
+    "eslint-config-react-app": "^7.0.1",
     "vite-plugin-node-stdlib-browser": "^0.1.1"
   }
 }

@@ -13,7 +13,7 @@ On your Urbit's home screen, search for:
 ~hodler-datder-sonnet
 ```
 
-Or you can manually install using the instructions below.
+Or you can manually install using the Development instructions below.
 
 ## Usage
 
@@ -35,6 +35,7 @@ It is also possible to programmatically add Transactions using pokes, see `notes
 
 ## Roadmap
 
+- support all 13K+ coingecko coins 
 - connect a wallet to automatically import transactions
 - data visualization
 
