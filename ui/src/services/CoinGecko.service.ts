@@ -16,3 +16,7 @@ export const getCoinsList = async (): Promise<CoinListResponseItem[]> => {
 export const coinSearch = async (query?: string): Promise<SearchResponse> => {
   return await client.search({ query });
 }
+
+export const getCoin = async (coinId: string) => {
+  return await client.coinId({ id: coinId });
+};

@@ -30,6 +30,12 @@ export const About = () => {
       <img src={mauveWingUrl} alt="" />
       <h3>~mallus-fabres</h3>
       <img src={stellerfallUrl} alt="" />
+      <h2>Special Thanks</h2>
+      <ul>
+        <li>~tanned-sipped for design, feedback, testing, and product ideation</li>
+        <li>~tocrex-holpen and ~mallus-fabres for artistic aesthetic</li>
+        <li>~sarpen-laplux, ~hastuc-dibtux, and ~nocsyx-lassul for hoon expertise</li>
+      </ul>
     </div>
   )
 }

@@ -3,18 +3,22 @@ import { Controller, useForm } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
 import { Transaction } from "../../types/Transaction.type";
 import { useNavigate } from "react-router-dom";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useTransactionsState } from "../../state/transactions";
 import { format, getTime } from 'date-fns'
 import { CURRENCIES } from "../../constants";
 import AsyncSelect from 'react-select/async';
-import { coinSearch } from "../../services/CoinGecko.service";
+import { coinSearch, getCoin } from "../../services/CoinGecko.service";
 import debounce from 'debounce-promise';
 import './TransactionsForm.scss';
 
 interface Option {
   value: string,
   label: string,
+}
+
+interface ThumbOption extends Option {
+  thumb: string;
 }
 
 type FormData = {
@@ -29,7 +33,7 @@ type FormData = {
 export default function TransactionsForm({ transaction }: { transaction?: Transaction }) {
   const isEditing = transaction !== undefined;
   const navigate = useNavigate()
-  const { control, register, handleSubmit, formState: { isValid } } = useForm<FormData>();
+  const { control, register, handleSubmit, setValue, formState: { isValid } } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
     // TODO: disable submit button when submitting
@@ -118,12 +122,37 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
 
   const debouncedLoadOptions = debounce(loadOptions, 300);
 
-  // TODO: if not in the list of defaults, need to query for it individually and pre-select
-  const defaultCoinId = () => {
-    if(transaction && defaultOptions) {
+  const [editingCoinOption, setEditingCoinOption] = React.useState<ThumbOption | undefined>();
+  const defaultCoinOption = React.useMemo(() => {
+    if(transaction && defaultOptions.find(o => o.value === transaction['coin-id'])) {
       return defaultOptions.find(o => o.value === transaction["coin-id"])
     }
-  };
+  }, [defaultOptions, transaction]);
+
+  const findEditingCoin = useCallback(async () => {
+    if(!transaction) { return }
+    const c = await getCoin(transaction["coin-id"]);
+    setEditingCoinOption({ 
+      label: `${c.name} (${c.symbol?.toUpperCase()})`,
+      value: c.id ?? '', // TODO: is there a better fallback?
+      thumb: c.image?.thumb ?? ''
+   })
+  }, [transaction]);
+
+  // When editing, if the asset is not in the default set, query for it
+  useEffect(() => {
+    if (!isEditing) return;
+    if (defaultCoinOption) { return }
+
+    findEditingCoin();
+  }, [defaultCoinOption, findEditingCoin, isEditing]);
+
+  // Once found, update the Select
+  useEffect(() => {
+    if(editingCoinOption) {
+      setValue('coin-id', editingCoinOption)
+    }
+  }, [editingCoinOption, setValue]);
 
   return (
     <>
@@ -135,7 +164,7 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
             <Controller
               name={"coin-id"}
               control={control}
-              defaultValue={defaultCoinId()}
+              defaultValue={defaultCoinOption ?? editingCoinOption}
               render={({ field }) => {
                 return (
                   <AsyncSelect
@@ -144,7 +173,7 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
                     isClearable
                     cacheOptions
                     placeholder="Select or search for an asset"
-                    defaultValue={defaultCoinId()}
+                    defaultValue={defaultCoinOption ?? editingCoinOption}
                     defaultOptions={defaultOptions}
                     loadOptions={debouncedLoadOptions}
                     formatOptionLabel={(coin) => (

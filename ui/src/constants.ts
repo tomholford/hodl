@@ -11,6 +11,12 @@ export const CURRENCIES = {
     id: 'ethereum',
     thumb: 'https://assets.coingecko.com/coins/images/279/thumb/ethereum.png',
   },
+  WSTR: {
+    label: 'Wrapped Star',
+    value: 'WSTR',
+    id: 'wrapped-star',
+    thumb: 'https://assets.coingecko.com/coins/images/23972/thumb/wstr.png',
+  },
   AVAX: {
     label: 'Avalanche',
     value: 'AVAX',
@@ -34,12 +40,6 @@ export const CURRENCIES = {
     value: 'DOGE',
     id: 'dogecoin',
     thumb: 'https://assets.coingecko.com/coins/images/5/thumb/dogecoin.png',
-  },
-  WSTR: {
-    label: 'Wrapped Star',
-    value: 'WSTR',
-    id: 'wrapped-star',
-    thumb: 'https://assets.coingecko.com/coins/images/23972/thumb/wstr.png',
   },
 }
 
