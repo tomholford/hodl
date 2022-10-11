@@ -7,4 +7,14 @@ form#transactions-form {
     margin-bottom: 10px;
     display: block;
   }
+
+  div.coin-option {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    img {
+      margin-right: 10px;
+    }
+  }
 }

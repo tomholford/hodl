@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import cookies from 'browser-cookies';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import {
   BrowserRouter as Router,
@@ -18,6 +18,7 @@ import { Settings } from './views/Settings/Settings';
 import { useTransactionsState } from './state/transactions';
 import { Transactions } from './views/Transactions/Transactions';
 import ErrorAlert from './components/ErrorAlert';
+import api from './services/API';
 
 const AppContainer = ({ children }: { children: React.ReactNode }) => {
   const { isDarkMode } = useSettings();
@@ -43,19 +44,31 @@ function checkIfLoggedIn() {
 }
 
 const App = () => {
+  const [subscriptions, setSubscriptions] = useState<number[]>([]);
   const handleError = useErrorHandler();
 
   useEffect(() => {
     handleError(() => {
       checkIfLoggedIn();
     });
-  }, [handleError]);  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const subscribeTransactions = async () => {
+    const subscriptionID = await useTransactionsState.getState().start();
+    setSubscriptions(state => [...state, subscriptionID]);
+  }
 
   useEffect(() => {
     handleError(() => {
-      useTransactionsState.getState().start();
+      subscribeTransactions();
     });
-  }, [handleError]);
+
+    return () => {
+      subscriptions.forEach(subId => api.unsubscribe(subId))
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <ErrorBoundary

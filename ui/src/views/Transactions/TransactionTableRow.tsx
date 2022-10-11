@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { CURRENCIES, CURRENCY_SYMBOLS } from "../../constants";
-import { useCoinImage } from "../../lib/useCoinImage";
+import { CURRENCY_SYMBOLS } from "../../constants";
 import { useExchangeRate } from "../../lib/useExchangeRate";
 import { useSettings } from "../../store/Settings";
 import { Transaction } from "../../types/Transaction.type";
@@ -10,7 +9,6 @@ import { TransactionRow } from "./TransactionRow";
 import { ReactComponent as ChevronDown } from '../../images/chevron-down.svg';
 import { ReactComponent as ChevronUp } from '../../images/chevron-up.svg';
 import './TransactionTableRow.scss';
-import { useCoinName } from "../../lib/useCoinName";
 import { useCoinData } from "../../lib/useCoinData";
 
 export const TransactionTableRow = ({ transactions, coinId }: { transactions: Transaction[], coinId: string }) => {
