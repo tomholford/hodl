@@ -40,7 +40,6 @@ type TransactionUpdate =
   | TransactionDelUpdate;
 
 function txAction(diff: TransactionDiff) {
-  console.log(diff);
   return {
     app: 'hodl',
     mark: 'hodl-action',
@@ -56,7 +55,7 @@ export interface TransactionsState {
   add: (transaction: Transaction) => Promise<void>;
   edit: (transaction: Transaction) => Promise<void>;
   del: (id: string) => Promise<void>;
-  start: () => Promise<number>;
+  start: () => Promise<void>;
 }
 
 export const useTransactionsState = create<TransactionsState>((set, get) => ({
@@ -100,10 +99,9 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
     set((s) => ({
       ...s,
       transactions: Object.values(transactions), // TODO: scry returns list?
-      initialized: true,
     }));
 
-    return await api.subscribe({
+    await api.subscribe({
       app: 'hodl',
       path: '/updates',
       event: (update: TransactionUpdate) => {
@@ -124,6 +122,11 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
         }
       },
     });
+
+    set((s) => ({
+      ...s,
+      initialized: true
+    }));
   },
 }));
 

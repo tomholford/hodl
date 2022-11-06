@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import cookies from 'browser-cookies';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import {
   BrowserRouter as Router,
@@ -44,29 +44,21 @@ function checkIfLoggedIn() {
 }
 
 const App = () => {
-  const [subscriptions, setSubscriptions] = useState<number[]>([]);
   const handleError = useErrorHandler();
 
   useEffect(() => {
-    handleError(() => {
-      checkIfLoggedIn();
-    });
+    checkIfLoggedIn();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const subscribeTransactions = async () => {
-    const subscriptionID = await useTransactionsState.getState().start();
-    setSubscriptions(state => [...state, subscriptionID]);
-  }
+  const subscribeTransactions = useCallback(async () => {
+    await useTransactionsState.getState().start();
+  }, []);
 
   useEffect(() => {
     handleError(() => {
       subscribeTransactions();
     });
-
-    return () => {
-      subscriptions.forEach(subId => api.unsubscribe(subId))
-    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
