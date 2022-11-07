@@ -15,6 +15,11 @@ On your Urbit's home screen, search for:
 ~hodler-datder-sonnet
 ```
 
+Or paste this in your ship's terminal:
+```
+|install ~hodler-datder-sonnet %hodl
+```
+
 Or you can manually install using the Development instructions below.
 
 ## Usage
