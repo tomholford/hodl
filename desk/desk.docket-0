@@ -5,6 +5,6 @@
     image+'https://user-images.githubusercontent.com/16504501/194947852-8802fd63-5954-4ce8-b147-2072bd929242.png'
     info+'A portfolio for all that you hodl'
     license+'MIT'
-    version+[2 0 0]
+    version+[2 0 1]
     website+'https://github.com/tomholford/hodl'
 ==
