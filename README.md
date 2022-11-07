@@ -4,8 +4,6 @@ A simple cryto portfolio app for Urbit.
 
 Enter your transactions in the UI. The data is stored on your ship. [CoinGecko API](https://www.coingecko.com/en/api) is used to pull price data and calculate your net worth.
 
-[video]
-
 ## Installation
 
 On your Urbit's home screen, search for:
@@ -105,4 +103,8 @@ cp -r ./desk/* ~/dev/urbit/ships/nus/hodl
 
 ## Questions or Feedback
 
-DM me on the network at `~datder-sonnet`, or join the app channel [TODO: link]
+DM me on the network at `~datder-sonnet`, or join the app group:
+
+```
+~hodler-datder-sonnet/hodl
+```
