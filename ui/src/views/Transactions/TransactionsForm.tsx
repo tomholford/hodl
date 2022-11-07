@@ -176,10 +176,12 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
                     defaultValue={defaultCoinOption ?? editingCoinOption}
                     defaultOptions={defaultOptions}
                     loadOptions={debouncedLoadOptions}
+                    className={'react-select-container'}
+                    classNamePrefix="react-select"
                     formatOptionLabel={(coin) => (
                       <div className="coin-option">
                         {/* @ts-expect-error Coin option has a thumb */}
-                        <img src={coin.thumb} alt="coin thumbnail" />
+                        <img src={coin.thumb} alt={`${coin.label} thumbnail`} />
                         <span>{coin.label}</span>
                       </div>
                     )}
