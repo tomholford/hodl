@@ -4,6 +4,10 @@ A simple cryto portfolio app for Urbit.
 
 Enter your transactions in the UI. The data is stored on your ship. [CoinGecko API](https://www.coingecko.com/en/api) is used to pull price data and calculate your net worth.
 
+## Demo
+
+https://user-images.githubusercontent.com/16504501/200311268-8d8e3208-919f-4d09-ab20-cf2abd362cf1.mp4
+
 ## Installation
 
 On your Urbit's home screen, search for:
