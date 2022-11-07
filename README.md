@@ -6,7 +6,7 @@ Enter your transactions in the UI. The data is stored on your ship. [CoinGecko A
 
 ## Demo
 
-https://user-images.githubusercontent.com/16504501/200311268-8d8e3208-919f-4d09-ab20-cf2abd362cf1.mp4
+https://user-images.githubusercontent.com/16504501/200311743-ef330af9-12b3-4a3f-ac9c-1faf36e62c17.mp4
 
 ## Installation
 
