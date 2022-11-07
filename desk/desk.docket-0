@@ -1,10 +1,10 @@
 :~  title+'hodl'
-    info+'A simple cryptocurrency portfolio app for all that you hodl.'
-    color+0x60.94d2
-    image+'https://user-images.githubusercontent.com/16504501/194947852-8802fd63-5954-4ce8-b147-2072bd929242.png'
     base+'hodl'
-    glob-ames+[~dev 0v0]
-    version+[0 0 2]
-    website+'https://github.com/tomholford/hodl'
+    color+0xb8.a3d1
+    glob-http+['https://globs.urbit.place/glob-0v1.c329p.00q5d.cbktr.f0vk6.dp9lq.glob' 0v1.c329p.00q5d.cbktr.f0vk6.dp9lq]
+    image+'https://user-images.githubusercontent.com/16504501/194947852-8802fd63-5954-4ce8-b147-2072bd929242.png'
+    info+'A portfolio for all that you hodl'
     license+'MIT'
+    version+[2 0 0]
+    website+'https://github.com/tomholford/hodl'
 ==

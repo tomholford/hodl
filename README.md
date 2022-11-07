@@ -33,9 +33,73 @@ It is also possible to programmatically add Transactions using pokes, see `notes
 5. Open http://localhost:3000/apps/hodl/ in your browser
 6. Changes in `ui/` will automatically reload the frontend; after making backend changes run `bin/sync`
 
+## Deployment
+
+### Make a new glob
+
+1. Boot a new fake ship; in this example, using `~bus`
+2. Merge and mount a desk:
+```
+|merge %work our %base
+|mount %work
+```
+3. Run `npm run build` in `ui/` to build frontend assets
+4. Copy built `dist`: 
+```
+rsync -avL --delete ui/dist/ ~/dev/urbit/ships/bus/work/hodl
+```
+5. Switch dojo working directory:
+```
+=dir /=garden
+```
+6. Make glob:
+```
+-make-glob %work /hodl
+```
+7. Find the built glob in the mounted ship dir under `.urb/put`, e.g.
+```
+~/dev/urbit/ships/nus/.urb/put
+```
+8. scp to file server, update docket with hash and URL
+
+### Publish
+
+1. Boot a new fake ship; in this example, using `~nus`
+2. Fork an existing desk:
+```
+|merge %hodl our %webterm
+|mount %hodl
+```
+3. Remove existing files:
+```
+rm -Rv ~/dev/urbit/ships/nus/hodl/*
+```
+4. Within Urbit git repo:
+```
+./symbolic-merge.sh base-dev hodl
+./symbolic-merge.sh garden-dev hodl
+```
+5. Copy linked dev files to mount:
+```
+cp -rL hodl/* ~/dev/urbit/ships/nus/hodl/
+```
+6. Copy desk contents to mount:
+```
+cp -r ./desk/* ~/dev/urbit/ships/nus/hodl
+```
+7. Commit and install:
+```
+|commit %hodl
+|install our %hodl
+```
+8. Publish:
+```
+:treaty|publish %hodl
+```
+
 ## Roadmap
 
-- support all 13K+ coingecko coins 
+- responsive mobile UI
 - connect a wallet to automatically import transactions
 - data visualization
 
