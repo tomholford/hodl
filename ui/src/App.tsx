@@ -18,7 +18,6 @@ import { Settings } from './views/Settings/Settings';
 import { useTransactionsState } from './state/transactions';
 import { Transactions } from './views/Transactions/Transactions';
 import ErrorAlert from './components/ErrorAlert';
-import api from './services/API';
 
 const AppContainer = ({ children }: { children: React.ReactNode }) => {
   const { isDarkMode } = useSettings();
@@ -43,12 +42,12 @@ function checkIfLoggedIn() {
   }
 }
 
-const App = () => {
+const RoutedApp = () => {
   const handleError = useErrorHandler();
 
   useEffect(() => {
     checkIfLoggedIn();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const subscribeTransactions = useCallback(async () => {
@@ -59,7 +58,7 @@ const App = () => {
     handleError(() => {
       subscribeTransactions();
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -89,4 +88,25 @@ const App = () => {
   );
 }
 
-export default App;
+const SSLApp = () => {
+  const handleClick = useCallback(() => {
+    window.location.href = window.location.href.replace(
+      /^http(?!s)/,
+      'https'
+    );
+  }, []);
+
+  return document.location.protocol === 'http:' ?
+    <div className="app-inner">
+      <div className="http-container">
+        <h3>⚠️ Heads Up</h3>
+        <p>hodl requires a secure connection (https)</p>
+        <button onClick={handleClick}>upgrade connection</button>
+        <p><small>(if this doesn't work, contact your hosting provider)</small></p>
+      </div>
+    </div>
+    :
+    <RoutedApp />
+}
+
+export default SSLApp;
