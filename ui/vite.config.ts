@@ -8,7 +8,6 @@ import svgr from "vite-plugin-svgr";
 import { fileURLToPath } from 'url';
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
-import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
 
 // https://vitejs.dev/config/
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -35,7 +34,6 @@ export default ({ mode }: { mode: string }) => {
       sourcemap: false,
     },
     plugins: [
-      // rollupNodePolyFill(),
       NodeModulesPolyfillPlugin(),
       NodeGlobalsPolyfillPlugin({
         process: true,
