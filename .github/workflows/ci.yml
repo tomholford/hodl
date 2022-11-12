@@ -1,5 +1,9 @@
 name: CI
 
+defaults:
+  run:
+    working-directory: ui
+
 on:
   push:
     branches: [ "master" ]
