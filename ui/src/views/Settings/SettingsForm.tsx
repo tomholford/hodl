@@ -20,7 +20,7 @@ export default function SettingsForm() {
   const vsCurrencyQuery = useSupportedVsCurrencies();
 
   const currencyOptions = useMemo(() => {
-    if(!(vsCurrencyQuery.isSuccess && vsCurrencyQuery.data)) { return Object.keys(CURRENCY_SYMBOLS) };
+    if(!(vsCurrencyQuery.isSuccess && vsCurrencyQuery.data)) { return Object.keys(CURRENCY_SYMBOLS).sort() };
 
     const output = vsCurrencyQuery.data;
     output.sort();
@@ -30,18 +30,26 @@ export default function SettingsForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <label>vsCurrency</label>
-      <select defaultValue={vsCurrency || undefined} {...register("vsCurrency")}>
-        {
-          currencyOptions.map(c => {
-            return (
-              <option value={c} key={c}>{c}</option>
-            )
-          })
-        }
-      {errors.vsCurrency ? <p>Currency error</p> : null}
-      </select>
-      <input type="submit" />
+      <section>
+        <h3>
+          Base Currency
+        </h3>
+        <p>This currency is used in dashboard calculations.</p>
+        <p>For each asset, the corresponding base currency exchange rate from Coingecko is used to determine profit / loss and total portfolio value.</p>
+        <select style={{ marginTop: '10px', marginBottom: '10px' }} disabled={vsCurrencyQuery.isLoading} defaultValue={vsCurrency || undefined} {...register("vsCurrency")}>
+          {
+            currencyOptions.map(c => {
+              return (
+                <option value={c} key={c}>{c.toLocaleUpperCase()}</option>
+              )
+            })
+          }
+        {errors.vsCurrency ? <p>Currency error</p> : null}
+        </select>
+      </section>
+      <section>
+        <input type="submit" />
+      </section>
     </form>
   );
 }
