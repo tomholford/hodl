@@ -1,0 +1,13 @@
+# this is a log for future reference of the steps required to initially set up the hodl desk
+
+git clone https://github.com/tomholford/hodl.git
+cd git/urbit
+cd pkg
+./symbolic-merge.sh base-dev hodl
+./symbolic-merge.sh garden-dev hodl
+cp -rL hodl/* ~/urbit/hodler/hodl/
+sudo cp -rL hodl/* ~/urbit/hodler/hodl/
+cd
+cd git
+cd hodl
+sudo cp -r ./desk/* ~/urbit/hodler/hodl/
