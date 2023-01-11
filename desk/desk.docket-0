@@ -1,10 +1,10 @@
 :~  title+'hodl'
     base+'hodl'
     color+0xb8.a3d1
-    glob-http+['https://globs.urbit.place/glob-0v1.ptu2f.9b3v3.rtlql.781db.95f1v.glob' 0v1.ptu2f.9b3v3.rtlql.781db.95f1v]
+    glob-http+['https://globs.urbit.place/glob-0v7.u6i0a.uo2bg.qmdul.ppodi.dgk81.glob' 0v7.u6i0a.uo2bg.qmdul.ppodi.dgk81]
     image+'https://user-images.githubusercontent.com/16504501/194947852-8802fd63-5954-4ce8-b147-2072bd929242.png'
     info+'A portfolio for all that you hodl'
     license+'MIT'
-    version+[2 0 1]
+    version+[2 0 2]
     website+'https://github.com/tomholford/hodl'
 ==
