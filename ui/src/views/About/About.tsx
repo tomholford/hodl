@@ -1,8 +1,10 @@
 import React from 'react';
 import { ExternalLink } from "../Shared/ExternalLink"
 import './About.scss';
+
 import mauveWingUrl from '@/images/mauve-wing.png';
 import stellerfallUrl from '@/images/stellarfall.png';
+import { versionLabel } from '../../flags';
 
 export const About = () => {
   return (
@@ -36,6 +38,8 @@ export const About = () => {
         <li>~tocrex-holpen and ~mallus-fabres for artistic aesthetic</li>
         <li>~sarpen-laplux, ~hastuc-dibtux, and ~nocsyx-lassul for hoon expertise</li>
       </ul>
+      <h2>Version</h2>
+      <p><code>{versionLabel}</code></p>
     </div>
   )
 }
