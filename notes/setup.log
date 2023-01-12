@@ -14,3 +14,13 @@ sudo cp -rv ./desk/* ~/urbit/hodler/hodl/
 
 # on ship
 |commit %hodl
+
+
+# to update base dev / garden dev mime types
+# on hodler
+cd git/urbit
+sudo rsync -avL --delete ./pkg/base-dev/* ~/urbit/hodler/hodl
+sudo rsync -avL ./pkg/garden-dev/* ~/urbit/hodler/hodl
+cd
+cd git/hodl/
+sudo rsync -avL ./desk/* ~/urbit/hodler/hod

@@ -1,7 +1,7 @@
 :~  title+'hodl'
     base+'hodl'
     color+0xb8.a3d1
-    glob-http+['https://globs.urbit.place/glob-0v7.u6i0a.uo2bg.qmdul.ppodi.dgk81.glob' 0v7.u6i0a.uo2bg.qmdul.ppodi.dgk81]
+    glob-http+['https://globs.urbit.place/glob-0vbk55s.8i1g8.amv47.kga6k.9gcr7.glob' 0vbk55s.8i1g8.amv47.kga6k.9gcr7]
     image+'https://user-images.githubusercontent.com/16504501/194947852-8802fd63-5954-4ce8-b147-2072bd929242.png'
     info+'A portfolio for all that you hodl'
     license+'MIT'
