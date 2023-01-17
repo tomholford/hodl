@@ -23,4 +23,4 @@ sudo rsync -avL --delete ./pkg/base-dev/* ~/urbit/hodler/hodl
 sudo rsync -avL ./pkg/garden-dev/* ~/urbit/hodler/hodl
 cd
 cd git/hodl/
-sudo rsync -avL ./desk/* ~/urbit/hodler/hod
+sudo rsync -avL ./desk/* ~/urbit/hodler/hodl

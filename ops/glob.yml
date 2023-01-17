@@ -1,0 +1,19 @@
+env:
+  desk: 'hodl'
+  build_desk: 'work'
+  urbit_path: '~/dev/urbit/urbit'
+  repo_path: '~/dev/hodl'
+  ship_path: '~/dev/urbit/ships'
+script:
+  - build:
+    - cmd: '~/dev/hodl/ops/build.sh'
+      type: 'system'
+  - commit:
+    - cmd: 'commit %work'
+      type: 'urbit:app'
+  - glob:
+    - cmd: '-garden!make-glob %work /hodl'
+      type: 'urbit:dojo'
+  - upload:
+    - cmd: '~/dev/hodl/ops/scp.sh'
+      type: 'system'

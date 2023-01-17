@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# Prerequisite:
+# in ships dir - create ship:
+#
+# rm -rf ~/dev/urbit/ships/bus
+# ~/urbit/urbit -F bus -B ~/dev/urbit/urbit/bin/multi-brass.pill
+
+# and on ship:
+#
+# |merge %work our %base
+# |mount %work
+
+ruby ~/dev/urbit/bouncer/bouncer.rb -c ~/dev/hodl/ops/glob.yml -s bus
