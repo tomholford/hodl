@@ -3,6 +3,7 @@ env:
   urbit_path: '~/dev/urbit/urbit'
   repo_path: '~/dev/hodl'
   ship_path: '~/dev/urbit/ships'
+  landscape_path: '~/dev/urbit/landscape'
 script:
   - merge:
     - cmd: 'merge %garden our %base'
