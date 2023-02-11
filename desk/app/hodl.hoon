@@ -6,18 +6,26 @@
 ::  mainly for orchestration. But, first focus on getting a working TX CRUD
 ::  agent before optimizing. So, one day :)
 ::
-/+  *transaction
-/+  default-agent, dbug, agentio
+/+  *account, *transaction, *wallet
+/+  default-agent, dbug, agentio, verb
 |%
++$  card  card:agent:gall
 +$  versioned-state
   $%  state-0
+      state-1
   ==
-+$  state-0  [%0 txns=transactions]
-+$  card  card:agent:gall
+::
+::  acts: map of account-id --> account
+::  txns: map of transaction-id --> transaction
+::  wlts: map of wallet-id --> wallets
++$  state-0  [%0 txns=transactions:zero:past]
++$  state-1  [%1 acts=accounts txns=transactions wlts=wallets]
 --
-%-  agent:dbug
-=|  state-0
+=|  state-1
 =*  state  -
+::
+%-  agent:dbug
+%+  verb  &  :: TODO: disable before production
 ^-  agent:gall
 |_  =bowl:gall
 +*  this  .
@@ -31,10 +39,44 @@
   !>(state)
 ::
 ++  on-load
-  |=  old-vase=vase
+  |=  old-state=vase
   ^-  (quip card _this)
-  `this(state !<(versioned-state old-vase))
+  =/  old  !<(versioned-state old-state)
+  ?-  -.old
+      %1
+    `this(state old)
+      %0
+    `this(state-0-to-1 old)
+  ==
+  ++  state-0-to-1
+    |=  zer=state-0
+    ^-  state-1
+    :*  %1
+        acts  *accounts
+        txns  (transactions-0-to-1 txns.zer)
+        wlts  *wallets
+    ==
+  ++  transactions-0-to-1
+    |=  txns=transactions:zero:past
+    ^-  transactions
+    %-  ~(run by txns)
+    |=  [id=@t txn=transaction:zero:past]
+    ^-  [id=@t txn=transaction]
+    [id (transaction-0-to-1 txn)]
+  ++  transaction-0-to-1
+    |=  txn=transaction:zero:past
+    ^-  ^transaction :: TODO: which transaction to point to? should use the ket to traverse up the tree?
+    :*  id.txn
+        coin-id.txn
+        date.txn
+        note.txn
+        amount.txn
+        cost-basis.txn
+        type.txn
+        ~
+    ==
 ::
+::  TODO: add pokes for accounts and wallets
 ++  on-poke
   |=  [=mark =vase]
   ^-  (quip card _this)
@@ -60,6 +102,7 @@
             amount=amount.act
             cost-basis=cost-basis.act
             type=type.act
+            account-id=account-id.act
         ==
       state(txns (~(put by txns) id.act txn))
     ::
@@ -73,6 +116,7 @@
             amount=amount.act
             cost-basis=cost-basis.act
             type=type.act
+            account-id=account-id.act
         ==
       state(txns (~(put by txns) id.act txn)) ::  TODO: should all fields be editable? probably not id
     ::
@@ -90,40 +134,19 @@
     [%updates ~]  `this
   ==
 ::
-:: ++  on-peek  on-peek:def
+::  TODO: add scries for accounts and wallets
 ++  on-peek
   |=  =path
   ^-  (unit (unit cage))
   ?>  (team:title our.bowl src.bowl)
-  =/  now=@  (unm:chrono:userlib now.bowl)
   ?+    path  (on-peek:def path)
       [%x %transactions *]
-    :: ~&  t.path
-    :: (on-peek:def path)
     ?+    t.t.path  (on-peek:def path)
         [%all ~]
       :^  ~  ~  %hodl-update
       !>  ^-  update
       [%txns txns]
-      :: [%txns (tap:t-orm txns)]
-      :: [now %txns (tap:t-orm txns)]
     ==
-      ::   [%before @ @ ~]
-      :: =/  before=@  (rash i.t.t.t.path dem)
-      :: =/  max=@  (rash i.t.t.t.t.path dem)
-      :: :^  ~  ~  %hodl-update
-      :: !>  ^-  update
-      :: [now %txns (tab:t-orm txns `before max)]
-    ::
-      ::   [%between @ @ ~]
-      :: =/  start=@
-      ::   =+  (rash i.t.t.t.path dem)
-      ::   ?:(=(0 -) - (sub - 1))
-      :: =/  end=@  (add 1 (rash i.t.t.t.t.path dem))
-      :: :^  ~  ~  %hodl-update
-      :: !>  ^-  update
-      :: [now %txns (tap:t-orm (lot:t-orm txns `end `start))]
-    :: ==
   ==
 ::
 ++  on-leave  on-leave:def

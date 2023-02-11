@@ -20,6 +20,7 @@
         amount+so
         cost-basis+so
         type+so
+        account-id+so
     ==
   ++  edit
     ^-  $-(json edit:^action) 
@@ -31,6 +32,7 @@
         amount+so
         cost-basis+so
         type+so
+        account-id+so
     ==
   ++  del
     ^-  $-(json del:^action) 
@@ -75,6 +77,7 @@
         amount/s+amount
         cost-basis/s+cost-basis
         type/s+type
+        account-id/s+account-id
     ==
   --
 --

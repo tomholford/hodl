@@ -1,10 +1,5 @@
-::  /sur/transaction.hoon
-/-  zer=transaction-0
+::  /sur/transaction-0.hoon
 |%
-++  past
-  |%
-  ++  zero  zer
-  --
 ::  Transaction ID - uuid string used for edit, del, query (not an ETH 0x...)
 +$  id  @t
 ::  CoinGecko Coin ID - external ID that maps to a CG entity (e.g. BTC is 'bitcoin').
@@ -26,8 +21,6 @@
 +$  cost-basis  @t
 ::  %buy, %sell
 +$  type  @ta
-::  Account ID - foreign key to parent account
-+$  account-id  @t
 +$  txn
   $:  =id
       =coin-id
@@ -36,7 +29,6 @@
       =amount
       =cost-basis
       =type
-      =account-id
   ==
 ++  action
   =<  action
@@ -46,8 +38,8 @@
         [%edit edit]
         [%del del]
     ==
-  +$  add   [=id =coin-id =date =note =amount =cost-basis =type =account-id]
-  +$  edit  [=id =coin-id =date =note =amount =cost-basis =type =account-id]
+  +$  add   [=id =coin-id =date =note =amount =cost-basis =type]
+  +$  edit  [=id =coin-id =date =note =amount =cost-basis =type]
   +$  del   [=id]
   --
 +$  update
