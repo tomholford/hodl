@@ -7,28 +7,22 @@
 ::  Note - optional description of the wallet
 +$  note  @t
 ::  TODO: tags, types
-+$  wallet
-  $:  id=id
-      name=name
-      note=note
+::  Wallet struct, named uniquely
++$  wllt
+  $:  =id
+      =name
+      =note
+  ==
+::
++$  action
+  $%  [%add =wllt]
+      [%edit =wllt]
+      [%del =id]
+  ==
+::
++$  update
+  $%  [%wllts wllts=wallets]
   ==
 ::  Wallets - map of wallet ids to wallets
-+$  wallets  (map id wallet)
-++  action
-  =<  action
-  |%
-  +$  action
-    $%  [%add add]
-        [%del del]
-        [%edit edit]
-    ==
-  +$  add [=id =name =note]
-  +$  del [=id]
-  +$  edit [=id =name =note]
-  --
-+$  update
-  $%  [%add =wallet]
-      [%del =id]
-      [%edit =wallet]
-  ==
++$  wallets  (map id wllt)
 --

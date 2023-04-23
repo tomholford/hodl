@@ -28,6 +28,7 @@
 +$  type  @ta
 ::  Account ID - foreign key to parent account
 +$  account-id  @t
+:: Transaction struct, named uniquely
 +$  txn
   $:  =id
       =coin-id
@@ -38,24 +39,15 @@
       =type
       =account-id
   ==
-++  action
-  =<  action
-  |%
-  +$  action
-    $%  [%add add]
-        [%edit edit]
-        [%del del]
-    ==
-  +$  add   [=id =coin-id =date =note =amount =cost-basis =type =account-id]
-  +$  edit  [=id =coin-id =date =note =amount =cost-basis =type =account-id]
-  +$  del   [=id]
-  --
-+$  update
-  $%  action
-      [%txns txns=transactions]
-      [%add =txn]
+::  Transactions are stored in a map keyed by ID
++$  transactions  (map id txn)
++$  action
+  $%  [%add =txn]
       [%edit =txn]
       [%del =id]
   ==
-+$  transactions  (map id txn)
+::
++$  update
+  $%  [%txns txns=transactions]
+  ==
 --

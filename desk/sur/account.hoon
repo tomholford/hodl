@@ -9,29 +9,22 @@
 ::  Note - optional description of the account
 +$  note  @t
 ::  TODO: tags, types
-+$  account
-  $:  id=id
-      wallet-id=wallet-id
-      name=name
-      note=note
+::  Account struct, named uniquely
++$  acct
+  $:  =id
+      =wallet-id
+      =name
+      =note
   ==
 ::  Accounts - map of account-id to account
-+$  accounts  (map id account)
-++  action
-  =<
-  |%
-  +$  action
-    $%  [%add add]
-        [%del del]
-        [%edit edit]
-    ==
-  +$  add [=id =wallet-id =name =note]
-  +$  del [=id]
-  +$  edit [=id =wallet-id =name =note]
-  --
-+$  update
-  $%  [%add =account]
++$  accounts  (map id acct)
++$  action
+  $%  [%add =id =wallet-id =name =note]
+      [%edit =id =wallet-id =name =note]
       [%del =id]
-      [%edit =account]
+  ==
+::
++$  update
+  $%  [%accts =accounts]
   ==
 --
