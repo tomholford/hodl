@@ -1,10 +1,40 @@
-::  /sur/transaction.hoon
-/-  zer=transaction-0
-|%
-++  past
-  |%
-  ++  zero  zer
-  --
+# Data Model
+
+## Wallets
+
+A wallet is a collection of accounts.
+
+```hoon
+::  Wallet ID - uuid string used for edit, del, query (not an ETH 0x...)
++$  id  @t
+::  Wallet Name
++$  name  @t
+::  Note - optional description of the wallet
++$  note  @t
+::  TODO: tags, types
+```
+
+## Accounts
+
+An account is a collection of transactions.
+
+```hoon
+::  Account ID - uuid string used for edit, del, query (not an ETH 0x...)
++$  id  @t
+::  Wallet ID - foreign key to parent wallet
++$  wallet-id  @t
+::  Account Name
++$  name  @t
+::  Note - optional description of the account
++$  note  @t
+::  TODO: tags, types
+```
+
+## Transactions
+
+A transaction is a credit or debit to an account.
+
+```hoon
 ::  Transaction ID - uuid string used for edit, del, query (not an ETH 0x...)
 +$  id  @t
 ::  CoinGecko Coin ID - external ID that maps to a CG entity (e.g. BTC is 'bitcoin').
@@ -26,28 +56,5 @@
 +$  cost-basis  @t
 ::  %buy, %sell
 +$  type  @ta
-::  Account ID - foreign key to parent account
-+$  account-id  @t
-:: Transaction struct, named uniquely
-+$  txn
-  $:  =id
-      =coin-id
-      =date
-      =note
-      =amount
-      =cost-basis
-      =type
-      =account-id
-  ==
-::  Transactions are stored in a map keyed by ID
-+$  transactions  (map id txn)
-+$  action
-  $%  [%add =txn]
-      [%edit =txn]
-      [%del =id]
-  ==
-::
-+$  update
-  $%  [%txns txns=transactions]
-  ==
---
+::  TODO: tags
+```

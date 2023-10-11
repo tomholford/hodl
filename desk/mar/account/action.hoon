@@ -1,4 +1,5 @@
-/+  *transaction
+/-  *account
+/+  *account
 |_  act=action
 ++  grow
   |%
@@ -7,7 +8,7 @@
 ++  grab
   |%
   ++  noun  action
-  ++  json  action:dejs
+  ++  json  dejs-action
   --
 ++  grad  %noun
 --

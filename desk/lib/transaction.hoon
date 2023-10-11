@@ -11,7 +11,6 @@
         [%del del]
     ==
   ++  add
-    ^-  $-(json add:^action) 
     %-  ot
     :~  id+so
         coin-id+so
@@ -20,9 +19,9 @@
         amount+so
         cost-basis+so
         type+so
+        account-id+so
     ==
   ++  edit
-    ^-  $-(json edit:^action) 
     %-  ot
     :~  id+so
         coin-id+so
@@ -31,9 +30,10 @@
         amount+so
         cost-basis+so
         type+so
+        account-id+so
     ==
   ++  del
-    ^-  $-(json del:^action) 
+    ^-  json
     %-  ot
     :~  id+so
     ==
@@ -44,37 +44,32 @@
   ++  update
     |=  upd=^update
     ^-  json
+    %+  frond  -.upd
     ?-    -.upd
-        %txns
-      %-  pairs
-      %+  turn  ~(tap by txns.upd)
-      |=  [=id =txn]
-      ^-  (pair @t json)
-      [id (txjs txn)]
-        %add
-      %-  pairs
-      :~  add/(txjs +.upd)
+          %txns  (txns txns.upd)
       ==
-        %edit
-      %-  pairs
-      :~  edit/(txjs +.upd)
-      ==
-        %del
-      %-  pairs
-      :~  del/s+id.upd
-      ==
-    ==
-  ++  txjs
-    |=  txn
+  ::
+  ++  txns
+    |=  txns=transactions
     ^-  json
     %-  pairs
-    :~  id/s+id
-        coin-id/s+coin-id
-        date/(time date)
-        note/s+note
-        amount/s+amount
-        cost-basis/s+cost-basis
-        type/s+type
+    %+  turn  ~(tap by txns)
+    |=  t=[=id =txn]
+    ^-  (pair @t json)
+    [id.t (txjs txn.t)]
+  ::
+  ++  txjs
+    |=  t=txn
+    ^-  json
+    %-  pairs
+    :~  id/s+id.t
+        coin-id/s+coin-id.t
+        date/(time date.t)
+        note/s+note.t
+        amount/s+amount.t
+        cost-basis/s+cost-basis.t
+        type/s+type.t
+        account-id/s+account-id.t
     ==
   --
 --
