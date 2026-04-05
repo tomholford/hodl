@@ -33,7 +33,6 @@
         account-id+so
     ==
   ++  del
-    ^-  json
     %-  ot
     :~  id+so
     ==

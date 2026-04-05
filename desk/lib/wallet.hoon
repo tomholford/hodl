@@ -11,21 +11,18 @@
         del+del
     ==
   ++  add
-    ^-  json
     %-  ot
     :~  id+so
         name+so
         note+so
     ==
   ++  edit
-    ^-  json
     %-  ot
     :~  id+so
         name+so
         note+so
     ==
   ++  del
-    ^-  json
     %-  ot
     :~  id+so
     ==
@@ -37,7 +34,7 @@
     |=  upd=^update
     ^-  json
     ?-    -.upd
-        %wllts  (wllts upd)
+        %wllts  (wllts +.upd)
     ==
   ++  wllts
     |=  wllts=(map id wllt)

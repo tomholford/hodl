@@ -27,7 +27,7 @@
     ^-  (pair @t json)
     [id.act (acjs acct.act)]
   ++  acjs
-    |=  [id=@tas wallet-id=@tas name=@tas note=@tas]
+    |=  [id=@t wallet-id=@t name=@t note=@t]
     ^-  json
     %-  pairs
     :~  id/s+id
