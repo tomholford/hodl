@@ -10,15 +10,14 @@
 /+  default-agent, dbug, verb
 |%
 +$  card  card:agent:gall
+::  old transaction type (state-0): no account-id field
++$  txn-0  [@t @t @da @t @t @t @ta]
++$  txns-0  (map @t txn-0)
 +$  versioned-state
   $%  state-0
       state-1
   ==
-::
-::  acts: map of account-id --> account
-::  txns: map of transaction-id --> transaction
-::  wlts: map of wallet-id --> wallets
-+$  state-0  [%0 txns=transactions:zero:past:t]
++$  state-0  [%0 txns=txns-0]
 +$  state-1  [%1 acts=accounts:a txns=transactions:t wlts=wallets:w]
 --
 =|  state-1
@@ -52,30 +51,15 @@
   ++  state-0-to-1
     |=  zer=state-0
     ^-  state-1
-    :*  %1
-        acts  *accounts:a
-        txns  (transactions-0-to-1 txns.zer)
-        wlts  *wallets:w
-    ==
+    [%1 *accounts:a (transactions-0-to-1 txns.zer) *wallets:w]
   ++  transactions-0-to-1
-    |=  txns=transactions:zero:past:t
+    |=  txns=txns-0
     ^-  transactions:t
     %-  ~(run by txns)
-    |=  [id=@t txn=transaction:zero:past:t]
-    ^-  [id=@t txn=transaction:t]
-    [id (transaction-0-to-1 txn)]
-  ++  transaction-0-to-1
-    |=  txn=transaction:zero:past:t
-    ^-  transaction:t
-    :*  id.txn
-        coin-id.txn
-        date.txn
-        note.txn
-        amount.txn
-        cost-basis.txn
-        type.txn
-        ~
-    ==
+    |=  old=txn-0
+    ^-  txn:t
+    =+  [id cid dat not amt cb typ]=old
+    [id cid dat not amt cb typ '']
   --
 ::
 ++  on-poke
@@ -125,7 +109,7 @@
 |_  =bowl:gall
 ++  poke-account-action
   |=  act=action:a
-  ^-  _state
+  ^-  (quip card _state)
   ?-    -.act
       %add
     ?<  (~(has by acts) id.act)
@@ -135,7 +119,7 @@
           name=name.act
           note=note.act
       ==
-    state(acts (~(put by acts) id.act acct))
+    `state(acts (~(put by acts) id.act acct))
   ::
       %edit
     ?>  (~(has by acts) id.act)
@@ -145,74 +129,48 @@
           name=name.act
           note=note.act
       ==
-    state(acts (~(put by acts) id.act acct))
+    `state(acts (~(put by acts) id.act acct))
   ::
       %del
     ?>  (~(has by acts) id.act)
-    state(acts (~(del by acts) id.act))
+    `state(acts (~(del by acts) id.act))
   ==
 ::
 ++  poke-transaction-action
   |=  act=action:t
-  ^-  _state
+  ^-  (quip card _state)
   ?-    -.act
       %add
-    ?<  (~(has by txns) id.act)
-    =/  =txn:t
-      :*  id=id.act
-          coin-id=coin-id.act
-          date=date.act
-          note=note.act
-          amount=amount.act
-          cost-basis=cost-basis.act
-          type=type.act
-          account-id=account-id.act
-      ==
-    state(txns (~(put by txns) id.act txn))
+    =/  =txn:t  txn.act
+    ?<  (~(has by txns) id.txn)
+    `state(txns (~(put by txns) id.txn txn))
   ::
       %edit
-    ?>  (~(has by txns) id.act)
-    =/  =txn:t
-      :*  id=id.act   ::  TODO: should all fields be editable? probably not id
-          coin-id=coin-id.act
-          date=date.act
-          note=note.act
-          amount=amount.act
-          cost-basis=cost-basis.act
-          type=type.act
-          account-id=account-id.act
-      ==
-    state(txns (~(put by txns) id.act txn))
+    =/  =txn:t  txn.act
+    ?>  (~(has by txns) id.txn)
+    `state(txns (~(put by txns) id.txn txn))
   ::
       %del
     ?>  (~(has by txns) id.act)
-    state(txns (~(del by txns) id.act))
+    `state(txns (~(del by txns) id.act))
   ==
 ::
 ++  poke-wallet-action
   |=  act=action:w
-  ^-  _state
+  ^-  (quip card _state)
   ?-    -.act
       %add
-    ?<  (~(has by wlts) id.act)
-    =/  =wllt:w
-      :*  id=id.act
-          name=name.act
-          note=note.act
-      ==
-    state(wlts (~(put by wlts) id.act wllt))
+    =/  =wllt:w  wllt.act
+    ?<  (~(has by wlts) id.wllt)
+    `state(wlts (~(put by wlts) id.wllt wllt))
   ::
       %edit
-    ?>  (~(has by wlts) id.act)
-    =/  =wllt:w
-      :*  id=id.act  ::  TODO: should all fields be editable? probably not id
-          name=name.act
-          note=note.act
-      ==
-    state(wlts (~(put by wlts) id.act wllt))
+    =/  =wllt:w  wllt.act
+    ?>  (~(has by wlts) id.wllt)
+    `state(wlts (~(put by wlts) id.wllt wllt))
   ::
       %del
     ?>  (~(has by wlts) id.act)
-    state(wlts (~(del by wlts) id.act))
+    `state(wlts (~(del by wlts) id.act))
   ==
 --
