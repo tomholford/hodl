@@ -26,5 +26,8 @@
 ::
 +$  update
   $%  [%accts =accounts]
+      [%add =acct]
+      [%edit =acct]
+      [%del =id]
   ==
 --

@@ -33,8 +33,12 @@
   ++  update
     |=  upd=^update
     ^-  json
+    %+  frond  -.upd
     ?-    -.upd
         %wllts  (wllts +.upd)
+        %add    (wljs wllt.upd)
+        %edit   (wljs wllt.upd)
+        %del    s+id.upd
     ==
   ++  wllts
     |=  wllts=(map id wllt)

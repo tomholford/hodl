@@ -16,8 +16,11 @@
   ^-  json
   |^
   ?-    -.upd
-        %accts  (acts +.upd)
-    ==
+      %accts  (acts +.upd)
+      %add    (acjs +.upd)
+      %edit   (acjs +.upd)
+      %del    s+id.upd
+  ==
   ++  acts
     |=  ud=[=accounts]
     ^-  json

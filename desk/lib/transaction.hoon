@@ -45,8 +45,11 @@
     ^-  json
     %+  frond  -.upd
     ?-    -.upd
-          %txns  (txns txns.upd)
-      ==
+        %txns  (txns txns.upd)
+        %add   (txjs txn.upd)
+        %edit  (txjs txn.upd)
+        %del   s+id.upd
+    ==
   ::
   ++  txns
     |=  txns=transactions

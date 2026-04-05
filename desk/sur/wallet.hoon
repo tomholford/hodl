@@ -22,6 +22,9 @@
 ::
 +$  update
   $%  [%wllts wllts=wallets]
+      [%add =wllt]
+      [%edit =wllt]
+      [%del =id]
   ==
 ::  Wallets - map of wallet ids to wallets
 +$  wallets  (map id wllt)

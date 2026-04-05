@@ -49,5 +49,8 @@
 ::
 +$  update
   $%  [%txns txns=transactions]
+      [%add =txn]
+      [%edit =txn]
+      [%del =id]
   ==
 --

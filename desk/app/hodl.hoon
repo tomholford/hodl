@@ -119,21 +119,24 @@
           name=name.act
           note=note.act
       ==
-    `state(acts (~(put by acts) id.act acct))
+    :_  state(acts (~(put by acts) id.act acct))
+    ~[[%give %fact ~[/updates] %account-update !>(`update:a`[%add acct])]]
   ::
       %edit
     ?>  (~(has by acts) id.act)
     =/  =acct:a
-      :*  id=id.act  ::  TODO: should all fields be editable? probably not id
+      :*  id=id.act
           wallet-id=wallet-id.act
           name=name.act
           note=note.act
       ==
-    `state(acts (~(put by acts) id.act acct))
+    :_  state(acts (~(put by acts) id.act acct))
+    ~[[%give %fact ~[/updates] %account-update !>(`update:a`[%edit acct])]]
   ::
       %del
     ?>  (~(has by acts) id.act)
-    `state(acts (~(del by acts) id.act))
+    :_  state(acts (~(del by acts) id.act))
+    ~[[%give %fact ~[/updates] %account-update !>(`update:a`[%del id.act])]]
   ==
 ::
 ++  poke-transaction-action
@@ -143,16 +146,19 @@
       %add
     =/  =txn:t  txn.act
     ?<  (~(has by txns) id.txn)
-    `state(txns (~(put by txns) id.txn txn))
+    :_  state(txns (~(put by txns) id.txn txn))
+    ~[[%give %fact ~[/updates] %transaction-update !>(`update:t`[%add txn])]]
   ::
       %edit
     =/  =txn:t  txn.act
     ?>  (~(has by txns) id.txn)
-    `state(txns (~(put by txns) id.txn txn))
+    :_  state(txns (~(put by txns) id.txn txn))
+    ~[[%give %fact ~[/updates] %transaction-update !>(`update:t`[%edit txn])]]
   ::
       %del
     ?>  (~(has by txns) id.act)
-    `state(txns (~(del by txns) id.act))
+    :_  state(txns (~(del by txns) id.act))
+    ~[[%give %fact ~[/updates] %transaction-update !>(`update:t`[%del id.act])]]
   ==
 ::
 ++  poke-wallet-action
@@ -162,15 +168,18 @@
       %add
     =/  =wllt:w  wllt.act
     ?<  (~(has by wlts) id.wllt)
-    `state(wlts (~(put by wlts) id.wllt wllt))
+    :_  state(wlts (~(put by wlts) id.wllt wllt))
+    ~[[%give %fact ~[/updates] %wallet-update !>(`update:w`[%add wllt])]]
   ::
       %edit
     =/  =wllt:w  wllt.act
     ?>  (~(has by wlts) id.wllt)
-    `state(wlts (~(put by wlts) id.wllt wllt))
+    :_  state(wlts (~(put by wlts) id.wllt wllt))
+    ~[[%give %fact ~[/updates] %wallet-update !>(`update:w`[%edit wllt])]]
   ::
       %del
     ?>  (~(has by wlts) id.act)
-    `state(wlts (~(del by wlts) id.act))
+    :_  state(wlts (~(del by wlts) id.act))
+    ~[[%give %fact ~[/updates] %wallet-update !>(`update:w`[%del id.act])]]
   ==
 --
