@@ -5,44 +5,15 @@ import { Transaction } from '../types/Transaction.type';
 import api from '../services/API';
 import { groupBy } from 'lodash';
 
-interface TransactionAddDiff {
-  add: Transaction;
-}
+export type TransactionUpdate =
+  | { add: Transaction }
+  | { edit: Transaction }
+  | { del: string };
 
-interface TransactionEditDiff {
-  edit: Transaction;
-}
-
-interface TransactionDelDiff {
-  del: {
-    id: string;
-  }
-}
-
-type TransactionDiff =
-  | TransactionAddDiff
-  | TransactionEditDiff
-  | TransactionDelDiff;
-
-interface TransactionAddUpdate {
-  add: Transaction;
-} 
-interface TransactionEditUpdate {
-  edit: Transaction;
-} 
-interface TransactionDelUpdate {
-  del: string;
-}
-
-type TransactionUpdate =
-  | TransactionAddUpdate 
-  | TransactionEditUpdate 
-  | TransactionDelUpdate;
-
-function txAction(diff: TransactionDiff) {
+function txAction(diff: Record<string, unknown>) {
   return {
     app: 'hodl',
-    mark: 'hodl-action',
+    mark: 'transaction-action',
     json: diff,
   };
 }
@@ -55,7 +26,8 @@ export interface TransactionsState {
   add: (transaction: Transaction) => Promise<void>;
   edit: (transaction: Transaction) => Promise<void>;
   del: (id: string) => Promise<void>;
-  start: () => Promise<void>;
+  init: () => Promise<void>;
+  handleUpdate: (update: TransactionUpdate) => void;
 }
 
 export const useTransactionsState = create<TransactionsState>((set, get) => ({
@@ -71,62 +43,50 @@ export const useTransactionsState = create<TransactionsState>((set, get) => ({
   transactions: [],
   add: async (transaction) => {
     await api.poke(
-      txAction({
-        add: transaction
-      })
+      txAction({ add: transaction })
     );
   },
   edit: async (transaction) => {
     await api.poke(
-      txAction({
-        edit: transaction
-      })
+      txAction({ edit: transaction })
     );
   },
   del: async (id) => {
     await api.poke(
-      txAction({
-        del: { id }
-      })
+      txAction({ del: { id } })
     );
   },
-  start: async () => {
-    const transactions = await api.scry<Transaction[]>({
+  init: async () => {
+    const transactions = await api.scry<Record<string, Transaction>>({
       app: 'hodl',
-      path: '/transactions/all',
+      path: '/transactions',
     });
 
     set((s) => ({
       ...s,
-      transactions: Object.values(transactions), // TODO: scry returns list?
+      transactions: Object.values(transactions),
+      initialized: true,
     }));
-
-    await api.subscribe({
-      app: 'hodl',
-      path: '/updates',
-      event: (update: TransactionUpdate) => {
-        if('add' in update) {
-          get().batchSet((draft) => {
-            draft.transactions = [...draft.transactions, update.add]
-          })
-        }
-        if('edit' in update) {
-          get().batchSet((draft) => {
-            draft.transactions = [...draft.transactions.slice().filter(t => t.id !== update.edit.id), update.edit]
-          })
-        }
-        if('del' in update) {
-          get().batchSet((draft) => {
-            draft.transactions = draft.transactions.slice().filter(t => t.id !== update.del)
-          })
-        }
-      },
-    });
-
-    set((s) => ({
-      ...s,
-      initialized: true
-    }));
+  },
+  handleUpdate: (update: TransactionUpdate) => {
+    if ('add' in update) {
+      get().batchSet((draft) => {
+        draft.transactions = [...draft.transactions, update.add];
+      });
+    }
+    if ('edit' in update) {
+      get().batchSet((draft) => {
+        draft.transactions = [
+          ...draft.transactions.filter((t) => t.id !== update.edit.id),
+          update.edit,
+        ];
+      });
+    }
+    if ('del' in update) {
+      get().batchSet((draft) => {
+        draft.transactions = draft.transactions.filter((t) => t.id !== update.del);
+      });
+    }
   },
 }));
 

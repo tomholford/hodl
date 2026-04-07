@@ -1,9 +1,10 @@
-// A Wallet can be used to automatically import Accounts; they are optional to import / create
-
-interface Wallet {
-  uuid?: string;
-  mnemonic?: string;
-  passphrase?: string;
+/**
+ * Schema for the backend's `wallet` record.
+ *
+ * See desk/sur/wallet.hoon
+ */
+export interface Wallet {
+  id: string;
+  name: string;
+  note: string;
 }
-
-export default Wallet;

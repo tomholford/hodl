@@ -36,7 +36,7 @@ export const TransactionTableRow = ({ transactions, coinId }: { transactions: Tr
   const initialValue = useMemo(() => {
     if (!transactions) { return 0 };
 
-    return transactions.reduce((memo, a) => memo + Number(a["cost-basis"]) * a.amount, 0)
+    return transactions.reduce((memo, a) => memo + Number(a["cost-basis"]) * Number(a.amount), 0)
   }, [transactions]);
 
   const pnl = useMemo(() => {

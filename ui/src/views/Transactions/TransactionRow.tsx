@@ -17,13 +17,13 @@ export const TransactionRow = ({ transaction }: { transaction: Transaction }) =>
   const currentValue = useMemo(() => {
     if(!exchangeRate) { return 0 };
 
-    return exchangeRate * transaction.amount;
+    return exchangeRate * parseFloat(transaction.amount);
   }, [transaction.amount, exchangeRate]);
 
   const initialValue = useMemo(() => {
     if(!(transaction.amount && transaction['cost-basis'])) { return null };
 
-    return transaction.amount * transaction['cost-basis'];
+    return parseFloat(transaction.amount) * parseFloat(transaction['cost-basis']);
   }, [transaction]);
 
   const pnl = useMemo(() => {

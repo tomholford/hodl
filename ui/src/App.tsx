@@ -15,8 +15,10 @@ import { About } from './views/About/About';
 import { Footer } from './views/App/Footer';
 import { Header } from './views/App/Header';
 import { Settings } from './views/Settings/Settings';
-import { useTransactionsState } from './state/transactions';
+import { bootstrapStores } from './state/bootstrap';
 import { Transactions } from './views/Transactions/Transactions';
+import Wallets from './views/Wallets/Wallets';
+import Accounts from './views/Accounts/Accounts';
 import ErrorAlert from './components/ErrorAlert';
 
 const AppContainer = ({ children }: { children: React.ReactNode }) => {
@@ -50,13 +52,9 @@ const RoutedApp = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const subscribeTransactions = useCallback(async () => {
-    await useTransactionsState.getState().start();
-  }, []);
-
   useEffect(() => {
     handleError(() => {
-      subscribeTransactions();
+      bootstrapStores();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -74,6 +72,8 @@ const RoutedApp = () => {
                 <Header />
                 <Routes>
                   <Route path="/about" element={<About />} />
+                  <Route path="/wallets" element={<Wallets />} />
+                  <Route path="/accounts" element={<Accounts />} />
                   <Route path="/transactions/*" element={<Transactions />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="*" element={<Navigate to={'/transactions'} />} />

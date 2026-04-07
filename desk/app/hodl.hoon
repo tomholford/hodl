@@ -6,23 +6,32 @@
 ::  mainly for orchestration. But, first focus on getting a working TX CRUD
 ::  agent before optimizing. So, one day :)
 ::
-/+  *transaction
-/+  default-agent, dbug, agentio
+/+  a=account, t=transaction, w=wallet
+/+  default-agent, dbug, verb
 |%
++$  card  card:agent:gall
+::  old transaction type (state-0): no account-id field
++$  txn-0  [@t @t @da @t @t @t @ta]
++$  txns-0  (map @t txn-0)
 +$  versioned-state
   $%  state-0
+      state-1
   ==
-+$  state-0  [%0 txns=transactions]
-+$  card  card:agent:gall
++$  state-0  [%0 txns=txns-0]
++$  state-1  [%1 acts=accounts:a txns=transactions:t wlts=wallets:w]
 --
-%-  agent:dbug
-=|  state-0
+=|  state-1
 =*  state  -
+::
+%-  agent:dbug
+%+  verb  &  :: TODO: disable before production
 ^-  agent:gall
+::
+=<  :: app core
 |_  =bowl:gall
 +*  this  .
+    do  ~(. +> bowl)
     def   ~(. (default-agent this %.n) bowl)
-    io    ~(. agentio bowl)
 ::
 ++  on-init  on-init:def
 ::
@@ -31,103 +40,146 @@
   !>(state)
 ::
 ++  on-load
-  |=  old-vase=vase
+  |=  old-state=vase
   ^-  (quip card _this)
-  `this(state !<(versioned-state old-vase))
+  =/  old  !<(versioned-state old-state)
+  |^
+  ?-  -.old
+    %1  `this(state old)
+    %0  `this(state (state-0-to-1 old))
+  ==
+  ++  state-0-to-1
+    |=  zer=state-0
+    ^-  state-1
+    [%1 *accounts:a (transactions-0-to-1 txns.zer) *wallets:w]
+  ++  transactions-0-to-1
+    |=  txns=txns-0
+    ^-  transactions:t
+    %-  ~(run by txns)
+    |=  old=txn-0
+    ^-  txn:t
+    =+  [id cid dat not amt cb typ]=old
+    [id cid dat not amt cb typ '']
+  --
 ::
 ++  on-poke
   |=  [=mark =vase]
   ^-  (quip card _this)
-  |^
   ?>  (team:title our.bowl src.bowl)
-  ?.  ?=(%hodl-action mark)  (on-poke:def mark vase)
-  =/  act  !<(action vase)
-  =.  state  (poke-action act)
-  :_  this
-  ~[(fact:io hodl-update+!>(`update`[act]) ~[/updates])]
-  ::
-  ++  poke-action
-    |=  act=action
-    ^-  _state
-    ?-    -.act
-        %add
-      ?<  (~(has by txns) id.act)
-      =/  txn=txn
-        :*  id=id.act
-            coin-id=coin-id.act
-            date=date.act
-            note=note.act
-            amount=amount.act
-            cost-basis=cost-basis.act
-            type=type.act
-        ==
-      state(txns (~(put by txns) id.act txn))
-    ::
-        %edit
-      ?>  (~(has by txns) id.act)
-      =/  txn=txn
-        :*  id=id.act
-            coin-id=coin-id.act
-            date=date.act
-            note=note.act
-            amount=amount.act
-            cost-basis=cost-basis.act
-            type=type.act
-        ==
-      state(txns (~(put by txns) id.act txn)) ::  TODO: should all fields be editable? probably not id
-    ::
-        %del
-      ?>  (~(has by txns) id.act)
-      state(txns (~(del by txns) id.act))
+  =^  cards  state
+    ?+  mark                 (on-poke:def mark vase)
+        %account-action      (poke-account-action:do !<(action:a vase)) :: TODO do these action need to be namesspaced?
+        %transaction-action  (poke-transaction-action:do !<(action:t vase))
+        %wallet-action       (poke-wallet-action:do !<(action:w vase))
     ==
-  --
+  [cards this]
 ::
 ++  on-watch
   |=  =path
   ^-  (quip card _this)
   ?>  (team:title our.bowl src.bowl)
   ?+  path  (on-watch:def path)
-    [%updates ~]  `this
+    [%updates ~]  `this  
+  :: TODO: should the updates be scoped to each model?
+  :: ?:  ?=([%updates ~] path)
+  ::   :_  this
+  ::   [%give %fact ~ %hodl-update !>(update)]~
+  :: (on-watch:def path)
   ==
 ::
-:: ++  on-peek  on-peek:def
 ++  on-peek
   |=  =path
   ^-  (unit (unit cage))
   ?>  (team:title our.bowl src.bowl)
-  =/  now=@  (unm:chrono:userlib now.bowl)
-  ?+    path  (on-peek:def path)
-      [%x %transactions *]
-    :: ~&  t.path
-    :: (on-peek:def path)
-    ?+    t.t.path  (on-peek:def path)
-        [%all ~]
-      :^  ~  ~  %hodl-update
-      !>  ^-  update
-      [%txns txns]
-      :: [%txns (tap:t-orm txns)]
-      :: [now %txns (tap:t-orm txns)]
-    ==
-      ::   [%before @ @ ~]
-      :: =/  before=@  (rash i.t.t.t.path dem)
-      :: =/  max=@  (rash i.t.t.t.t.path dem)
-      :: :^  ~  ~  %hodl-update
-      :: !>  ^-  update
-      :: [now %txns (tab:t-orm txns `before max)]
-    ::
-      ::   [%between @ @ ~]
-      :: =/  start=@
-      ::   =+  (rash i.t.t.t.path dem)
-      ::   ?:(=(0 -) - (sub - 1))
-      :: =/  end=@  (add 1 (rash i.t.t.t.t.path dem))
-      :: :^  ~  ~  %hodl-update
-      :: !>  ^-  update
-      :: [now %txns (tap:t-orm (lot:t-orm txns `end `start))]
-    :: ==
+  ?+  path  (on-peek:def path)
+      [%x %accounts @t ~]      ``noun+!>((~(get by acts) i.t.t.path))
+      [%x %accounts ~]        ``noun+!>(acts)
+      [%x %transactions @t ~]  ``noun+!>((~(get by txns) i.t.t.path))
+      [%x %transactions ~]    ``noun+!>(txns)
+      [%x %wallets @t ~]       ``noun+!>((~(get by wlts) i.t.t.path))
+      [%x %wallets ~]         ``noun+!>(wlts)
   ==
 ::
 ++  on-leave  on-leave:def
 ++  on-agent  on-agent:def
 ++  on-arvo   on-arvo:def
 ++  on-fail   on-fail:def
+--
+::  helper core
+|_  =bowl:gall
+++  poke-account-action
+  |=  act=action:a
+  ^-  (quip card _state)
+  ?-    -.act
+      %add
+    ?<  (~(has by acts) id.act)
+    =/  =acct:a
+      :*  id=id.act
+          wallet-id=wallet-id.act
+          name=name.act
+          note=note.act
+      ==
+    :_  state(acts (~(put by acts) id.act acct))
+    ~[[%give %fact ~[/updates] %account-update !>(`update:a`[%add acct])]]
+  ::
+      %edit
+    ?>  (~(has by acts) id.act)
+    =/  =acct:a
+      :*  id=id.act
+          wallet-id=wallet-id.act
+          name=name.act
+          note=note.act
+      ==
+    :_  state(acts (~(put by acts) id.act acct))
+    ~[[%give %fact ~[/updates] %account-update !>(`update:a`[%edit acct])]]
+  ::
+      %del
+    ?>  (~(has by acts) id.act)
+    :_  state(acts (~(del by acts) id.act))
+    ~[[%give %fact ~[/updates] %account-update !>(`update:a`[%del id.act])]]
+  ==
+::
+++  poke-transaction-action
+  |=  act=action:t
+  ^-  (quip card _state)
+  ?-    -.act
+      %add
+    =/  =txn:t  txn.act
+    ?<  (~(has by txns) id.txn)
+    :_  state(txns (~(put by txns) id.txn txn))
+    ~[[%give %fact ~[/updates] %transaction-update !>(`update:t`[%add txn])]]
+  ::
+      %edit
+    =/  =txn:t  txn.act
+    ?>  (~(has by txns) id.txn)
+    :_  state(txns (~(put by txns) id.txn txn))
+    ~[[%give %fact ~[/updates] %transaction-update !>(`update:t`[%edit txn])]]
+  ::
+      %del
+    ?>  (~(has by txns) id.act)
+    :_  state(txns (~(del by txns) id.act))
+    ~[[%give %fact ~[/updates] %transaction-update !>(`update:t`[%del id.act])]]
+  ==
+::
+++  poke-wallet-action
+  |=  act=action:w
+  ^-  (quip card _state)
+  ?-    -.act
+      %add
+    =/  =wllt:w  wllt.act
+    ?<  (~(has by wlts) id.wllt)
+    :_  state(wlts (~(put by wlts) id.wllt wllt))
+    ~[[%give %fact ~[/updates] %wallet-update !>(`update:w`[%add wllt])]]
+  ::
+      %edit
+    =/  =wllt:w  wllt.act
+    ?>  (~(has by wlts) id.wllt)
+    :_  state(wlts (~(put by wlts) id.wllt wllt))
+    ~[[%give %fact ~[/updates] %wallet-update !>(`update:w`[%edit wllt])]]
+  ::
+      %del
+    ?>  (~(has by wlts) id.act)
+    :_  state(wlts (~(del by wlts) id.act))
+    ~[[%give %fact ~[/updates] %wallet-update !>(`update:w`[%del id.act])]]
+  ==
 --
