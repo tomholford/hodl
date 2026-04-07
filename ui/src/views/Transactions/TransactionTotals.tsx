@@ -34,7 +34,7 @@ export const TransactionTotals = () => {
     return transactionCoins.reduce((total, c) => {
       const transactions = groupedTransactions[c];
 
-      return transactions.reduce((transactionTotal, a) => transactionTotal + (a.amount * priceMap[c]), total)
+      return transactions.reduce((transactionTotal, a) => transactionTotal + (parseFloat(a.amount) * priceMap[c]), total)
     }, 0);
   }, [transactionCoins, groupedTransactions, priceMap]);
 
@@ -44,7 +44,7 @@ export const TransactionTotals = () => {
     return transactionCoins.reduce((total, c) => {
       const transactions = groupedTransactions[c];
 
-      return transactions.reduce((transactionTotal, t) => transactionTotal + (t.amount * (t['cost-basis'] || 1)), total)
+      return transactions.reduce((transactionTotal, t) => transactionTotal + (parseFloat(t.amount) * (parseFloat(t['cost-basis']) || 1)), total)
     }, 0);
   }, [transactionCoins, groupedTransactions]);
 

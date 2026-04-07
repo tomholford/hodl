@@ -1,14 +1,11 @@
-// An Account has one more Assets
-
-import BN from "bn.js";
-import { Currency } from "./Currency.type";
-
+/**
+ * Schema for the backend's `account` record.
+ *
+ * See desk/sur/account.hoon
+ */
 export interface Account {
-  address?: string;
-  currency?: Currency;
-  balance?: number;
-  balanceBN?: BN;
-  // wallet?: Wallet;
-  uuid?: string;
-  custodial?: boolean;
+  id: string;
+  "wallet-id": string;
+  name: string;
+  note: string;
 }

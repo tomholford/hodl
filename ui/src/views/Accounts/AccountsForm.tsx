@@ -1,66 +1,43 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { useAccounts } from "../../store/Accounts";
+import { useAccountsState } from "../../state/accounts";
+import { useWallets } from "../../state/wallets";
 import { v4 as uuidv4 } from 'uuid';
-import { Currency } from "../../types/Currency.type";
-import { CURRENCIES } from "../../constants";
-import { isValidAddress } from "../../lib/validators";
 
 type FormData = {
-  custodial: boolean;
-  address: string;
-  currency: Currency;
+  "wallet-id": string;
+  name: string;
+  note: string;
 };
 
 export default function AccountForm() {
-  const { addAccount } = useAccounts();
-  const { register, handleSubmit, setError, reset, watch, formState: { errors } } = useForm<FormData>();
-  const onSubmit = handleSubmit(data => {
-    if (!isValidAddress(data.address, data.currency)) {
-      setError('address', { message: `Invalid ${data.currency} address` })
-      return;
-    }
-
-    reset();
-
-    addAccount({
-      custodial: data.custodial,
-      address: data.address,
-      currency: data.currency,
-      uuid: uuidv4()
+  const wallets = useWallets();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
+  const onSubmit = handleSubmit(async (data) => {
+    await useAccountsState.getState().add({
+      id: uuidv4(),
+      "wallet-id": data["wallet-id"],
+      name: data.name,
+      note: data.note ?? '',
     });
+    reset();
   });
-
-  const isCustodial = watch("custodial");
 
   return (
     <form onSubmit={onSubmit}>
-      <label>custodial</label>
-      <input type="checkbox" {...register("custodial")} />
-      {
-        isCustodial ?
-          (<>
-            <span>custodial</span>
-          </>) : (
-            <>
-              <label>address</label>
-              <input {...register("address", { required: true })} />
-            </>)
-      }
-      {
-        errors.address && <p>{errors.address.message}</p>
-      }
-      <label>currency</label>
-      <select {...register("currency")}>
-        {
-          Object.keys(CURRENCIES).map(c => {
-            return (
-              <option value={c} key={c}>{c}</option>
-
-            )
-          })
-        }
+      <label>wallet</label>
+      <select {...register("wallet-id", { required: true })}>
+        <option value="">Select a wallet</option>
+        {wallets.map(w => (
+          <option value={w.id} key={w.id}>{w.name}</option>
+        ))}
       </select>
+      {errors["wallet-id"] && <p>Wallet is required</p>}
+      <label>name</label>
+      <input {...register("name", { required: true })} />
+      {errors.name && <p>Name is required</p>}
+      <label>note</label>
+      <input {...register("note")} />
       <input type="submit" />
     </form>
   );

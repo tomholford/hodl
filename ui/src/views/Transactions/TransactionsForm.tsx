@@ -7,6 +7,7 @@ import { useCallback, useEffect } from "react";
 import { useTransactionsState } from "../../state/transactions";
 import { format, getTime } from 'date-fns'
 import { CURRENCIES } from "../../constants";
+import { useAccounts } from "../../state/accounts";
 import AsyncSelect from 'react-select/async';
 import { coinSearch, getCoin } from "../../services/CoinGecko.service";
 import debounce from 'debounce-promise';
@@ -24,8 +25,9 @@ interface ThumbOption extends Option {
 type FormData = {
   type: string;
   "coin-id": Option;
-  amount: number;
-  "cost-basis": number;
+  amount: string;
+  "cost-basis": string;
+  "account-id": string;
   note: string;
   date: string;
 };
@@ -33,6 +35,7 @@ type FormData = {
 export default function TransactionsForm({ transaction }: { transaction?: Transaction }) {
   const isEditing = transaction !== undefined;
   const navigate = useNavigate()
+  const accounts = useAccounts();
   const { control, register, handleSubmit, setValue, formState: { isValid } } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
@@ -45,9 +48,10 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
         "coin-id": data["coin-id"].value,
         date: msDate,
         note: data.note,
-        amount: data.amount,
-        "cost-basis": data['cost-basis'],
+        amount: String(data.amount),
+        "cost-basis": String(data['cost-basis']),
         type: 'buy',
+        "account-id": data['account-id'],
       })
     } else {
       useTransactionsState.getState().add({
@@ -55,9 +59,10 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
         "coin-id": data["coin-id"].value,
         date: msDate,
         note: data.note,
-        amount: data.amount,
-        "cost-basis": data['cost-basis'],
+        amount: String(data.amount),
+        "cost-basis": String(data['cost-basis']),
         type: 'buy',
+        "account-id": data['account-id'],
       });
     }
 
@@ -206,6 +211,15 @@ export default function TransactionsForm({ transaction }: { transaction?: Transa
         <div>
           <label htmlFor="note">note</label>
           <input type="text" defaultValue={transaction?.note} {...register('note')} />
+        </div>
+        <div>
+          <label htmlFor="account-id">account</label>
+          <select defaultValue={transaction?.['account-id'] ?? ''} {...register('account-id')}>
+            <option value="">Select an account</option>
+            {accounts.map(a => (
+              <option key={a.id} value={a.id}>{a.name}</option>
+            ))}
+          </select>
         </div>
         <div>
           <button onClick={handleCancelClick}>cancel</button>

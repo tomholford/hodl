@@ -8,7 +8,8 @@ export interface Transaction {
   "coin-id": string;
   date: number;
   note: string;
-  amount: number;
-  "cost-basis": number;
+  amount: string;
+  "cost-basis": string;
   type: string;
+  "account-id": string;
 }

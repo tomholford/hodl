@@ -1,9 +1,14 @@
-import { useAccounts } from "../../store/Accounts";
+import { useAccounts, useAccountsInitialized } from "../../state/accounts";
 import { AccountRow } from "./AccountRow";
 import AccountsForm from "./AccountsForm";
 
 const Accounts = () => {
-  const { accounts } = useAccounts();
+  const accounts = useAccounts();
+  const initialized = useAccountsInitialized();
+
+  if (!initialized) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -11,10 +16,9 @@ const Accounts = () => {
       <hr />
       <AccountsForm />
       <hr />
-      {
-        accounts ?
-          accounts.map(a => <AccountRow account={a} key={a.uuid} />)
-          : 'No accounts'
+      {accounts.length > 0
+        ? accounts.map(a => <AccountRow account={a} key={a.id} />)
+        : <p>No accounts</p>
       }
     </>
   );
